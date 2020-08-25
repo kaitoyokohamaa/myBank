@@ -2,27 +2,11 @@ import React, { useEffect, useState, FC, Dispatch, Reducer } from "react";
 
 import { app } from "../../firebase"
 import * as H from 'history'
-interface Actions {
-    type: string;
-    value: any;
-}
+export interface AccountContextValue {
 
-interface SidebarProps {
-    show: boolean;
-    content: JSX.Element | null;
-}
-
-interface SidebarProviderProps {
-    reducer: Reducer<SidebarProps, Actions>;
-    initState: SidebarProps;
-}
-
-interface InitContextProps {
-    state: SidebarProps;
-    dispatch: Dispatch<Actions>;
 }
 // contextの作成
-export const AuthContext = React.createContext({} as InitContextProps);
+export const AuthContext = React.createContext<AccountContextValue>({});
 
 export const AuthProvider: FC = ({ children }) => {
     // const [currentUser, setCurrentUser] = useState(null);
