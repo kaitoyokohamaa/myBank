@@ -3,10 +3,11 @@ import React, { useEffect, useState, FC, Dispatch, Reducer } from "react";
 import { app } from "../../firebase"
 import * as H from 'history'
 export interface AccountContextValue {
-
+    login: (email: string, password: string, history: H.History) => Promise<void> | undefined,
+    signup: (email: string, password: string, history: H.History) => Promise<void> | undefined
 }
 // contextの作成
-export const AuthContext = React.createContext<AccountContextValue>({});
+export const AuthContext = React.createContext<AccountContextValue>({ login: () => void 0, signup: () => void 0 });
 
 export const AuthProvider: FC = ({ children }) => {
     // const [currentUser, setCurrentUser] = useState(null);
