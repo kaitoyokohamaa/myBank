@@ -1,32 +1,91 @@
-import React, { useContext } from "react";
-import { withRouter } from "react-router";
-import { AuthContext } from "../../../contexts/Authcontexts";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Input from "../../atoms/Input";
+import * as firebase from "firebase/app";
+const Index: React.FC = () => {
+    const history = useHistory();
+    const [authForm, setAuthForm] = useState({
+        Email: {
+            elementType: "email",
+            elementConfig: {
+                type: "email",
+                placeholder: "メールアドレス",
+                label: "メールアドレス",
+            },
+            value: "",
+        },
+        Password: {
+            elementType: "password",
+            elementConfig: {
+                type: "password",
+                placeholder: "パスワード",
+                label: "パスワード",
+            },
+            value: "",
+        },
+    });
 
-const SignUp = ({ history }) => {
-    const { signup } = useContext(AuthContext);
-    // AuthContextからsignup関数を受け取る
-    const handleSubmit = event => {
-        event.preventDefault();
-        const { email, password } = event.target.elements;
-        signup(email.value, password.value, history);
+    const inputChangedHandler = (event: KeyboardEvent, controlName: string) => {
+        const updatedControls = {
+            ...authForm,
+            [controlName]: {
+                ...authForm[controlName],
+                value: (event.target as HTMLInputElement).value,
+                valid: authForm[controlName].validation,
+                id: controlName,
+            },
+        };
+        setAuthForm(updatedControls);
     };
 
+    const formElementsArray = [];
+    for (let key in authForm) {
+        formElementsArray.push({
+            id: key,
+            config: authForm[key],
+        });
+    }
+
+    let form = formElementsArray.map((formElement) => (
+        <React.Fragment key={formElement.id}>
+            <Input
+                rowkey={formElement.id}
+                elementType={formElement.config.elementType}
+                elementConfig={formElement.config.elementConfig}
+                value={formElement.config.value}
+                changed={(event: KeyboardEvent) =>
+                    inputChangedHandler(event, formElement.id)
+                }
+            />
+        </React.Fragment>
+    ));
+
+
+
+    const submit = (e: React.FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault();
+
+        const email = authForm.Email.value;
+        const password = authForm.Password.value;
+
+        firebase.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((res: any) => {
+                history.push("/")
+            })
+            .catch((err: any) => {
+                console.log(err)
+            });
+    };
     return (
         <div>
-            <h1>Sign up</h1>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Email
-          <input name="email" type="email" placeholder="Email" />
-                </label>
-                <label>
-                    Password
-          <input name="password" type="password" placeholder="Password" />
-                </label>
-                <button type="submit">Sign Up</button>
+            <form onSubmit={submit} >
+                {form}
+                <button></button>
             </form>
         </div>
     );
 };
 
-export default withRouter(SignUp);
+export default Index;
