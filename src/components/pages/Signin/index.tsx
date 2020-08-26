@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Input from "../../atoms/Input";
-import firebase from '../../../firebase'
-const Index: React.FC = () => {
+import firebase from "../../../firebase"
+
+const SigninCreation: React.FC = () => {
     const history = useHistory();
     const [authForm, setAuthForm] = useState({
         Email: {
@@ -59,30 +60,30 @@ const Index: React.FC = () => {
         </React.Fragment>
     ));
 
-
-
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const email = authForm.Email.value;
         const password = authForm.Password.value;
-        firebase.auth()
-            .createUserWithEmailAndPassword(email, password)
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
             .then((res) => {
-                history.push("/home")
+                history.push("/home");
                 console.log(res)
             })
-            .catch((err) => {
-                console.log(err)
+            .catch((res) => {
+                alert("ログインに失敗しました");
+                console.log(res)
             });
     };
     return (
         <div>
-            <form onSubmit={submit} >
+            <form onSubmit={submit}>
                 {form}
-                <button>登録</button>
+                <button>ログイン</button>
             </form>
         </div>
     );
 };
 
-export default Index;
+export default SigninCreation;
