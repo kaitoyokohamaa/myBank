@@ -1,4 +1,5 @@
 import * as firebase from "firebase/app";
+import "firebase/firestore";
 import "firebase/auth";
 
 const app = {
@@ -10,3 +11,5 @@ const app = {
     messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
 };
 firebase.initializeApp(app);
+export const db = firebase.firestore();
+export default firebase;

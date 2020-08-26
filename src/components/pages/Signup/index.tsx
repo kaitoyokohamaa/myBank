@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Input from "../../atoms/Input";
-import * as firebase from "firebase/app";
+import firebase from '../../../firebase'
 const Index: React.FC = () => {
     const history = useHistory();
     const [authForm, setAuthForm] = useState({
@@ -63,18 +63,16 @@ const Index: React.FC = () => {
 
 
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault();
-
         const email = authForm.Email.value;
         const password = authForm.Password.value;
-
         firebase.auth()
             .createUserWithEmailAndPassword(email, password)
-            .then((res: any) => {
+            .then((res) => {
                 history.push("/")
+                console.log(res)
             })
-            .catch((err: any) => {
+            .catch((err) => {
                 console.log(err)
             });
     };
@@ -82,7 +80,7 @@ const Index: React.FC = () => {
         <div>
             <form onSubmit={submit} >
                 {form}
-                <button></button>
+                <button>登録</button>
             </form>
         </div>
     );
