@@ -6,6 +6,7 @@ import { Button } from '@chakra-ui/core'
 const Index: React.FC = () => {
     const history = useHistory();
 
+
     const submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const email = "hoge";
@@ -13,7 +14,7 @@ const Index: React.FC = () => {
         firebase.auth()
             .createUserWithEmailAndPassword(email, password)
             .then((res) => {
-                history.push("/")
+                history.push("/home")
                 console.log(res)
             })
             .catch((err) => {

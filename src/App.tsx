@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { ThemeProvider, theme } from '@chakra-ui/core'
 import Home from "./components/pages/Home"
 import SignUp from "./components/pages/Signup"
+import SignIn from "./components/pages/Signin"
 const App: React.FC = () => {
   return (
     <BrowserRouter >
