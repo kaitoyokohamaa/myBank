@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Input, FormControl, FormLabel } from '@chakra-ui/core'
 import firebase from '../../../firebase'
 import { Button } from '@chakra-ui/core'
+import styles from "./signup.module.css"
 const Index: React.FC = () => {
     const history = useHistory();
 
@@ -22,18 +23,19 @@ const Index: React.FC = () => {
             });
     };
     return (
-        <div>
+        <div className={styles.formWrap}>
+            <h1>新規登録</h1>
             <form onSubmit={submit} >
-                <FormControl isRequired>
+                <FormControl isRequired className={styles.form}>
                     <FormLabel htmlFor="fname">email</FormLabel>
                     <Input id="fname" placeholder="メールアドレス" />
                 </FormControl>
-                <FormControl isRequired>
+                <FormControl isRequired className={styles.form}>
                     <FormLabel htmlFor="fname">password</FormLabel>
                     <Input id="fname" placeholder="パスワード" />
                 </FormControl>
-                <Button variantColor='green' >
-                    Success
+                <Button variantColor='green' className={styles.register}>
+                    登録
                 </Button>
             </form>
         </div>

@@ -1,0 +1,16 @@
+.formWrap {
+    width: 50%;
+    background: #e5ffca;
+    margin: 0 auto;
+    margin-top: 150px;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.form {
+    width: 50%;
+}
+
+.register {
+    margin-top: 20px;
+}

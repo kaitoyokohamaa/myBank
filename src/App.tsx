@@ -9,8 +9,8 @@ const App: React.FC = () => {
     <BrowserRouter >
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact={true} component={Home} path="/" />
-          <Route exact path="/signup" component={SignUp} />
+          <Route exact={true} component={Home} path="/home" />
+          <Route exact path="/" component={SignUp} />
         </Switch>
       </ThemeProvider>
     </BrowserRouter>
