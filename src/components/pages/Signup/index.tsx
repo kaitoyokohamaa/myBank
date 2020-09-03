@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { Input, FormControl, FormLabel } from '@chakra-ui/core'
 import firebase from '../../../firebase'
+import { Button } from '@chakra-ui/core'
 const Index: React.FC = () => {
     const history = useHistory();
 
@@ -30,7 +31,9 @@ const Index: React.FC = () => {
                     <FormLabel htmlFor="fname">password</FormLabel>
                     <Input id="fname" placeholder="パスワード" />
                 </FormControl>
-                <button>登録</button>
+                <Button variantColor='green' >
+                    Success
+                </Button>
             </form>
         </div>
     );

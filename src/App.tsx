@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { ThemeProvider, theme } from '@chakra-ui/core'
 import Home from "./components/pages/Home"
 import SignUp from "./components/pages/Signup"
 const App: React.FC = () => {
   return (
     <BrowserRouter >
-      <Switch>
-        <Route exact={true} component={Home} path="/" />
-        <Route exact path="/signup" component={SignUp} />
-      </Switch>
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route exact={true} component={Home} path="/" />
+          <Route exact path="/signup" component={SignUp} />
+        </Switch>
+      </ThemeProvider>
     </BrowserRouter>
   );
 };
