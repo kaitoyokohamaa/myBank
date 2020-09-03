@@ -1,10 +1,33 @@
 import React from 'react'
-
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 export default function index() {
   return (
     <div>
-      <h1>home</h1>
-      <p>表示されぬ</p>
+      <React.Fragment>
+        <h2>total:40000</h2>
+      </React.Fragment>
+      <div>
+        <h2>Income</h2>
+        <span>
+          +40000
+      </span>
+      </div>
+      <div>
+        <h2>Expenses</h2>
+        <span>-20000</span>
+      </div>
+      <div>
+        <select>
+          <option value="inc" selected>+</option>
+          <option value="exp" >-</option>
+        </select>
+        <TextField type="text" placeholder="Add description" />
+        <TextField type="number" placeholder="value" />
+        <Button variant="contained"
+          color="primary" >登録</Button>
+      </div>
     </div>
+
   )
 }
