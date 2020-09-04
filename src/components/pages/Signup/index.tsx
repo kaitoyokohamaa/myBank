@@ -5,6 +5,7 @@ import firebase from '../../../firebase'
 import { Button } from '@chakra-ui/core'
 import styles from "./signup.module.css"
 import { Formik, Form, ErrorMessage, Field } from 'formik';
+import { Link } from "react-router-dom"
 import * as Yup from 'yup';
 
 
@@ -53,7 +54,9 @@ const Index: React.FC = () => {
                     <Button type="submit" variantColor='green' className={styles.register} >
                         登録
                　　 </Button>
+                    <p>アカウントを持っていない方は<Link to="/signin">こちら</Link></p>
                 </Form>
+
             )}
         </Formik>
     )
