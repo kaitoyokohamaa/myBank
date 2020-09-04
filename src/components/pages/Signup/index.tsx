@@ -52,7 +52,7 @@ const Index: React.FC = () => {
                         <ErrorMessage name="password" component="div" className={styles.invalid} />
                     </FormControl>
                     <Button type="submit" variantColor='green' className={styles.register} >
-                        登録
+                        新規登録
                　　 </Button>
                     <p>アカウントを持っていない方は<Link to="/signin">こちら</Link></p>
                 </Form>

@@ -11,6 +11,7 @@ const App: React.FC = () => {
         <Switch>
           <Route exact={true} component={Home} path="/home" />
           <Route exact path="/" component={SignUp} />
+          <Route exact path="/signin" component={SignIn} />
         </Switch>
       </ThemeProvider>
     </BrowserRouter>
