@@ -29,7 +29,7 @@ const Index: React.FC = () => {
                 const email = fields.email;
                 const password = fields.password;
                 firebase.auth()
-                    .createUserWithEmailAndPassword(email, password)
+                    .signInWithEmailAndPassword(email, password)
                     .then((res) => {
                         history.push("/home")
                         console.log(res)
