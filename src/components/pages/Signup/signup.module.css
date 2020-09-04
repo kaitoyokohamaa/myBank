@@ -14,3 +14,7 @@
 .register {
     margin-top: 20px;
 }
+
+.invalid {
+    color: coral;
+}
