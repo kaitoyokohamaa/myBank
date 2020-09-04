@@ -1,12 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { Input, FormControl, FormLabel } from '@chakra-ui/core'
+import { FormControl, FormLabel } from '@chakra-ui/core'
 import firebase from '../../../firebase'
 import { Button } from '@chakra-ui/core'
 import styles from "./signup.module.css"
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
-import { style } from "styled-system";
+
 
 const Index: React.FC = () => {
     const history = useHistory();
