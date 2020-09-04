@@ -9,6 +9,6 @@ export default {
 
 export const Success = () => (
     <Button variantColor='green' >
-        Success
+        登録
   </Button>
 )
