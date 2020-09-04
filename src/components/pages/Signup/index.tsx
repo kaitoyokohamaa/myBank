@@ -6,6 +6,7 @@ import { Button } from '@chakra-ui/core'
 import styles from "./signup.module.css"
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
+import { style } from "styled-system";
 
 const Index: React.FC = () => {
     const history = useHistory();
@@ -24,19 +25,29 @@ const Index: React.FC = () => {
                     .required('パスワードは必須になってます'),
             })}
             onSubmit={fields => {
-                alert('SUCCESS!! :-)\n\n' + JSON.stringify(fields, null, 4))
+                const email = fields.email;
+                const password = fields.password;
+                firebase.auth()
+                    .createUserWithEmailAndPassword(email, password)
+                    .then((res) => {
+                        history.push("/home")
+                        console.log(res)
+                    })
+                    .catch((err) => {
+                        alert("何か間違ってるんじゃないですカァー？")
+                    });
             }}
         >
             {({ errors, status, touched }) => (
                 <Form className={styles.formWrap}>
                     <FormControl className={styles.form}>
                         <FormLabel htmlFor="email">Email</FormLabel>
-                        <Field name="email" type="text" className={'form-control' + (errors.email && touched.email ? ' is-invalid' : '')} />
+                        <Field name="email" type="text" className={styles.formimput + (errors.email && touched.email ? ' is-invalid' : '')} />
                         <ErrorMessage name="email" component="div" className={styles.invalid} />
                     </FormControl>
                     <FormControl className={styles.form}>
                         <FormLabel htmlFor="fname">password</FormLabel>
-                        <Field name="password" type="password" className={'form-control' + (errors.password && touched.password ? ' is-invalid' : '')} />
+                        <Field name="password" type="password" className={styles.formimput + (errors.password && touched.password ? ' is-invalid' : '')} />
                         <ErrorMessage name="password" component="div" className={styles.invalid} />
                     </FormControl>
                     <Button type="submit" variantColor='green' className={styles.register} >
