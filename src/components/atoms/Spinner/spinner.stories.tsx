@@ -1,12 +1,12 @@
 
 import React from 'react'
-import spinner from './spinner'
+import { Spinner } from "./index"
 
 export default {
     title: 'Atom/spinner',
-    component: spinner
+    component: Spinner
 }
 
-export const Spinner = <spinner />
+export const spinner = () => <Spinner />
 
 

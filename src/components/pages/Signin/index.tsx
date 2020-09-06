@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FormControl, FormLabel } from '@chakra-ui/core'
 import firebase from '../../../firebase'
@@ -7,10 +7,11 @@ import styles from "./signin.module.css"
 import { Formik, Form, ErrorMessage, Field } from 'formik';
 import { Link } from "react-router-dom"
 import * as Yup from 'yup';
-
+import Spinner from "../../atoms/Spinner"
 
 const Index: React.FC = () => {
     const history = useHistory();
+    const [loading, setLoading] = useState(false)
     return (
         <Formik
             initialValues={{
@@ -28,6 +29,7 @@ const Index: React.FC = () => {
             onSubmit={fields => {
                 const email = fields.email;
                 const password = fields.password;
+                setLoading(true)
                 firebase.auth()
                     .signInWithEmailAndPassword(email, password)
                     .then((res) => {
@@ -36,6 +38,7 @@ const Index: React.FC = () => {
                     })
                     .catch((err) => {
                         alert("何か間違ってるんじゃないですカァー？")
+                        setLoading(false)
                     });
             }}
         >
@@ -51,10 +54,12 @@ const Index: React.FC = () => {
                         <Field name="password" type="password" className={styles.formimput + (errors.password && touched.password ? ' is-invalid' : '')} />
                         <ErrorMessage name="password" component="div" className={styles.invalid} />
                     </FormControl>
-                    <Button type="submit" variantColor='green' className={styles.register} >
-                        ログイン
-               　　 </Button>
-                    <p>アカウントをお持ちの方は<Link to="/">こちら</Link></p>
+                    {
+                        !loading ? <Button type="submit" variantColor='green' className={styles.register} >
+                            ログイン
+               　　 </Button> : <Spinner />
+                    }
+                    <p>アカウントをお持ちでない方は<Link to="/">こちら</Link></p>
                 </Form>
 
             )}
