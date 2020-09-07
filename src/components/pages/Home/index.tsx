@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import firebase from "firebase/app";
 export default function index() {
+  // const [budget, setBudget] = useState("")
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged((usr: firebase.User | null) => {
+      if (!usr) {
+        alert("新規登録をしてください");
+      } else {
+        const sampleBudget = await firebase
+          .firestore()
+          .collection("budget")
+          .doc("ZMXc0Q992PhPIiUvZnAD")
+          .get();
+
+        const showBudget = sampleBudget.data();
+
+        console.log(showBudget)
+      }
+    });
+  });
+
   return (
     <div>
       <React.Fragment>
