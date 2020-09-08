@@ -14,21 +14,22 @@ const Index: React.FC = () => {
       if (!usr) {
         alert("新規登録をしてください");
       } else {
-        const sampleBudget = await firebase
+        firebase
           .firestore()
           .collection("budget")
-          .doc("ZMXc0Q992PhPIiUvZnAD")
-          .get();
-
-        const showBudget = sampleBudget.data();
-        const storeBudget = []
-        if (showBudget) {
-          storeBudget.push(showBudget)
-          setBudget(storeBudget)
-        }
+          .get()
+          .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
+            let storeBudget: firebase.firestore.DocumentData[] = []
+            querySnapshot.forEach((docs) => {
+              const showBudget = docs.data();
+              storeBudget.push(showBudget)
+            })
+            setBudget(storeBudget)
+          })
       }
     });
   }, [setBudget]);
+
   return (
     <React.Fragment>
       <React.Fragment>
@@ -54,9 +55,9 @@ const Index: React.FC = () => {
       {
         budget?.map((item: moneyField, index: number) => {
           return (
-            <div>
-              <p key={index}>{item.money}</p>
-              <p key={index}>{item.description}</p>
+            <div key={index}>
+              <p>{item.money}</p>
+              <p >{item.description}</p>
             </div>
           )
         })

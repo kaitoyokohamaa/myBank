@@ -5,7 +5,7 @@ export default function form() {
     return (
         <div>
             <select>
-                <option value="inc" selected>+</option>
+                <option value="inc" >+</option>
                 <option value="exp" >-</option>
             </select>
             <TextField type="text" placeholder="Add description" />
