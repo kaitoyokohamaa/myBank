@@ -48,7 +48,19 @@ const Index: React.FC = () => {
             <span>-20000</span>
           </div>
           <div>
-            <Form />
+            <Form
+              sendMoney={(text: string, money: number) => {
+                const sendMoney: moneyField = {
+                  money: money,
+                  description: text,
+                  type: "inc",
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                };
+                firebase.firestore()
+                  .collection("budget")
+                  .add(sendMoney);
+              }}
+            />
           </div>
         </div>
       </React.Fragment>
