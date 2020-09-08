@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import firebase from "firebase/app";
-export default function index() {
+const Index: React.FC = () => {
   // const [budget, setBudget] = useState("")
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged((usr: firebase.User | null) => {
+    return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
         alert("新規登録をしてください");
       } else {
@@ -51,3 +51,4 @@ export default function index() {
 
   )
 }
+export default Index;
