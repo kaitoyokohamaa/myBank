@@ -3,8 +3,8 @@ import firebase from "firebase/app";
 import Form from "./form";
 type moneyField = {
   money: number;
-  description: String;
-  type: String;
+  description: string;
+  type: string;
   createdAt: firebase.firestore.FieldValue;
 };
 const Index: React.FC = () => {
