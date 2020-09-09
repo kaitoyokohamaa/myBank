@@ -11,6 +11,7 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
         if (text.trim() !== "") {
             sendMoney(text, money);
             setText("");
+            setMoney(0);
         } else {
             alert("本文が入力されてません");
         }

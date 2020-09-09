@@ -17,6 +17,7 @@ const Index: React.FC = () => {
         firebase
           .firestore()
           .collection("budget")
+          .orderBy("createdAt", "desc")
           .get()
           .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
             let storeBudget: firebase.firestore.DocumentData[] = []
@@ -64,15 +65,14 @@ const Index: React.FC = () => {
           </div>
         </div>
       </React.Fragment>
-      {
-        budget?.map((item: moneyField, index: number) => {
-          return (
-            <div key={index}>
-              <p>{item.money}</p>
-              <p >{item.description}</p>
-            </div>
-          )
-        })
+      {budget != undefined ? budget?.map((item: moneyField, index: number) => {
+        return (
+          <div key={index}>
+            <p>{item.money}</p>
+            <p >{item.description}</p>
+          </div>
+        )
+      }) : <p>まだ何も登録されてませんわ</p>
       }
     </React.Fragment >
   )
