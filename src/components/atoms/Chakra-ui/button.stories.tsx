@@ -7,8 +7,14 @@ export default {
     component: Button
 }
 
-export const Success = () => (
+export const signBtn = () => (
     <Button variantColor='green' >
         登録
-  </Button>
+    </Button>
+)
+
+export const homeBtn = () => (
+    <Button  >
+        登録
+    </Button>
 )
