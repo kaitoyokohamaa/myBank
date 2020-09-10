@@ -65,7 +65,7 @@ const Index: React.FC = () => {
           </div>
         </div>
       </React.Fragment>
-      {budget != undefined ? budget?.map((item: moneyField, index: number) => {
+      {budget !== undefined ? budget?.map((item: moneyField, index: number) => {
         return (
           <div key={index}>
             <p>{item.money}</p>
