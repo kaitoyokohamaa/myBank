@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Button } from '@chakra-ui/core'
 export interface TagFormProps {
     sendMoney: (text: string, money: number) => void;
 }
@@ -26,12 +26,12 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
             <TextField type="text" placeholder="Add description" value={text} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
                 setText(event.target.value);
             }} />
-            <TextField type="number" placeholder="value" value={money} onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+            <TextField type="number" placeholder="200" value={money} onChange={(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
                 const moneyStore: number = Number(event.target.value)
                 setMoney(moneyStore);
             }} />
 
-            <Button variant="contained"
+            <Button
                 onClick={() => money ? submitMoney(text, money) : null}
                 color="primary" >登録</Button>
         </div>
