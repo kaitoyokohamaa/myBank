@@ -1,15 +1,32 @@
 import React from 'react'
-import { Field } from 'formik';
+import { Formik, Form, Field } from 'formik';
+import { FormControl, FormLabel } from '@chakra-ui/core';
+
 import styles from "./Filed.module.css"
 type propsFiled = {
-    children: string,
-    className: string
+    name: string, placeholder: string, type: string
 }
 export default function index(props: propsFiled) {
-    const { children, className } = props
+    const { name, placeholder, type } = props
     return (
-        <div>
-            <Field name={children} type={children} className={className} />
-        </div>
+        <Formik
+            initialValues={{
+                email: '',
+                password: '',
+            }}
+            onSubmit={fields => {
+                console.log(fields)
+            }}
+        >
+            {({ }) => (
+                <Form className={styles.formWrap}>
+                    <FormControl className={styles.form}>
+                        <FormLabel htmlFor={name}>{name}</FormLabel>
+                        <Field name={name} type={type} className={styles.formimput} />
+                    </FormControl>
+                </Form>
+            )
+            }
+        </ Formik>
     )
 }

@@ -6,5 +6,5 @@ export default {
     component: Filed,
 }
 
-export const Email = () => <Filed children='email' className="formimput" />
-export const Password = () => <Filed children='password' className="formimput" />
+export const Email = () => <Filed name='Email' type="text" placeholder="value" />
+export const Password = () => <Filed name='Password' type="password" placeholder="value" />

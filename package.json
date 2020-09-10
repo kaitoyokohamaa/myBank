@@ -46,6 +46,8 @@
   },
   "devDependencies": {
     "@storybook/react": "^6.0.21",
-    "babel-core": "^6.26.3"
+    "babel-core": "^6.26.3",
+    "css-loader": "^4.3.0",
+    "style-loader": "^1.2.1"
   }
 }
