@@ -9,7 +9,6 @@ type moneyField = {
 };
 const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
-  const [storeCost, setStoreCost] = useState<firebase.firestore.DocumentData[]>()
   const [totalCost, setTotalCost] = useState<number>()
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
@@ -28,8 +27,8 @@ const Index: React.FC = () => {
               const showBudget = docs.data();
               storeBudget.push(showBudget)
               if (showBudget.type === "inc") {
-                storeCost.push(showBudget.money)
-                setStoreCost(storeBudget)
+                const allMoney: number = showBudget.money
+                storeCost.push(allMoney)
               }
             })
             //配列arrayのbegin番目からend番目の値を加算する
@@ -46,13 +45,11 @@ const Index: React.FC = () => {
             }
             const allMoney = sumBetween(storeCost)
             setTotalCost(allMoney)
-
             setBudget(storeBudget)
-            console.log(storeCost)
           })
       }
     });
-  }, [setBudget]);
+  }, [setTotalCost]);
 
   return (
     <React.Fragment>
