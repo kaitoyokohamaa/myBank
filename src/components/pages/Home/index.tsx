@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import firebase from "firebase/app";
 import Form from "./form";
+import CountUp from "react-countup";
 type moneyField = {
   money: number;
   description: string;
@@ -32,7 +33,6 @@ const Index: React.FC = () => {
               }
             })
             //配列arrayのbegin番目からend番目の値を加算する
-
             const sumBetween = (arr: number[]) => {
               // 合計を格納する変数
               let sum = 0;
@@ -56,7 +56,18 @@ const Index: React.FC = () => {
       <React.Fragment>
         <div>
           <React.Fragment>
-            <h2>今月の支出は{totalCost}円です</h2>
+            <h2>
+              今月の支出は
+              {
+                totalCost ? <CountUp
+                  start={0}
+                  end={totalCost}
+                  duration={2.5}
+                  separator=","
+                /> : null
+              }
+              円です
+            </h2>
           </React.Fragment>
           <div>
             <h2>Income</h2>
