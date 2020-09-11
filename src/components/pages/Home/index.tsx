@@ -9,6 +9,7 @@ type moneyField = {
 };
 const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
+  const [totalCost, setTotalCost] = useState<number>()
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
@@ -21,22 +22,41 @@ const Index: React.FC = () => {
           .get()
           .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
             let storeBudget: firebase.firestore.DocumentData[] = []
+            let storeCost: number[] = []
             querySnapshot.forEach((docs) => {
               const showBudget = docs.data();
               storeBudget.push(showBudget)
+              if (showBudget.type === "inc") {
+                const allMoney: number = showBudget.money
+                storeCost.push(allMoney)
+              }
             })
+            //配列arrayのbegin番目からend番目の値を加算する
+
+            const sumBetween = (arr: number[]) => {
+              // 合計を格納する変数
+              let sum = 0;
+              // beginからendまで
+              for (var i = 0, len = arr.length; i < len; ++i) {
+                sum += arr[i];
+              };
+              // 結果を返却
+              return sum;
+            }
+            const allMoney = sumBetween(storeCost)
+            setTotalCost(allMoney)
             setBudget(storeBudget)
           })
       }
     });
-  }, [setBudget]);
+  }, [setTotalCost]);
 
   return (
     <React.Fragment>
       <React.Fragment>
         <div>
           <React.Fragment>
-            <h2>total:40000</h2>
+            <h2>今月の支出は{totalCost}円です</h2>
           </React.Fragment>
           <div>
             <h2>Income</h2>
