@@ -9,6 +9,7 @@ type moneyField = {
 };
 const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
+  const [totalCost, setTatolCost] = useState<number>()
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
@@ -21,11 +22,18 @@ const Index: React.FC = () => {
           .get()
           .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
             let storeBudget: firebase.firestore.DocumentData[] = []
+            let storeCost: firebase.firestore.DocumentData[] = []
             querySnapshot.forEach((docs) => {
               const showBudget = docs.data();
               storeBudget.push(showBudget)
+              storeBudget.push(showBudget.money)
+
+              if (showBudget.type === "inc") {
+                setTatolCost(showBudget.money + showBudget.money)
+              }
             })
             setBudget(storeBudget)
+            console.log(storeCost)
           })
       }
     });
@@ -36,7 +44,7 @@ const Index: React.FC = () => {
       <React.Fragment>
         <div>
           <React.Fragment>
-            <h2>total:40000</h2>
+            <h2>今月の支出は{totalCost}円です</h2>
           </React.Fragment>
           <div>
             <h2>Income</h2>
