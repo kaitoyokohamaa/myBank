@@ -3,7 +3,8 @@ import firebase from "firebase/app";
 import Form from "./form";
 import CountUp from "react-countup";
 import styles from "./home.module.css";
-import Card from "./card"
+import Card from "./card";
+import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 type moneyField = {
   money: number;
   description: string;
@@ -62,7 +63,8 @@ const Index: React.FC = () => {
       }
     });
   }, [setExpence]);
-
+  let expArea: JSX.Element[] = []
+  let incArea: JSX.Element[] = []
   return (
     <div className={styles.home}>
       <div className={styles.homeHeader}>
@@ -120,18 +122,34 @@ const Index: React.FC = () => {
         </div>
       </div>
       <div className={styles.card}>
-        {budget !== undefined ? budget?.map((item: moneyField, index: number) => {
-          return (
-            <div key={index}>
-              {
-                item.type === "inc" ? <Card className="incColor" item={item.description} money={item.money} /> : <Card className="expColor" item={item.description} money={item.money} />
-              }
-            </div>
-          )
-        }) : <p>まだ何も登録されてませんわ</p>
-        }
-      </div>
-    </div>
+        <Tabs>
+          <TabList className={styles.tabList}>
+            <Tab className={styles.tab}>支出</Tab>
+            <Tab className={styles.tab}>収入</Tab>
+          </TabList>
+
+          {
+
+            budget !== undefined ? budget?.map((item: moneyField, index: number) => {
+
+              return (
+                <div key={index} className={styles.delete}>
+                  {
+                    item.type === "inc" ? incArea.push(<Card className="incColor" item={item.description} money={item.money} />) : expArea.push(<Card className="expColor" item={item.description} money={item.money} />)
+                  }
+                </div>
+              )
+            }) : <p>まだ何も登録されてませんわ</p>
+          }
+          <TabPanel >
+            {expArea}
+          </TabPanel>
+          <TabPanel >
+            {incArea}
+          </TabPanel>
+        </Tabs>
+      </div >
+    </div >
   )
 }
 export default Index;

@@ -5,3 +5,7 @@
 .income {
     color: rgb(1, 89, 100)
 }
+
+.delete {
+    display: none;
+}
