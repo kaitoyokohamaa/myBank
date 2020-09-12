@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import firebase from "firebase/app";
 import Form from "./form";
+import CountUp from "react-countup";
+import styles from "./home.module.css";
+import Card from "./card";
+import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 type moneyField = {
   money: number;
   description: string;
@@ -9,7 +13,8 @@ type moneyField = {
 };
 const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
-  const [totalCost, setTotalCost] = useState<number>()
+  const [income, setIncome] = useState<number>()
+  const [expence, setExpence] = useState<number>()
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
@@ -22,79 +27,135 @@ const Index: React.FC = () => {
           .get()
           .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
             let storeBudget: firebase.firestore.DocumentData[] = []
-            let storeCost: number[] = []
+            let storeIncome: number[] = []
+            let storeExpence: number[] = []
             querySnapshot.forEach((docs) => {
               const showBudget = docs.data();
               storeBudget.push(showBudget)
               if (showBudget.type === "inc") {
-                const allMoney: number = showBudget.money
-                storeCost.push(allMoney)
+                const incomeMoney: number = showBudget.money
+                storeIncome.push(incomeMoney)
+                const sumBetween = (arr: number[]) => {
+                  let sum = 0;
+                  for (var i = 0, len = arr.length; i < len; ++i) {
+                    sum += arr[i];
+                  };
+                  return sum;
+                }
+                const sumMoney = sumBetween(storeIncome)
+                setIncome(sumMoney)
+              } else if (showBudget.type === "exp") {
+                const expenceMoney: number = showBudget.money
+                storeExpence.push(expenceMoney)
+                const decBetween = (arr: number[]) => {
+                  let sum = 0;
+                  for (var i = 0, len = arr.length; i < len; ++i) {
+                    sum += arr[i];
+                  };
+                  return sum;
+                }
+                const decMoney = decBetween(storeExpence)
+                setExpence(decMoney)
               }
             })
-            //配列arrayのbegin番目からend番目の値を加算する
-
-            const sumBetween = (arr: number[]) => {
-              // 合計を格納する変数
-              let sum = 0;
-              // beginからendまで
-              for (var i = 0, len = arr.length; i < len; ++i) {
-                sum += arr[i];
-              };
-              // 結果を返却
-              return sum;
-            }
-            const allMoney = sumBetween(storeCost)
-            setTotalCost(allMoney)
             setBudget(storeBudget)
           })
       }
     });
-  }, [setTotalCost]);
-
+  }, [setExpence]);
+  let expArea: JSX.Element[] = []
+  let incArea: JSX.Element[] = []
   return (
-    <React.Fragment>
-      <React.Fragment>
-        <div>
-          <React.Fragment>
-            <h2>今月の支出は{totalCost}円です</h2>
-          </React.Fragment>
-          <div>
+    <div className={styles.home}>
+      <div className={styles.homeHeader}>
+        <h2 className={styles.total}>
+          今月の支出は
+              {
+            expence ? <CountUp
+              start={0}
+              end={expence}
+              duration={2.5}
+              separator=","
+            /> : null
+          }
+              円です
+            </h2>
+        <div className={styles.body}>
+          <div className={styles.totalIncome}>
             <h2>Income</h2>
-            <span>
-              +40000
-           </span>
+            +
+            <span className={styles.income}>
+              {income ?
+                <CountUp
+                  start={0}
+                  end={income}
+                  duration={2.5}
+                  separator=","
+                /> : null}
+            </span>
           </div>
-          <div>
+          <div className={styles.Expenses}>
             <h2>Expenses</h2>
-            <span>-20000</span>
-          </div>
-          <div>
-            <Form
-              sendMoney={(text: string, money: number) => {
-                const sendMoney: moneyField = {
-                  money: money,
-                  description: text,
-                  type: "inc",
-                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                };
-                firebase.firestore()
-                  .collection("budget")
-                  .add(sendMoney);
-              }}
-            />
+            -
+            <span className={styles.expence}>
+              {expence ?
+                <CountUp
+                  start={0}
+                  end={expence}
+                  duration={2.5}
+                  separator=","
+                /> : null} </span>
           </div>
         </div>
-      </React.Fragment>
-      {budget !== undefined ? budget?.map((item: moneyField, index: number) => {
-        return (
-          <div key={index}>
-            <p>{item.money}</p>
-            <p >{item.description}</p>
-          </div>
-        )
-      }) : <p>まだ何も登録されてませんわ</p>
-      }
-    </React.Fragment >
+        <div>
+          <Form
+            sendMoney={(text: string, money: number, type: string) => {
+              const sendMoney: moneyField = {
+                money: money,
+                description: text,
+                type: type,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              };
+              firebase.firestore()
+                .collection("budget")
+                .add(sendMoney);
+            }}
+          />
+        </div>
+      </div>
+      <div className={styles.card}>
+        <Tabs>
+          <TabList className={styles.List}>
+            <Tab className={styles.tab}>支出</Tab>
+            <Tab className={styles.tab}>収入</Tab>
+          </TabList>
+
+          {
+
+            budget !== undefined ? budget?.map((item: moneyField, index: number) => {
+
+              return (
+                <div key={index} className={styles.delete}>
+                  {
+                    item.type === "inc" ? incArea.push(<Card className="incColor" item={item.description} money={item.money} />) : expArea.push(<Card className="expColor" item={item.description} money={item.money} />)
+                  }
+                </div>
+              )
+            }) : <p>まだ何も登録されてませんわ</p>
+          }
+          <TabPanel >
+            <div className={styles.colorExp}>
+              {expArea}
+            </div>
+          </TabPanel>
+          <TabPanel >
+            <div className={styles.colorInc}>
+              {incArea}
+            </div>
+          </TabPanel>
+        </Tabs>
+      </div >
+    </div >
   )
 }
 export default Index;
