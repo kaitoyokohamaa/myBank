@@ -5,6 +5,7 @@ import CountUp from "react-countup";
 import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
+import Header from "../../organisms/Header"
 type moneyField = {
   money: number;
   description: string;
@@ -66,96 +67,99 @@ const Index: React.FC = () => {
   let expArea: JSX.Element[] = []
   let incArea: JSX.Element[] = []
   return (
-    <div className={styles.home}>
-      <div className={styles.homeHeader}>
-        <h2 className={styles.total}>
-          今月の支出は
+    <React.Fragment>
+      <Header />
+      <div className={styles.home}>
+        <div className={styles.homeHeader}>
+          <h2 className={styles.total}>
+            今月の支出は
               {
-            expence ? <CountUp
-              start={0}
-              end={expence}
-              duration={2.5}
-              separator=","
-            /> : null
-          }
+              expence ? <CountUp
+                start={0}
+                end={expence}
+                duration={2.5}
+                separator=","
+              /> : null
+            }
               円です
             </h2>
-        <div className={styles.body}>
-          <div className={styles.totalIncome}>
-            <h2>Income</h2>
+          <div className={styles.body}>
+            <div className={styles.totalIncome}>
+              <h2>Income</h2>
             +
             <span className={styles.income}>
-              {income ?
-                <CountUp
-                  start={0}
-                  end={income}
-                  duration={2.5}
-                  separator=","
-                /> : null}
-            </span>
-          </div>
-          <div className={styles.Expenses}>
-            <h2>Expenses</h2>
+                {income ?
+                  <CountUp
+                    start={0}
+                    end={income}
+                    duration={2.5}
+                    separator=","
+                  /> : null}
+              </span>
+            </div>
+            <div className={styles.Expenses}>
+              <h2>Expenses</h2>
             -
             <span className={styles.expence}>
-              {expence ?
-                <CountUp
-                  start={0}
-                  end={expence}
-                  duration={2.5}
-                  separator=","
-                /> : null} </span>
+                {expence ?
+                  <CountUp
+                    start={0}
+                    end={expence}
+                    duration={2.5}
+                    separator=","
+                  /> : null} </span>
+            </div>
+          </div>
+          <div>
+            <Form
+              sendMoney={(text: string, money: number, type: string) => {
+                const sendMoney: moneyField = {
+                  money: money,
+                  description: text,
+                  type: type,
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                };
+                firebase.firestore()
+                  .collection("budget")
+                  .add(sendMoney);
+              }}
+            />
           </div>
         </div>
-        <div>
-          <Form
-            sendMoney={(text: string, money: number, type: string) => {
-              const sendMoney: moneyField = {
-                money: money,
-                description: text,
-                type: type,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-              };
-              firebase.firestore()
-                .collection("budget")
-                .add(sendMoney);
-            }}
-          />
-        </div>
-      </div>
-      <div className={styles.card}>
-        <Tabs>
-          <TabList className={styles.List}>
-            <Tab className={styles.tab}>支出</Tab>
-            <Tab className={styles.tab}>収入</Tab>
-          </TabList>
+        <div className={styles.card}>
+          <Tabs>
+            <TabList className={styles.List}>
+              <Tab className={styles.tab}>支出</Tab>
+              <Tab className={styles.tab}>収入</Tab>
+            </TabList>
 
-          {
+            {
 
-            budget !== undefined ? budget?.map((item: moneyField, index: number) => {
+              budget !== undefined ? budget?.map((item: moneyField, index: number) => {
 
-              return (
-                <div key={index} className={styles.delete}>
-                  {
-                    item.type === "inc" ? incArea.push(<Card className="incColor" item={item.description} money={item.money} />) : expArea.push(<Card className="expColor" item={item.description} money={item.money} />)
-                  }
-                </div>
-              )
-            }) : <p>まだ何も登録されてませんわ</p>
-          }
-          <TabPanel >
-            <div className={styles.colorExp}>
-              {expArea}
-            </div>
-          </TabPanel>
-          <TabPanel >
-            <div className={styles.colorInc}>
-              {incArea}
-            </div>
-          </TabPanel>
-        </Tabs>
+                return (
+                  <div key={index} className={styles.delete}>
+                    {
+                      item.type === "inc" ? incArea.push(<Card className="incColor" item={item.description} money={item.money} />) : expArea.push(<Card className="expColor" item={item.description} money={item.money} />)
+                    }
+                  </div>
+                )
+              }) : <p>まだ何も登録されてませんわ</p>
+            }
+            <TabPanel >
+              <div className={styles.colorExp}>
+                {expArea}
+              </div>
+            </TabPanel>
+            <TabPanel >
+              <div className={styles.colorInc}>
+                {incArea}
+              </div>
+            </TabPanel>
+          </Tabs>
+        </div >
       </div >
-    </div >
+    </React.Fragment>
   )
 }
 export default Index;
