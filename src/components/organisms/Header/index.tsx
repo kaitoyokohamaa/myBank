@@ -27,7 +27,6 @@ export default function index() {
                     </li>
                 </div>
             </header>
-
         </div>
     )
 }
