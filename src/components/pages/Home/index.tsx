@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import firebase from "firebase/app";
 import Form from "./form";
 import CountUp from "react-countup";
-import styles from "./home.module.css"
+import styles from "./home.module.css";
+import Card from "./card"
 type moneyField = {
   money: number;
   description: string;
@@ -125,8 +126,7 @@ const Index: React.FC = () => {
       {budget !== undefined ? budget?.map((item: moneyField, index: number) => {
         return (
           <div key={index}>
-            <p>{item.money}</p>
-            <p >{item.description}</p>
+            <Card item={item.description} money={item.money} />
           </div>
         )
       }) : <p>まだ何も登録されてませんわ</p>
