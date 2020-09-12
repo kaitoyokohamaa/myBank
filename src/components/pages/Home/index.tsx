@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import firebase from "firebase/app";
 import Form from "./form";
 import CountUp from "react-countup";
+import styles from "./home.module.css"
 type moneyField = {
   money: number;
   description: string;
@@ -10,7 +11,8 @@ type moneyField = {
 };
 const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
-  const [totalCost, setTotalCost] = useState<number>()
+  const [income, setIncome] = useState<number>()
+  const [expence, setExpence] = useState<number>()
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
@@ -23,33 +25,42 @@ const Index: React.FC = () => {
           .get()
           .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
             let storeBudget: firebase.firestore.DocumentData[] = []
-            let storeCost: number[] = []
+            let storeIncome: number[] = []
+            let storeExpence: number[] = []
             querySnapshot.forEach((docs) => {
               const showBudget = docs.data();
               storeBudget.push(showBudget)
               if (showBudget.type === "inc") {
-                const allMoney: number = showBudget.money
-                storeCost.push(allMoney)
+                const incomeMoney: number = showBudget.money
+                storeIncome.push(incomeMoney)
+                const sumBetween = (arr: number[]) => {
+                  let sum = 0;
+                  for (var i = 0, len = arr.length; i < len; ++i) {
+                    sum += arr[i];
+                  };
+                  return sum;
+                }
+                const sumMoney = sumBetween(storeIncome)
+                setIncome(sumMoney)
+              } else if (showBudget.type === "exp") {
+                const expenceMoney: number = showBudget.money
+                storeExpence.push(expenceMoney)
+                const decBetween = (arr: number[]) => {
+                  let sum = 0;
+                  for (var i = 0, len = arr.length; i < len; ++i) {
+                    sum += arr[i];
+                  };
+                  return sum;
+                }
+                const decMoney = decBetween(storeExpence)
+                setExpence(decMoney)
               }
             })
-            //配列arrayのbegin番目からend番目の値を加算する
-            const sumBetween = (arr: number[]) => {
-              // 合計を格納する変数
-              let sum = 0;
-              // beginからendまで
-              for (var i = 0, len = arr.length; i < len; ++i) {
-                sum += arr[i];
-              };
-              // 結果を返却
-              return sum;
-            }
-            const allMoney = sumBetween(storeCost)
-            setTotalCost(allMoney)
             setBudget(storeBudget)
           })
       }
     });
-  }, [setTotalCost]);
+  }, [setExpence]);
 
   return (
     <React.Fragment>
@@ -59,9 +70,9 @@ const Index: React.FC = () => {
             <h2>
               今月の支出は
               {
-                totalCost ? <CountUp
+                expence ? <CountUp
                   start={0}
-                  end={totalCost}
+                  end={expence}
                   duration={2.5}
                   separator=","
                 /> : null
@@ -71,21 +82,36 @@ const Index: React.FC = () => {
           </React.Fragment>
           <div>
             <h2>Income</h2>
-            <span>
-              +40000
-           </span>
+            +
+            <span className={styles.income}>
+              {income ?
+                <CountUp
+                  start={0}
+                  end={income}
+                  duration={2.5}
+                  separator=","
+                /> : null}
+            </span>
           </div>
           <div>
             <h2>Expenses</h2>
-            <span>-20000</span>
+            -
+            <span className={styles.expence}>
+              {expence ?
+                <CountUp
+                  start={0}
+                  end={expence}
+                  duration={2.5}
+                  separator=","
+                /> : null} </span>
           </div>
           <div>
             <Form
-              sendMoney={(text: string, money: number) => {
+              sendMoney={(text: string, money: number, type: string) => {
                 const sendMoney: moneyField = {
                   money: money,
                   description: text,
-                  type: "inc",
+                  type: type,
                   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 };
                 firebase.firestore()

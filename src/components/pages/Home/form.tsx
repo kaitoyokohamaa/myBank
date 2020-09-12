@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@chakra-ui/core'
 export interface TagFormProps {
-    sendMoney: (text: string, money: number) => void;
+    sendMoney: (text: string, money: number, type: string) => void;
 }
 const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
     const [text, setText] = useState<string>("");
+    const [type, setType] = useState<string>("inc");
     const [money, setMoney] = useState<number>();
-    const submitMoney = (text: string, money: number) => {
+    const submitMoney = (text: string, money: number, type: string) => {
         if (text.trim() !== "") {
-            sendMoney(text, money);
+            sendMoney(text, money, type);
             setText("");
             setMoney(0);
         } else {
@@ -19,8 +20,11 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
 
     return (
         <div>
-            <select>
-                <option value="inc" >+</option>
+            <select value={type}
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                    setType(event.target.value);
+                }}>
+                <option value="inc">+</option>
                 <option value="exp" >-</option>
             </select>
             <TextField type="text" placeholder="Add description" value={text} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -32,7 +36,7 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
             }} />
 
             <Button
-                onClick={() => money ? submitMoney(text, money) : null}
+                onClick={() => money ? submitMoney(text, money, type) : null}
                 color="primary" >登録</Button>
         </div>
     )
