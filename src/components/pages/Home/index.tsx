@@ -68,7 +68,7 @@ const Index: React.FC = () => {
   return (
     <div className={styles.home}>
       <div className={styles.homeHeader}>
-        <h2>
+        <h2 className={styles.total}>
           今月の支出は
               {
             expence ? <CountUp
@@ -80,30 +80,32 @@ const Index: React.FC = () => {
           }
               円です
             </h2>
-        <div>
-          <h2>Income</h2>
+        <div className={styles.body}>
+          <div className={styles.totalIncome}>
+            <h2>Income</h2>
             +
             <span className={styles.income}>
-            {income ?
-              <CountUp
-                start={0}
-                end={income}
-                duration={2.5}
-                separator=","
-              /> : null}
-          </span>
-        </div>
-        <div>
-          <h2>Expenses</h2>
+              {income ?
+                <CountUp
+                  start={0}
+                  end={income}
+                  duration={2.5}
+                  separator=","
+                /> : null}
+            </span>
+          </div>
+          <div className={styles.Expenses}>
+            <h2>Expenses</h2>
             -
             <span className={styles.expence}>
-            {expence ?
-              <CountUp
-                start={0}
-                end={expence}
-                duration={2.5}
-                separator=","
-              /> : null} </span>
+              {expence ?
+                <CountUp
+                  start={0}
+                  end={expence}
+                  duration={2.5}
+                  separator=","
+                /> : null} </span>
+          </div>
         </div>
         <div>
           <Form
@@ -123,7 +125,7 @@ const Index: React.FC = () => {
       </div>
       <div className={styles.card}>
         <Tabs>
-          <TabList className={styles.tabList}>
+          <TabList className={styles.List}>
             <Tab className={styles.tab}>支出</Tab>
             <Tab className={styles.tab}>収入</Tab>
           </TabList>
@@ -142,10 +144,14 @@ const Index: React.FC = () => {
             }) : <p>まだ何も登録されてませんわ</p>
           }
           <TabPanel >
-            {expArea}
+            <div className={styles.colorExp}>
+              {expArea}
+            </div>
           </TabPanel>
           <TabPanel >
-            {incArea}
+            <div className={styles.colorInc}>
+              {incArea}
+            </div>
           </TabPanel>
         </Tabs>
       </div >

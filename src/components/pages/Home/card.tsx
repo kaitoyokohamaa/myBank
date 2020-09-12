@@ -16,7 +16,7 @@ export default function card(props: cardField) {
                     <Typography color="textSecondary" gutterBottom>
                         {props.item}
                     </Typography>
-                    <Typography className={props.className} variant="body2" component="p">
+                    <Typography variant="body2" component="p">
                         {props.money}
                     </Typography>
                 </CardContent>
