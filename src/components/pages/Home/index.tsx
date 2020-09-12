@@ -64,74 +64,74 @@ const Index: React.FC = () => {
   }, [setExpence]);
 
   return (
-    <React.Fragment>
-      <React.Fragment>
-        <div>
-          <React.Fragment>
-            <h2>
-              今月の支出は
+    <div className={styles.home}>
+      <div className={styles.homeHeader}>
+        <h2>
+          今月の支出は
               {
-                expence ? <CountUp
-                  start={0}
-                  end={expence}
-                  duration={2.5}
-                  separator=","
-                /> : null
-              }
+            expence ? <CountUp
+              start={0}
+              end={expence}
+              duration={2.5}
+              separator=","
+            /> : null
+          }
               円です
             </h2>
-          </React.Fragment>
-          <div>
-            <h2>Income</h2>
+        <div>
+          <h2>Income</h2>
             +
             <span className={styles.income}>
-              {income ?
-                <CountUp
-                  start={0}
-                  end={income}
-                  duration={2.5}
-                  separator=","
-                /> : null}
-            </span>
-          </div>
-          <div>
-            <h2>Expenses</h2>
+            {income ?
+              <CountUp
+                start={0}
+                end={income}
+                duration={2.5}
+                separator=","
+              /> : null}
+          </span>
+        </div>
+        <div>
+          <h2>Expenses</h2>
             -
             <span className={styles.expence}>
-              {expence ?
-                <CountUp
-                  start={0}
-                  end={expence}
-                  duration={2.5}
-                  separator=","
-                /> : null} </span>
-          </div>
-          <div>
-            <Form
-              sendMoney={(text: string, money: number, type: string) => {
-                const sendMoney: moneyField = {
-                  money: money,
-                  description: text,
-                  type: type,
-                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                };
-                firebase.firestore()
-                  .collection("budget")
-                  .add(sendMoney);
-              }}
-            />
-          </div>
+            {expence ?
+              <CountUp
+                start={0}
+                end={expence}
+                duration={2.5}
+                separator=","
+              /> : null} </span>
         </div>
-      </React.Fragment>
-      {budget !== undefined ? budget?.map((item: moneyField, index: number) => {
-        return (
-          <div key={index}>
-            <Card item={item.description} money={item.money} />
-          </div>
-        )
-      }) : <p>まだ何も登録されてませんわ</p>
-      }
-    </React.Fragment >
+        <div>
+          <Form
+            sendMoney={(text: string, money: number, type: string) => {
+              const sendMoney: moneyField = {
+                money: money,
+                description: text,
+                type: type,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              };
+              firebase.firestore()
+                .collection("budget")
+                .add(sendMoney);
+            }}
+          />
+        </div>
+      </div>
+      <div className={styles.card}>
+        {budget !== undefined ? budget?.map((item: moneyField, index: number) => {
+          return (
+            <div key={index}>
+              {
+                item.type === "inc" ? <Card className="incColor" item={item.description} money={item.money} /> : <Card className="expColor" item={item.description} money={item.money} />
+              }
+            </div>
+          )
+        }) : <p>まだ何も登録されてませんわ</p>
+        }
+      </div>
+    </div>
   )
 }
 export default Index;

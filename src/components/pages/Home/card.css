@@ -1,0 +1,13 @@
+.incColor {
+    color: rgb(1, 89, 100);
+}
+
+.expColor {
+    color: red;
+}
+
+.cardWidth {
+    background: black;
+    width: 30%;
+    margin-top: 20px;
+}
