@@ -14,10 +14,13 @@ export default function index() {
                 <Logo />
                 <div className={styles.linkWrap}>
                     <li>
-                        <Link className={styles.link} to="/">グラフ</Link>
+                        <Link className={styles.link} to="/home">ホーム</Link>
                     </li>
                     <li>
-                        <Link className={styles.link} to="/">カレンダー</Link>
+                        <Link className={styles.link} to="/graph">グラフ</Link>
+                    </li>
+                    <li>
+                        <Link className={styles.link} to="/calendar">カレンダー</Link>
                     </li>
                     <li>
                         <Link className={styles.link} to="/" onClick={logOut} > ログアウト</Link>
