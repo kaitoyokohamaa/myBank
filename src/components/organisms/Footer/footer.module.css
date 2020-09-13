@@ -4,4 +4,8 @@
     background: url(../../../Img/kai.png) right no-repeat;
     height: 350px;
     margin-left: 630px;
+    position: fixed;
+    top: 50;
+    right: 0;
+    width: 654px;
 }
