@@ -25,7 +25,7 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
                     setType(event.target.value);
                 }}>
                 <option value="inc">+</option>
-                <option value="exp" >-</option>
+                <option value="exp">-</option>
             </select>
             <TextField type="text" placeholder="Add description" value={text} onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
                 setText(event.target.value);

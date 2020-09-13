@@ -1,7 +1,6 @@
 import React from 'react'
 import Coment from "../../atoms/Coment"
 import styles from "./footer.module.css";
-import { Link } from "react-router-dom"
 export default function index() {
     return (
         <footer className={styles.foot}>
