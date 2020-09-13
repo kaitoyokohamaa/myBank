@@ -6,6 +6,7 @@ import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import Header from "../../organisms/Header"
+
 type moneyField = {
   money: number;
   description: string;
