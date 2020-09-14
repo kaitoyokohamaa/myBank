@@ -6,12 +6,12 @@ import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import Header from "../../organisms/Header"
-import Calendar from "./calendar"
 type moneyField = {
   money: number;
   description: string;
   type: string;
   createdAt: firebase.firestore.FieldValue;
+  day: Date
 };
 
 const Index: React.FC = () => {
@@ -114,14 +114,14 @@ const Index: React.FC = () => {
             </div>
           </div>
           <div>
-            <Calendar />
             <Form
-              sendMoney={(text: string, money: number, type: string) => {
+              sendMoney={(text: string, money: number, type: string, date) => {
                 const sendMoney: moneyField = {
                   money: money,
                   description: text,
                   type: type,
                   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  day: date
                 };
                 firebase.firestore()
                   .collection("budget")

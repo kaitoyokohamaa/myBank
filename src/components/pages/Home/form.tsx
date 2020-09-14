@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@chakra-ui/core'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import styles from "./calendar.module.css"
 export interface TagFormProps {
-    sendMoney: (text: string, money: number, type: string) => void;
+    sendMoney: (text: string, money: number, type: string, date: Date) => void;
+
 }
 const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
     const [text, setText] = useState<string>("");
     const [type, setType] = useState<string>("inc");
     const [money, setMoney] = useState<number>();
-    const submitMoney = (text: string, money: number, type: string) => {
+    const [date, setDate] = useState(new Date());
+    const dateChange = (date: Date) => {
+        const detailDate = date
+        setDate(detailDate)
+    }
+    const submitMoney = (text: string, money: number, type: string, date: Date) => {
         if (text.trim() !== "") {
-            sendMoney(text, money, type);
+            sendMoney(text, money, type, date);
             setText("");
             setMoney(0);
         } else {
@@ -20,6 +29,13 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
 
     return (
         <div>
+            <div>
+                <span className={styles.coment}>日付</span>
+                <DatePicker
+                    onChange={dateChange}
+                    className={styles.calendar}
+                />
+            </div>
             <select value={type}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                     setType(event.target.value);
@@ -36,7 +52,7 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
             }} />
 
             <Button
-                onClick={() => money ? submitMoney(text, money, type) : null}
+                onClick={() => money ? submitMoney(text, money, type, date) : null}
                 color="primary" >登録</Button>
         </div>
     )
