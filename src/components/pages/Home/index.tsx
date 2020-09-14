@@ -6,7 +6,7 @@ import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import Header from "../../organisms/Header"
-
+import Carendar from "./carendar"
 type moneyField = {
   money: number;
   description: string;
@@ -114,6 +114,7 @@ const Index: React.FC = () => {
             </div>
           </div>
           <div>
+            <Carendar />
             <Form
               sendMoney={(text: string, money: number, type: string) => {
                 const sendMoney: moneyField = {
