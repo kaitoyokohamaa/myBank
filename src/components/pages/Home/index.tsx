@@ -6,7 +6,7 @@ import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import Header from "../../organisms/Header"
-import Carendar from "./carendar"
+import Calendar from "./calendar"
 type moneyField = {
   money: number;
   description: string;
@@ -22,7 +22,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
-        alert("新規登録をしてください");
+        alert("新規登録をしてください"); alert("新規登録をしてください"); alert("新規登録しないなんて"); alert("あなた馬鹿ですね！！");
       } else {
         firebase
           .firestore()
@@ -114,7 +114,7 @@ const Index: React.FC = () => {
             </div>
           </div>
           <div>
-            <Carendar />
+            <Calendar />
             <Form
               sendMoney={(text: string, money: number, type: string) => {
                 const sendMoney: moneyField = {
@@ -136,11 +136,8 @@ const Index: React.FC = () => {
               <Tab className={styles.tab}>支出</Tab>
               <Tab className={styles.tab}>収入</Tab>
             </TabList>
-
             {
-
               budget !== undefined ? budget?.map((item: moneyField, index: number) => {
-
                 return (
                   <div key={index} className={styles.delete}>
                     {
