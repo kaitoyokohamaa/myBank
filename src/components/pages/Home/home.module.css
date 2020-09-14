@@ -40,7 +40,7 @@
 
 .List {
     display: flex;
-    padding: 10px;
+    padding-left: 0;
     margin: 0;
     list-style: none;
 }
@@ -52,16 +52,9 @@
     cursor: pointer;
     font-weight: bold;
     text-align: center;
+    border: 1px solid #dedede;
 }
 
 .tab[aria-selected="true"] {
     background-color: #dedede;
-}
-
-.colorExp {
-    border: 1px solid #a20707;
-}
-
-.colorInc {
-    border: 1px solid blue;
 }

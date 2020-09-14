@@ -6,16 +6,19 @@ import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import Header from "../../organisms/Header"
+
 type moneyField = {
   money: number;
   description: string;
   type: string;
   createdAt: firebase.firestore.FieldValue;
 };
+
 const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
   const [income, setIncome] = useState<number>()
   const [expence, setExpence] = useState<number>()
+  const thisMonth = new Date();
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
@@ -72,7 +75,7 @@ const Index: React.FC = () => {
       <div className={styles.home}>
         <div className={styles.homeHeader}>
           <h2 className={styles.total}>
-            今月の支出は
+            {thisMonth.getMonth() + 1}月の支出は
               {
               expence ? <CountUp
                 start={0}

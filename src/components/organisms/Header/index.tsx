@@ -20,14 +20,10 @@ export default function index() {
                         <Link className={styles.link} to="/graph">グラフ</Link>
                     </li>
                     <li>
-                        <Link className={styles.link} to="/calendar">カレンダー</Link>
-                    </li>
-                    <li>
                         <Link className={styles.link} to="/" onClick={logOut} > ログアウト</Link>
                     </li>
                 </div>
             </header>
-
         </div>
     )
 }
