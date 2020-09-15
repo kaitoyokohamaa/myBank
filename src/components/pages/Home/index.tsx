@@ -141,7 +141,7 @@ const Index: React.FC = () => {
                 return (
                   <div key={index} className={styles.delete}>
                     {
-                      item.type === "inc" ? incArea.push(<Card className="incColor" item={item.description} money={item.money} />) : expArea.push(<Card className="expColor" item={item.description} money={item.money} />)
+                      item.type === "inc" ? incArea.push(<Card key={index} className="incColor" item={item.description} money={item.money} day={item.day} />) : expArea.push(<Card key={index} className="expColor" item={item.description} money={item.money} day={item.day} />)
                     }
                   </div>
                 )
