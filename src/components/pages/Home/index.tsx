@@ -6,12 +6,12 @@ import styles from "./home.module.css";
 import Card from "./card";
 import { Tab, TabList, Tabs, TabPanel } from "react-tabs";
 import Header from "../../organisms/Header"
-
 type moneyField = {
   money: number;
   description: string;
   type: string;
   createdAt: firebase.firestore.FieldValue;
+  day: Date
 };
 
 const Index: React.FC = () => {
@@ -22,7 +22,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
-        alert("新規登録をしてください");
+        alert("新規登録をしてください"); alert("新規登録をしてください"); alert("新規登録しないなんて"); alert("あなた馬鹿ですね！！");
       } else {
         firebase
           .firestore()
@@ -115,12 +115,13 @@ const Index: React.FC = () => {
           </div>
           <div>
             <Form
-              sendMoney={(text: string, money: number, type: string) => {
+              sendMoney={(text: string, money: number, type: string, date) => {
                 const sendMoney: moneyField = {
                   money: money,
                   description: text,
                   type: type,
                   createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  day: date
                 };
                 firebase.firestore()
                   .collection("budget")
@@ -135,15 +136,12 @@ const Index: React.FC = () => {
               <Tab className={styles.tab}>支出</Tab>
               <Tab className={styles.tab}>収入</Tab>
             </TabList>
-
             {
-
               budget !== undefined ? budget?.map((item: moneyField, index: number) => {
-
                 return (
                   <div key={index} className={styles.delete}>
                     {
-                      item.type === "inc" ? incArea.push(<Card className="incColor" item={item.description} money={item.money} />) : expArea.push(<Card className="expColor" item={item.description} money={item.money} />)
+                      item.type === "inc" ? incArea.push(<Card key={index} className="incColor" item={item.description} money={item.money} day={item.day} />) : expArea.push(<Card key={index} className="expColor" item={item.description} money={item.money} day={item.day} />)
                     }
                   </div>
                 )
