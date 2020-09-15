@@ -27,6 +27,10 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
         }
     };
 
+    const month = date.getMonth() + 1
+    const currentDay = date.getDate()
+
+
     return (
         <div>
             <div>
@@ -35,6 +39,7 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
                     onChange={dateChange}
                     className={styles.calendar}
                 />
+                {month}月{currentDay}日
             </div>
             <select value={type}
                 onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {

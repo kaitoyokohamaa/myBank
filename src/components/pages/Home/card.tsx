@@ -12,6 +12,9 @@ type cardField = {
 export default function card(props: cardField) {
 
     const date = props.day.toDate()
+    const month = date.getMonth() + 1
+    const currentDay = date.getDate()
+    console.log(month, currentDay)
     return (
         <React.Fragment>
             <Card className="cardWidth">
@@ -19,11 +22,11 @@ export default function card(props: cardField) {
                     <Typography color="textSecondary" gutterBottom>
                         {props.item}
                     </Typography>
-                    <Typography variant="body2" component="p">
+                    <Typography color="textPrimary" variant="body2" component="h2">
                         {props.money}
                     </Typography>
-                    <Typography variant="body2" component="p">
-                        {date.getDate()}
+                    <Typography color="textSecondary" variant="body2" component="span">
+                        {month}月{currentDay}日
                     </Typography>
                 </CardContent>
             </Card>
