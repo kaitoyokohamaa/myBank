@@ -26,11 +26,8 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
             alert("本文が入力されてません");
         }
     };
-
     const month = date.getMonth() + 1
     const currentDay = date.getDate()
-
-
     return (
         <div>
             <div>

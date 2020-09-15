@@ -10,11 +10,9 @@ type cardField = {
     day: Date
 };
 export default function card(props: cardField) {
-
     const date = props.day.toDate()
     const month = date.getMonth() + 1
     const currentDay = date.getDate()
-    console.log(month, currentDay)
     return (
         <React.Fragment>
             <Card className="cardWidth">
