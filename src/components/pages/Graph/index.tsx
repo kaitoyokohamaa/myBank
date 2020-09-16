@@ -8,7 +8,21 @@ export default function Graph() {
     const [income, setIncome] = useState<number>()
     const [expence, setExpence] = useState<number>()
     const [totalBudget, setTotalBudget] = useState<number>()
-    const thisMonth = new Date();
+    // const [january, setJanuary] = useState<number>()
+    // const [february, setFebruary] = useState<number>()
+    // const [march, setMarch] = useState<number>()
+    // const [april, setApril] = useState<number>()
+    // const [may, setMay] = useState<number>()
+    // const [june, setJune] = useState<number>()
+    // const [july, setJuly] = useState<number>()
+    // const [august, setAugust] = useState<number>()
+    // const [september, setSeptember] = useState<number>()
+    // const [october, setOctober] = useState<number>()
+    // const [november, setNovember] = useState<number>()
+    // const [december, setDecember] = useState<number>()
+    const Month = new Date();
+    const findMonth: number[] = []
+    findMonth.push(Month.getMonth() + 1)
     useEffect(() => {
         return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
             if (!usr) {
@@ -24,7 +38,7 @@ export default function Graph() {
                         let storeExpence: number[] = []
                         querySnapshot.forEach((docs) => {
                             const showBudget = docs.data();
-                            if (showBudget.type === "inc") {
+                            if (showBudget.type === "inc" && findMonth.includes(9)) {
                                 const incomeMoney: number = showBudget.money
                                 storeIncome.push(incomeMoney)
                                 const sumBetween = (arr: number[]) => {
@@ -36,7 +50,7 @@ export default function Graph() {
                                 }
                                 const sumMoney = sumBetween(storeIncome)
                                 setIncome(sumMoney)
-                            } else if (showBudget.type === "exp") {
+                            } else if (showBudget.type === "exp" && findMonth.includes(9)) {
                                 const expenceMoney: number = showBudget.money
                                 storeExpence.push(expenceMoney)
                                 const decBetween = (arr: number[]) => {

@@ -20,6 +20,9 @@ const Index: React.FC = () => {
   const [expence, setExpence] = useState<number>()
   const [totalBudget, setTotalBudget] = useState<number>()
   const thisMonth = new Date();
+  const findMonth: number[] = []
+  findMonth.push(thisMonth.getMonth() + 1)
+
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
@@ -37,7 +40,7 @@ const Index: React.FC = () => {
             querySnapshot.forEach((docs) => {
               const showBudget = docs.data();
               storeBudget.push(showBudget)
-              if (showBudget.type === "inc") {
+              if (showBudget.type === "inc" && findMonth.includes(9)) {
                 const incomeMoney: number = showBudget.money
                 storeIncome.push(incomeMoney)
                 const sumBetween = (arr: number[]) => {
@@ -49,7 +52,7 @@ const Index: React.FC = () => {
                 }
                 const sumMoney = sumBetween(storeIncome)
                 setIncome(sumMoney)
-              } else if (showBudget.type === "exp") {
+              } else if (showBudget.type === "exp" && findMonth.includes(9)) {
                 const expenceMoney: number = showBudget.money
                 storeExpence.push(expenceMoney)
                 const decBetween = (arr: number[]) => {
