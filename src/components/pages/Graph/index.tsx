@@ -1,9 +1,66 @@
-import React from 'react'
-import { ComposedChart, XAxis, YAxis, Tooltip, Legend, CartesianGrid, Area, Bar } from "recharts"
+import React, { useState, useEffect } from 'react'
+import { ComposedChart, XAxis, YAxis, Tooltip, Legend, CartesianGrid, Bar } from "recharts"
 import Header from "../../organisms/Header";
 import Footer from "../../organisms/Footer"
-import styles from "./graph.module.css"
-export default function graph() {
+import firebase from "firebase/app";
+
+export default function Graph() {
+    const [income, setIncome] = useState<number>()
+    const [expence, setExpence] = useState<number>()
+    const [totalBudget, setTotalBudget] = useState<number>()
+    const thisMonth = new Date();
+    useEffect(() => {
+        return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
+            if (!usr) {
+                alert("新規登録をしてください"); alert("新規登録をしてください"); alert("新規登録しないなんて"); alert("あなた馬鹿ですね！！");
+            } else {
+                firebase
+                    .firestore()
+                    .collection("budget")
+                    .orderBy("createdAt", "desc")
+                    .get()
+                    .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
+                        let storeIncome: number[] = []
+                        let storeExpence: number[] = []
+                        querySnapshot.forEach((docs) => {
+                            const showBudget = docs.data();
+                            if (showBudget.type === "inc") {
+                                const incomeMoney: number = showBudget.money
+                                storeIncome.push(incomeMoney)
+                                const sumBetween = (arr: number[]) => {
+                                    let sum = 0;
+                                    for (var i = 0, len = arr.length; i < len; ++i) {
+                                        sum += arr[i];
+                                    };
+                                    return sum;
+                                }
+                                const sumMoney = sumBetween(storeIncome)
+                                setIncome(sumMoney)
+                            } else if (showBudget.type === "exp") {
+                                const expenceMoney: number = showBudget.money
+                                storeExpence.push(expenceMoney)
+                                const decBetween = (arr: number[]) => {
+                                    let sum = 0;
+                                    for (var i = 0, len = arr.length; i < len; ++i) {
+                                        sum += arr[i];
+                                    };
+                                    return sum;
+                                }
+                                const decMoney = decBetween(storeExpence)
+                                setExpence(decMoney)
+                            }
+                        })
+                    })
+            }
+        });
+    }, [setExpence]);
+    useEffect(() => {
+        if (income && expence) {
+            setTotalBudget(income - expence)
+            console.log(income, expence)
+        }
+    }, [income, expence])
+    console.log(totalBudget)
     const dataGraph = [
         { month: '1月', "支出": 0, '残金': 0 },
         { month: '2月', '支出': 0, '残金': 0 },
@@ -13,7 +70,7 @@ export default function graph() {
         { month: '6月', '支出': 0, '残金': 0 },
         { month: '7月', '支出': 0, '残金': 0 },
         { month: '8月', '支出': 0, '残金': 0 },
-        { month: '9月', '支出': 0, '残金': 0 },
+        { month: '9月', '支出': expence, '残金': totalBudget },
         { month: '10月', '支出': 0, '残金': 0 },
         { month: '11月', '支出': 0, '残金': 0 },
         { month: '12月', '支出': 0, '残金': 0 }
@@ -35,13 +92,6 @@ export default function graph() {
                 <Legend />
                 <CartesianGrid //グラフのグリッドを指定
                     stroke="gray" //グリッド線の色を指定
-                />
-                <Area //面積を表すグラフ
-                    type="monotone"  //グラフが曲線を描くように指定。default値は折れ線グラフ
-                    dataKey="残金" //Array型のデータの、Y軸に表示したい値のキーを指定
-                    stroke="gray" ////グラフの線の色を指定
-                    fillOpacity={1}  ////グラフの中身の薄さを指定
-                    fill="gray"  //グラフの色を指定
                 />
                 <Bar //棒グラフ
                     dataKey="支出"　//Array型のデータの、Y軸に表示したい値のキーを指定

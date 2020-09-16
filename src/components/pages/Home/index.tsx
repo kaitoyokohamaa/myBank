@@ -18,6 +18,7 @@ const Index: React.FC = () => {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>()
   const [income, setIncome] = useState<number>()
   const [expence, setExpence] = useState<number>()
+  const [totalBudget, setTotalBudget] = useState<number>()
   const thisMonth = new Date();
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
@@ -67,6 +68,11 @@ const Index: React.FC = () => {
       }
     });
   }, [setExpence]);
+  useEffect(() => {
+    if (income && expence) {
+      setTotalBudget(income - expence)
+    }
+  }, [income, expence])
   let expArea: JSX.Element[] = []
   let incArea: JSX.Element[] = []
   return (
@@ -75,11 +81,11 @@ const Index: React.FC = () => {
       <div className={styles.home}>
         <div className={styles.homeHeader}>
           <h2 className={styles.total}>
-            {thisMonth.getMonth() + 1}月の支出は
+            {thisMonth.getMonth() + 1}月の残高は
               {
-              expence ? <CountUp
+              totalBudget ? <CountUp
                 start={0}
-                end={expence}
+                end={totalBudget}
                 duration={2.5}
                 separator=","
               /> : null
