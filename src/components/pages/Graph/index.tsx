@@ -5,7 +5,6 @@ import Footer from "../../organisms/Footer"
 import firebase from "firebase/app";
 
 export default function Graph() {
-    const [income, setIncome] = useState<number>()
     const [expence, setExpence] = useState<number>()
     const [totalBudget, setTotalBudget] = useState<number>()
     // const [january, setJanuary] = useState<number>()
@@ -26,7 +25,7 @@ export default function Graph() {
     useEffect(() => {
         return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
             if (!usr) {
-                alert("新規登録をしてください"); alert("新規登録をしてください"); alert("新規登録しないなんて"); alert("あなた馬鹿ですね！！");
+                alert("新規登録をしてください");
             } else {
                 firebase
                     .firestore()
@@ -34,23 +33,10 @@ export default function Graph() {
                     .orderBy("createdAt", "desc")
                     .get()
                     .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
-                        let storeIncome: number[] = []
                         let storeExpence: number[] = []
                         querySnapshot.forEach((docs) => {
                             const showBudget = docs.data();
-                            if (showBudget.type === "inc" && findMonth.includes(9)) {
-                                const incomeMoney: number = showBudget.money
-                                storeIncome.push(incomeMoney)
-                                const sumBetween = (arr: number[]) => {
-                                    let sum = 0;
-                                    for (var i = 0, len = arr.length; i < len; ++i) {
-                                        sum += arr[i];
-                                    };
-                                    return sum;
-                                }
-                                const sumMoney = sumBetween(storeIncome)
-                                setIncome(sumMoney)
-                            } else if (showBudget.type === "exp" && findMonth.includes(9)) {
+                            if (showBudget.type === "exp" && findMonth.includes(9)) {
                                 const expenceMoney: number = showBudget.money
                                 storeExpence.push(expenceMoney)
                                 const decBetween = (arr: number[]) => {
@@ -68,12 +54,7 @@ export default function Graph() {
             }
         });
     }, [setExpence]);
-    useEffect(() => {
-        if (income && expence) {
-            setTotalBudget(income - expence)
-            console.log(income, expence)
-        }
-    }, [income, expence])
+
     console.log(totalBudget)
     const dataGraph = [
         { month: '1月', "支出": 0, '残金': 0 },
