@@ -6,7 +6,6 @@ import firebase from "firebase/app";
 
 export default function Graph() {
     const [expence, setExpence] = useState<number>()
-    const [totalBudget, setTotalBudget] = useState<number>()
     // const [january, setJanuary] = useState<number>()
     // const [february, setFebruary] = useState<number>()
     // const [march, setMarch] = useState<number>()
@@ -15,8 +14,8 @@ export default function Graph() {
     // const [june, setJune] = useState<number>()
     // const [july, setJuly] = useState<number>()
     // const [august, setAugust] = useState<number>()
-    // const [september, setSeptember] = useState<number>()
-    // const [october, setOctober] = useState<number>()
+    const [september, setSeptember] = useState<number>()
+    const [october, setOctober] = useState<number>()
     // const [november, setNovember] = useState<number>()
     // const [december, setDecember] = useState<number>()
     const Month = new Date();
@@ -47,7 +46,19 @@ export default function Graph() {
                                     return sum;
                                 }
                                 const decMoney = decBetween(storeExpence)
-                                setExpence(decMoney)
+                                setSeptember(decMoney)
+                            } else if (showBudget.type === "exp" && findMonth.includes(10)) {
+                                const expenceMoney: number = showBudget.money
+                                storeExpence.push(expenceMoney)
+                                const decBetween = (arr: number[]) => {
+                                    let sum = 0;
+                                    for (var i = 0, len = arr.length; i < len; ++i) {
+                                        sum += arr[i];
+                                    };
+                                    return sum;
+                                }
+                                const decMoney = decBetween(storeExpence)
+                                setOctober(decMoney)
                             }
                         })
                     })
@@ -55,7 +66,7 @@ export default function Graph() {
         });
     }, [setExpence]);
 
-    console.log(totalBudget)
+
     const dataGraph = [
         { month: '1月', "支出": 0, '残金': 0 },
         { month: '2月', '支出': 0, '残金': 0 },
@@ -65,8 +76,8 @@ export default function Graph() {
         { month: '6月', '支出': 0, '残金': 0 },
         { month: '7月', '支出': 0, '残金': 0 },
         { month: '8月', '支出': 0, '残金': 0 },
-        { month: '9月', '支出': expence, '残金': totalBudget },
-        { month: '10月', '支出': 0, '残金': 0 },
+        { month: '9月', '支出': september },
+        { month: '10月', '支出': october, },
         { month: '11月', '支出': 0, '残金': 0 },
         { month: '12月', '支出': 0, '残金': 0 }
     ];
