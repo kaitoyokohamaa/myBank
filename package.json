@@ -2,6 +2,9 @@
   "name": "bank",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
     "@material-ui/core": "^4.11.0",
