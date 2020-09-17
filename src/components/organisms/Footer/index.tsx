@@ -1,6 +1,7 @@
 import React from 'react'
 import Coment from "../../atoms/Coment"
 import styles from "./footer.module.css";
+
 export default function index() {
     return (
         <footer className={styles.foot}>
