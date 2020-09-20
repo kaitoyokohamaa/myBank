@@ -1,3 +1,4 @@
+
 module.exports = {
   stories: ["../src/**/**/*.stories.tsx"],
   addons: [
@@ -11,4 +12,4 @@ module.exports = {
     '@storybook/preset-typescript',
     "@storybook/addon-a11y"
   ]
-};
+}

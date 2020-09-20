@@ -26,7 +26,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (!usr) {
-        alert("新規登録をしてください"); alert("新規登録をしてください"); alert("新規登録しないなんて"); alert("あなた馬鹿ですね！！");
+        alert("新規登録をしてください");
       } else {
         firebase
           .firestore()
