@@ -10,6 +10,7 @@ type cardField = {
     day: Date
 };
 export default function card(props: cardField) {
+    // リリース後に対応
     // const date = props.day
     // const month = date.getMonth() + 1
     // const currentDay = date.getDate()
