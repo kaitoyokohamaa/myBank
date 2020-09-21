@@ -85,27 +85,27 @@ export default function Graph() {
     return (
         <div>
             <Header />
-            <ComposedChart //グラフ全体のサイズや位置、データを指定。場合によってmarginで上下左右の位置を指定する必要あり。
-                width={800}  //グラフ全体の幅を指定
-                height={280}  //グラフ全体の高さを指定
-                data={dataGraph} //ここにArray型のデータを指定
-                margin={{ top: 20, right: 60, bottom: 0, left: 0 }}  //marginを指定
+            <ComposedChart 
+                width={800}  
+                height={280} 
+                data={dataGraph} 
+                margin={{ top: 20, right: 60, bottom: 0, left: 0 }}  
             >
                 <XAxis
-                    dataKey="month"  //Array型のデータの、X軸に表示したい値のキーを指定
+                    dataKey="month"  
                 />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <CartesianGrid //グラフのグリッドを指定
-                    stroke="gray" //グリッド線の色を指定
+                <CartesianGrid 
+                    stroke="gray" 
                 />
                 <Bar //棒グラフ
-                    dataKey="支出"　//Array型のデータの、Y軸に表示したい値のキーを指定
-                    barSize={20}  //棒の太さを指定
-                    stroke="gray" ////レーダーの線の色を指定 
-                    fillOpacity={1}  //レーダーの中身の色の薄さを指定
-                    fill="pink" ////レーダーの中身の色を指定
+                    dataKey="支出"　
+                    barSize={20}  
+                    stroke="gray" 
+                    fillOpacity={1}  
+                    fill="pink"
                 />
             </ComposedChart>
             <Footer />
