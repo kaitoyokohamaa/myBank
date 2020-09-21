@@ -10,6 +10,6 @@ const app = {
     storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
 };
-firebase.initializeApp(app);
+export default firebase.initializeApp(app);
 export const db = firebase.firestore();
 export default firebase;
