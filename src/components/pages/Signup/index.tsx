@@ -41,6 +41,7 @@ const Index: React.FC = () => {
                         .catch((err) => {
                             alert("何か間違ってるんじゃないですカァー？")
                             setLoading(false)
+                            console.log(err)
                         });
                 }}
             >
