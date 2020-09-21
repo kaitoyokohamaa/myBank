@@ -25,6 +25,7 @@ export default function Graph() {
         return firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
             if (!usr) {
                 alert("新規登録をしてください");
+                console.log(expence)
             } else {
                 firebase
                     .firestore()
