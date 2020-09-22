@@ -65,7 +65,7 @@ export default function Graph() {
                     })
             }
         });
-    }, [setSeptember ]);
+    }, [setSeptember]);
 
 
     const dataGraph = [
