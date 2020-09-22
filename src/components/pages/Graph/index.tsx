@@ -65,7 +65,7 @@ export default function Graph() {
                     })
             }
         });
-    }, [setExpence]);
+    }, [setExpence,setIncome]);
 
 
     const dataGraph = [

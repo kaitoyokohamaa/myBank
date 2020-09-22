@@ -70,7 +70,7 @@ const Index: React.FC = () => {
           })
       }
     });
-  }, [setExpence]);
+  }, [setExpence,setIncome]);
   useEffect(() => {
     if (income && expence) {
       setTotalBudget(income - expence)
