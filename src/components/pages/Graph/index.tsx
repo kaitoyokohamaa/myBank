@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ComposedChart, XAxis, YAxis, Tooltip, Legend, CartesianGrid, Bar } from "recharts"
 import Header from "../../organisms/Header";
 import Footer from "../../organisms/Footer"
-import firebase from "firebase/app";
+import firebase from '../../../firebase'
 
 export default function Graph() {
     const [expence, setExpence] = useState<number>()
