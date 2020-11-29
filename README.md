@@ -2,9 +2,7 @@
 
 ### **https://kaibank.herokuapp.com/**  
 　
-## 💬 Usage
 
-`$ git clone https://github.com/aocattleya/Ramen-Timer.git`  
 　
 ## :art: Character Design
 
