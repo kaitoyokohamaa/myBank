@@ -1,6 +1,13 @@
+## 🌐 App URL
 
-使用技術はReact.js、TypeScript、FireBase（FireStore,FireAuth）
+### **https://kaibank.herokuapp.com/**  
+　
+## 💬 Usage
 
-このアプリを作ろうと思ったきっかけ
-自分のお金を管理したいと思ったからです。
-自分はあり金を自己投資に使ってしまうため手元に残るお金がない状態が続いたため、自分の使ったお金を可視化できるアプリを作りたいなと思った次第です。
+`$ git clone https://github.com/aocattleya/Ramen-Timer.git`  
+　
+## :art: Character Design
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55383786/100537179-95233700-3269-11eb-8791-55fe497b6228.png" width=70%>  
+</p>　
