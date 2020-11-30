@@ -1,0 +1,24 @@
+.List {
+  display: flex;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tab {
+  width: 100px;
+  padding: 11px 0px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #dedede;
+}
+
+.tab[aria-selected="true"] {
+  background-color: #dedede;
+}
+
+.card {
+  width: 50%;
+}
