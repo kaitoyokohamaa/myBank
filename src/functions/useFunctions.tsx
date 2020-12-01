@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../firebase";
-export function useHome() {
+export function useFunctions() {
   const [budget, setBudget] = useState<firebase.firestore.DocumentData>();
   const [income, setIncome] = useState<number>();
   const [expence, setExpence] = useState<number>();

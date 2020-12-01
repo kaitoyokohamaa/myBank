@@ -22,7 +22,7 @@ const Form: FC = () => {
         money,
         description: text,
         type,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        createdAt: firebase.firestore.Timestamp.now(),
         day: date,
       };
       firebase.firestore().collection("budget").add(sendMoney);

@@ -5,19 +5,20 @@ import CountUp from "react-countup";
 import styles from "./home.module.css";
 import Header from "../../organisms/Header";
 import Tab from "./tabs";
-import { useHome } from "../../../functions/useHome";
+import { useFunctions } from "../../../functions/useFunctions";
+import { AnyARecord } from "dns";
 export type moneyField = {
   money: number;
   description: string;
   type: string;
   createdAt: firebase.firestore.FieldValue;
-  day: Date;
+  day: any;
 };
 
 const Index: FC = () => {
   const now = new Date();
   const thisMonth = now.getMonth() + 1;
-  const [functionsHome] = useHome();
+  const [functionsHome] = useFunctions();
 
   return (
     <React.Fragment>
