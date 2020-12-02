@@ -1,35 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@chakra-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./calendar.module.css";
-export interface TagFormProps {
-  sendMoney: (text: string, money: number, type: string, date: Date) => void;
-}
-const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
+import firebase from "../../../firebase";
+import { moneyField } from "./index";
+
+const Form: FC = () => {
   const [text, setText] = useState<string>("");
   const [type, setType] = useState<string>("inc");
-  const [money, setMoney] = useState<number>();
+  const [money, setMoney] = useState<number>(0);
   const [date, setDate] = useState(new Date());
   const dateChange = (date: Date) => {
     const detailDate = date;
     setDate(detailDate);
   };
-  const submitMoney = (
-    text: string,
-    money: number,
-    type: string,
-    date: Date
-  ) => {
+  const submitHandler = () => {
     if (text.trim() !== "") {
-      sendMoney(text, money, type, date);
+      const sendMoney: moneyField = {
+        money,
+        description: text,
+        type,
+        createdAt: firebase.firestore.Timestamp.now(),
+        day: date,
+      };
+      firebase.firestore().collection("budget").add(sendMoney);
       setText("");
       setMoney(0);
     } else {
       alert("本文が入力されてません");
     }
   };
+
   const month = date.getMonth() + 1;
   const currentDay = date.getDate();
   return (
@@ -68,10 +71,7 @@ const Form: React.FC<TagFormProps> = ({ sendMoney }) => {
         }}
       />
 
-      <Button
-        onClick={() => (money ? submitMoney(text, money, type, date) : null)}
-        color="primary"
-      >
+      <Button onClick={submitHandler} color="primary">
         登録
       </Button>
     </div>

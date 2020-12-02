@@ -10,89 +10,110 @@ import {
 } from "recharts";
 import Header from "../../organisms/Header";
 import Footer from "../../organisms/Footer";
-import firebase from "../../../firebase";
-
+import { useFunctions } from "../../../functions/useFunctions";
+import { moneyField } from "../Home";
 export default function Graph() {
-  const [expence, setExpence] = useState<number>();
-  // const [january, setJanuary] = useState<number>()
-  // const [february, setFebruary] = useState<number>()
-  // const [march, setMarch] = useState<number>()
-  // const [april, setApril] = useState<number>()
-  // const [may, setMay] = useState<number>()
-  // const [june, setJune] = useState<number>()
-  // const [july, setJuly] = useState<number>()
-  // const [august, setAugust] = useState<number>()
+  const [useGraph] = useFunctions();
+  const [expence, setExpence] = useState<moneyField[]>();
+  const [months, setMonths] = useState<any[]>();
+  const [january, setJanuary] = useState<number>();
+  const [february, setFebruary] = useState<number>();
+  const [march, setMarch] = useState<number>();
+  const [april, setApril] = useState<number>();
+  const [may, setMay] = useState<number>();
+  const [june, setJune] = useState<number>();
+  const [july, setJuly] = useState<number>();
+  const [august, setAugust] = useState<number>();
   const [september, setSeptember] = useState<number>();
   const [october, setOctober] = useState<number>();
-  // const [november, setNovember] = useState<number>()
-  // const [december, setDecember] = useState<number>()
-  const Month = new Date();
-  const findMonth: number[] = [];
-  findMonth.push(Month.getMonth() + 1);
+  const [november, setNovember] = useState<number>();
+  const [december, setDecember] = useState<number>();
+  let expenceArray: moneyField[] = [];
+  let expenceMonths: any[] = [];
+  let januaryList: number[] = [];
+  let februaryList: number[] = [];
+  let marchList: number[] = [];
+  let aprilList: number[] = [];
+  let mayList: number[] = [];
+  let juneList: number[] = [];
+  let julyList: number[] = [];
+  let augustList: number[] = [];
+  let septemberList: number[] = [];
+  let octoberList: number[] = [];
+  let novemberList: number[] = [];
+  let decemberList: number[] = [];
   useEffect(() => {
-    return firebase
-      .auth()
-      .onAuthStateChanged(async (usr: firebase.User | null) => {
-        if (!usr) {
-          alert("新規登録をしてください");
-          console.log(expence);
-        } else {
-          firebase
-            .firestore()
-            .collection("budget")
-            .orderBy("createdAt", "desc")
-            .get()
-            .then((querySnapshot: firebase.firestore.QuerySnapshot) => {
-              let storeExpence: number[] = [];
-              querySnapshot.forEach((docs) => {
-                const showBudget = docs.data();
-                if (showBudget.type === "exp" && findMonth.includes(9)) {
-                  const expenceMoney: number = showBudget.money;
-                  storeExpence.push(expenceMoney);
-                  const decBetween = (arr: number[]) => {
-                    let sum = 0;
-                    for (var i = 0, len = arr.length; i < len; ++i) {
-                      sum += arr[i];
-                    }
-                    return sum;
-                  };
-                  const decMoney = decBetween(storeExpence);
-                  setSeptember(decMoney);
-                } else if (
-                  showBudget.type === "exp" &&
-                  findMonth.includes(10)
-                ) {
-                  const expenceMoney: number = showBudget.money;
-                  storeExpence.push(expenceMoney);
-                  const decBetween = (arr: number[]) => {
-                    let sum = 0;
-                    for (var i = 0, len = arr.length; i < len; ++i) {
-                      sum += arr[i];
-                    }
-                    return sum;
-                  };
-                  const decMoney = decBetween(storeExpence);
-                  setOctober(decMoney);
-                }
-              });
-            });
-        }
+    if (useGraph.budget) {
+      useGraph.budget.map((Field: moneyField) => {
+        Field.type === "exp" && expenceArray.push(Field);
       });
-  }, [setSeptember]);
+
+      setExpence(expenceArray);
+      console.log(expence);
+      expence?.map((Field: moneyField) =>
+        expenceMonths.push({
+          selectedMonth: Field.day.toDate().getMonth() + 1,
+          Field: Field,
+        })
+      );
+
+      setMonths(expenceMonths);
+    }
+  }, [useGraph.budget, useGraph.totalBudget, useGraph.expence]);
+
+  useEffect(() => {
+    if (months) {
+      months?.map(
+        (e) => e.selectedMonth === 1 && januaryList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 2 && februaryList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 3 && marchList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 4 && aprilList.push(e.Field.money)
+      );
+      months?.map((e) => e.selectedMonth === 5 && mayList.push(e.Field.money));
+      months?.map((e) => e.selectedMonth === 6 && juneList.push(e.Field.money));
+      months?.map((e) => e.selectedMonth === 7 && julyList.push(e.Field.money));
+      months?.map(
+        (e) => e.selectedMonth === 8 && augustList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 9 && septemberList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 10 && octoberList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 11 && novemberList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 12 && decemberList.push(e.Field.money)
+      );
+    }
+
+    const reducer = (sum: number, currentValue: number) => sum + currentValue;
+    if (decemberList.length) {
+      setDecember(decemberList.reduce(reducer));
+    }
+  });
 
   const dataGraph = [
-    { month: "1月", 支出: 0, 残金: 0 },
-    { month: "2月", 支出: 0, 残金: 0 },
-    { month: "3月", 支出: 0, 残金: 0 },
-    { month: "4月", 支出: 0, 残金: 0 },
-    { month: "5月", 支出: 0, 残金: 0 },
-    { month: "6月", 支出: 0, 残金: 0 },
-    { month: "7月", 支出: 0, 残金: 0 },
-    { month: "8月", 支出: 0, 残金: 0 },
+    { month: "1月", 支出: january },
+    { month: "2月", 支出: february },
+    { month: "3月", 支出: march },
+    { month: "4月", 支出: april },
+    { month: "5月", 支出: may },
+    { month: "6月", 支出: june },
+    { month: "7月", 支出: july },
+    { month: "8月", 支出: august },
     { month: "9月", 支出: september },
     { month: "10月", 支出: october },
-    { month: "11月", 支出: 0, 残金: 0 },
-    { month: "12月", 支出: 0, 残金: 0 },
+    { month: "11月", 支出: november },
+    { month: "12月", 支出: december },
   ];
   return (
     <div>
