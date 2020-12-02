@@ -9,7 +9,6 @@ import {
   Bar,
 } from "recharts";
 import Header from "../../organisms/Header";
-import Footer from "../../organisms/Footer";
 import { useGraphFunctions } from "../../../functions/useGraphFunctions";
 export default function Graph() {
   const [getExpenceMonth] = useGraphFunctions();
@@ -49,7 +48,6 @@ export default function Graph() {
           fill="pink"
         />
       </ComposedChart>
-      <Footer />
     </div>
   );
 }
