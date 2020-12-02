@@ -5,6 +5,8 @@ export function useFunctions() {
   const [income, setIncome] = useState<number>();
   const [expence, setExpence] = useState<number>();
   const [totalBudget, setTotalBudget] = useState<number>();
+  const d = new Date();
+  const month = d.getMonth() + 1;
   useEffect(() => {
     return firebase
       .auth()
@@ -25,7 +27,10 @@ export function useFunctions() {
                   const showBudget = docs.data();
                   storeBudget.push(showBudget);
                   //収入の中身を足す
-                  if (showBudget.type === "inc") {
+                  if (
+                    showBudget.type === "inc" &&
+                    showBudget.day.toDate().getMonth() + 1 === month
+                  ) {
                     const incomeMoney: number = await showBudget.money;
                     storeIncome.push(incomeMoney);
                     const reducer = (sum: number, currentValue: number) =>
@@ -35,7 +40,10 @@ export function useFunctions() {
                     setIncome(sumMoney);
                   }
                   //支出の中身を足す
-                  else if (showBudget.type === "exp") {
+                  else if (
+                    showBudget.type === "exp" &&
+                    showBudget.day.toDate().getMonth() + 1 === month
+                  ) {
                     const expenceMoney: number = showBudget.money;
                     storeExpence.push(expenceMoney);
                     const reducer = (sum: number, currentValue: number) =>
