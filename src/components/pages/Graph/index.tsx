@@ -12,6 +12,7 @@ import Header from "../../organisms/Header";
 import { useGraphFunctions } from "../../../functions/useGraphFunctions";
 export default function Graph() {
   const [getExpenceMonth] = useGraphFunctions();
+
   const dataGraph = [
     { month: "1月", 支出: getExpenceMonth.january },
     { month: "2月", 支出: getExpenceMonth.february },

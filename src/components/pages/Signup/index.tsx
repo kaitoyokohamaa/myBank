@@ -8,10 +8,11 @@ import { Formik, Form, ErrorMessage, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Spinner from "../../atoms/Spinner";
-
+import { useAuthentication } from "../../../functions/useAuthentication";
 const Index: React.FC = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [getIdToken] = useAuthentication();
   return (
     <React.Fragment>
       <Formik
@@ -34,18 +35,19 @@ const Index: React.FC = () => {
           firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then((res) => {
+            .then(() => {
+              const myUserID = { idToken: getIdToken.idToken, name: "kaito" };
+              firebase.firestore().collection("User").add(myUserID);
               history.push("/home");
-              console.log(res);
             })
             .catch((err) => {
-              alert("何か間違ってるんじゃないですカァー？");
+              alert("きちんと入力してください");
               setLoading(false);
               console.log(err);
             });
         }}
       >
-        {({ errors, status, touched }) => (
+        {({ errors, touched }) => (
           <Form className={styles.formWrap}>
             <FormControl className={styles.form}>
               <FormLabel htmlFor="email">Email</FormLabel>
@@ -85,7 +87,7 @@ const Index: React.FC = () => {
                 variantColor="green"
                 className={styles.register}
               >
-                新規登録 　　{" "}
+                新規登録{" "}
               </Button>
             ) : (
               <Spinner />

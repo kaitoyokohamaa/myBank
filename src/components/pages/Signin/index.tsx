@@ -85,7 +85,7 @@ const Index: React.FC = () => {
                 variantColor="green"
                 className={styles.register}
               >
-                ログイン 　　{" "}
+                ログイン{" "}
               </Button>
             ) : (
               <Spinner />
