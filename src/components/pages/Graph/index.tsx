@@ -30,43 +30,77 @@ export default function Graph() {
   const [december, setDecember] = useState<number>();
   let expenceArray: moneyField[] = [];
   let expenceMonths: any[] = [];
+  let januaryList: number[] = [];
+  let februaryList: number[] = [];
+  let marchList: number[] = [];
+  let aprilList: number[] = [];
+  let mayList: number[] = [];
+  let juneList: number[] = [];
+  let julyList: number[] = [];
+  let augustList: number[] = [];
+  let septemberList: number[] = [];
+  let octoberList: number[] = [];
+  let novemberList: number[] = [];
+  let decemberList: number[] = [];
   useEffect(() => {
     if (useGraph.budget) {
       useGraph.budget.map((Field: moneyField) => {
         Field.type === "exp" && expenceArray.push(Field);
       });
-      if (expenceArray.length) {
-        setExpence(expenceArray);
-      }
+
+      setExpence(expenceArray);
+      console.log(expence);
       expence?.map((Field: moneyField) =>
         expenceMonths.push({
           selectedMonth: Field.day.toDate().getMonth() + 1,
           Field: Field,
         })
       );
-      if (expenceMonths.length) {
-        setMonths(expenceMonths);
-      }
-      months?.map((e) => e.selectedMonth === 1 && setJanuary(e.Field.money));
-      months?.map((e) => e.selectedMonth === 2 && setFebruary(e.Field.money));
-      months?.map((e) => e.selectedMonth === 3 && setMarch(e.Field.money));
-      months?.map((e) => e.selectedMonth === 4 && setApril(e.Field.money));
-      months?.map((e) => e.selectedMonth === 5 && setMay(e.Field.money));
-      months?.map((e) => e.selectedMonth === 6 && setJune(e.Field.money));
-      months?.map((e) => e.selectedMonth === 7 && setJuly(e.Field.money));
-      months?.map((e) => e.selectedMonth === 8 && setAugust(e.Field.money));
-      months?.map((e) => e.selectedMonth === 9 && setSeptember(e.Field.money));
-      months?.map((e) => e.selectedMonth === 10 && setOctober(e.Field.money));
-      months?.map(
-        (e) =>
-          e.selectedMonth === 11 &&
-          e.Field.day.toDate().getMonth() + 1 === e.selectedMonth &&
-          setNovember(e.Field.money)
-      );
-      months?.map((e) => e.selectedMonth === 12 && setDecember(e.Field.money));
+
+      setMonths(expenceMonths);
     }
-  }, [useGraph.totalBudget]);
-  console.log(november);
+  }, [useGraph.budget, useGraph.totalBudget, useGraph.expence]);
+
+  useEffect(() => {
+    if (months) {
+      months?.map(
+        (e) => e.selectedMonth === 1 && januaryList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 2 && februaryList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 3 && marchList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 4 && aprilList.push(e.Field.money)
+      );
+      months?.map((e) => e.selectedMonth === 5 && mayList.push(e.Field.money));
+      months?.map((e) => e.selectedMonth === 6 && juneList.push(e.Field.money));
+      months?.map((e) => e.selectedMonth === 7 && julyList.push(e.Field.money));
+      months?.map(
+        (e) => e.selectedMonth === 8 && augustList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 9 && septemberList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 10 && octoberList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 11 && novemberList.push(e.Field.money)
+      );
+      months?.map(
+        (e) => e.selectedMonth === 12 && decemberList.push(e.Field.money)
+      );
+    }
+
+    const reducer = (sum: number, currentValue: number) => sum + currentValue;
+    if (decemberList.length) {
+      setDecember(decemberList.reduce(reducer));
+    }
+  });
+
   const dataGraph = [
     { month: "1月", 支出: january },
     { month: "2月", 支出: february },

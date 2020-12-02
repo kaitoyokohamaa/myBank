@@ -46,6 +46,7 @@ export function useFunctions() {
                   }
                 }
               );
+
               setBudget(storeBudget);
             });
         }
@@ -58,5 +59,7 @@ export function useFunctions() {
     }
   }, [income, expence]);
 
-  return [{ totalBudget, income, expence, budget }] as const;
+  return [
+    { totalBudget, income, expence, budget, setBudget, setExpence },
+  ] as const;
 }

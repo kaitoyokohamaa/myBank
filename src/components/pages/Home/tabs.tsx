@@ -16,8 +16,8 @@ export default function tab(props: firebase.firestore.DocumentData) {
     <div className={styles.card}>
       <Tabs>
         <TabList className={styles.List}>
-          <Tab className={styles.tab}>支出</Tab>
           <Tab className={styles.tab}>収入</Tab>
+          <Tab className={styles.tab}>支出</Tab>
         </TabList>
         <TabPanel>
           {incomeMoneyFields.map((item, index) => (

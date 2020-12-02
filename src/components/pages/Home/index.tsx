@@ -6,7 +6,7 @@ import styles from "./home.module.css";
 import Header from "../../organisms/Header";
 import Tab from "./tabs";
 import { useFunctions } from "../../../functions/useFunctions";
-import { AnyARecord } from "dns";
+
 export type moneyField = {
   money: number;
   description: string;
