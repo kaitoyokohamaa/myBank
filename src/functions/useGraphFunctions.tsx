@@ -43,7 +43,7 @@ export function useGraphFunctions() {
       expence?.map((Field: moneyField) =>
         expenceMonths.push({
           selectedMonth: Field.day.toDate().getMonth() + 1,
-          Field: Field,
+          Field,
         })
       );
 

@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@chakra-ui/core";
 import DatePicker from "react-datepicker";
@@ -7,15 +7,32 @@ import styles from "./calendar.module.css";
 import firebase from "../../../firebase";
 import { moneyField } from "./index";
 
+import { useParams } from "react-router";
 const Form: FC = () => {
   const [text, setText] = useState<string>("");
   const [type, setType] = useState<string>("inc");
   const [money, setMoney] = useState<number>(0);
   const [date, setDate] = useState(new Date());
+  const [getBankID, setGetBankID] = useState<string>();
+  const bankId = useParams();
+
+  const ref = firebase.firestore().collection("User");
+
+  useEffect(() => {
+    ref.onSnapshot((usersDocs) => {
+      usersDocs.forEach((contens) => {
+        if (contens.data().idToken[0].includes(bankId["userId"])) {
+          const bankID = contens.id;
+          setGetBankID(bankID);
+        }
+      });
+    });
+  }, []);
   const dateChange = (date: Date) => {
     const detailDate = date;
     setDate(detailDate);
   };
+
   const submitHandler = () => {
     if (text.trim() !== "") {
       const sendMoney: moneyField = {
@@ -25,7 +42,7 @@ const Form: FC = () => {
         createdAt: firebase.firestore.Timestamp.now(),
         day: date,
       };
-      firebase.firestore().collection("budget").add(sendMoney);
+      ref.doc(getBankID).collection("bank").add(sendMoney);
       setText("");
       setMoney(0);
     } else {

@@ -7,6 +7,8 @@ export function useFunctions() {
   const [totalBudget, setTotalBudget] = useState<number>();
   const d = new Date();
   const month = d.getMonth() + 1;
+  const ref = firebase.firestore().collection("User");
+  const reducer = (sum: number, currentValue: number) => sum + currentValue;
   useEffect(() => {
     return firebase
       .auth()
@@ -14,9 +16,7 @@ export function useFunctions() {
         if (!usr) {
           alert("新規登録をしてください");
         } else {
-          firebase
-            .firestore()
-            .collection("budget")
+          ref
             .orderBy("createdAt", "desc")
             .onSnapshot((querySnapshot: firebase.firestore.QuerySnapshot) => {
               let storeBudget: firebase.firestore.DocumentData[] = [];
@@ -33,8 +33,6 @@ export function useFunctions() {
                   ) {
                     const incomeMoney: number = await showBudget.money;
                     storeIncome.push(incomeMoney);
-                    const reducer = (sum: number, currentValue: number) =>
-                      sum + currentValue;
                     const sumMoney = storeIncome.reduce(reducer);
                     //足された収入の中身をstateで管理
                     setIncome(sumMoney);
@@ -46,8 +44,6 @@ export function useFunctions() {
                   ) {
                     const expenceMoney: number = showBudget.money;
                     storeExpence.push(expenceMoney);
-                    const reducer = (sum: number, currentValue: number) =>
-                      sum + currentValue;
                     const decMoney = storeExpence.reduce(reducer);
                     //足された支出の中身をstateで管理
                     setExpence(decMoney);

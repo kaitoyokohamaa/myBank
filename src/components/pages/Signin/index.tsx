@@ -8,10 +8,11 @@ import { Formik, Form, ErrorMessage, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Spinner from "../../atoms/Spinner";
-
+import { useAuthentication } from "../../../functions/useAuthentication";
 const Index: React.FC = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [getIdToken] = useAuthentication();
   return (
     <React.Fragment>
       <Formik
@@ -35,7 +36,7 @@ const Index: React.FC = () => {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((res) => {
-              history.push("/home");
+              history.push(`/home/${getIdToken.idToken}`);
               console.log(res);
             })
             .catch((err) => {

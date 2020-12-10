@@ -12,7 +12,10 @@ import { useAuthentication } from "../../../functions/useAuthentication";
 const Index: React.FC = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [getIdToken] = useAuthentication();
+  const [useAuthenticationContents] = useAuthentication();
+  useAuthenticationContents.getUserId();
+  const myUserId = useAuthenticationContents.userId;
+
   return (
     <React.Fragment>
       <Formik
@@ -36,9 +39,12 @@ const Index: React.FC = () => {
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(() => {
-              const myUserID = { idToken: getIdToken.idToken, name: "kaito" };
+              const myUserID = {
+                idToken: useAuthenticationContents.idToken,
+                name: "kaito",
+              };
               firebase.firestore().collection("User").add(myUserID);
-              history.push("/home");
+              history.push(`/home/${useAuthenticationContents.idToken}`);
             })
             .catch((err) => {
               alert("きちんと入力してください");
