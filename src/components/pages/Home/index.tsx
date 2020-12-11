@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 import Form from "./form";
 import CountUp from "react-countup";
@@ -7,6 +7,7 @@ import Header from "../../organisms/Header";
 import Tab from "./tabs";
 import { useFunctions } from "../../../functions/useFunctions";
 
+import firebase from "../../../firebase";
 export type moneyField = {
   money: number;
   description: string;
