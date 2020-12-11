@@ -9,10 +9,12 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Spinner from "../../atoms/Spinner";
 import { useAuthentication } from "../../../functions/useAuthentication";
+import { useFunctions } from "../../../functions/useFunctions";
 const Index: React.FC = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [useAuthenticationContents] = useAuthentication();
+
   return (
     <React.Fragment>
       <Formik
@@ -29,18 +31,22 @@ const Index: React.FC = () => {
             .required("パスワードは必須になってます"),
         })}
         onSubmit={async (fields) => {
+          setLoading(true);
+
           const email = fields.email;
           const password = fields.password;
-          setLoading(true);
           return firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(async () => {
+            .then(async (res) => {
               const myUserID = {
-                userID: [],
+                userID: [res.user?.uid],
                 name: "kaito",
               };
+
               await useAuthenticationContents.ref.add(myUserID);
+            })
+            .then(() => {
               history.push(`/home`);
             })
             .catch((err) => {
