@@ -3,10 +3,8 @@ import Logo from "../../atoms/Logo";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase/app";
-import { useAuthentication } from "../../../functions/useAuthentication";
+
 export default function Index() {
-  const [getIdToken] = useAuthentication();
-  const idToken = getIdToken.idToken;
   const logOut = () => {
     alert("ログアウトします");
     firebase.auth().signOut();
@@ -18,7 +16,7 @@ export default function Index() {
         <Logo />
         <div className={styles.linkWrap}>
           <li>
-            <Link className={styles.link} to={`/home/${idToken}`}>
+            <Link className={styles.link} to={`/home`}>
               ホーム
             </Link>
           </li>

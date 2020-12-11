@@ -11,23 +11,23 @@ import { useParams } from "react-router";
 const Form: FC = () => {
   const [text, setText] = useState<string>("");
   const [type, setType] = useState<string>("inc");
-  const [money, setMoney] = useState<number>(0);
+  const [money, setMoney] = useState<number>(1);
   const [date, setDate] = useState(new Date());
   const [getBankID, setGetBankID] = useState<string>();
   const bankId = useParams();
 
   const ref = firebase.firestore().collection("User");
 
-  useEffect(() => {
-    ref.onSnapshot((usersDocs) => {
-      usersDocs.forEach((contens) => {
-        if (contens.data().idToken[0].includes(bankId["userId"])) {
-          const bankID = contens.id;
-          setGetBankID(bankID);
-        }
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   ref.onSnapshot((usersDocs) => {
+  //     usersDocs.forEach((contens) => {
+  //       if (contens.data().idToken[0].includes(bankId["userId"])) {
+  //         const bankID = contens.id;
+  //         setGetBankID(bankID);
+  //       }
+  //     });
+  //   });
+  // }, []);
   const dateChange = (date: Date) => {
     const detailDate = date;
     setDate(detailDate);
@@ -42,7 +42,7 @@ const Form: FC = () => {
         createdAt: firebase.firestore.Timestamp.now(),
         day: date,
       };
-      ref.doc(getBankID).collection("bank").add(sendMoney);
+      // ref.doc(getBankID).collection("bank").add(sendMoney);
       setText("");
       setMoney(0);
     } else {
@@ -65,8 +65,8 @@ const Form: FC = () => {
           setType(event.target.value);
         }}
       >
-        <option value="inc">+</option>
         <option value="exp">-</option>
+        <option value="inc">+</option>
       </select>
       <TextField
         type="text"

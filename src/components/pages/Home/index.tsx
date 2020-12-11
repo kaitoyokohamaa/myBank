@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 
 import Form from "./form";
 import CountUp from "react-countup";
@@ -6,7 +6,8 @@ import styles from "./home.module.css";
 import Header from "../../organisms/Header";
 import Tab from "./tabs";
 import { useFunctions } from "../../../functions/useFunctions";
-
+import { useAuthentication } from "../../../functions/useAuthentication";
+import firebase from "../../../firebase";
 export type moneyField = {
   money: number;
   description: string;
@@ -20,6 +21,14 @@ const Index: FC = () => {
   const thisMonth = now.getMonth() + 1;
   const [functionsHome] = useFunctions();
 
+  const [useAuthenticationContents] = useAuthentication();
+  useEffect(() => {
+    const userId = useAuthenticationContents.userId;
+    //ここで自分のアカウントを識別するユニークなIDを入れる
+    if (userId) {
+      useAuthenticationContents.updateUserID(userId);
+    }
+  }, [useAuthenticationContents.userId]);
   return (
     <React.Fragment>
       <Header />

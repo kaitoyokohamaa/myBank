@@ -3,32 +3,33 @@ import firebase from "../firebase";
 import { useHistory } from "react-router-dom";
 export function useAuthentication() {
   const history = useHistory();
-  const [idToken, setIdToken] = useState<number | string>();
+
   const [userId, setUserId] = useState<number | string>();
   const db = firebase.firestore();
   const ref = db.collection("User");
-
-  firebase
-    .auth()
-    .currentUser?.getIdToken(false)
-    .then((idToken: number | string) => {
-      setIdToken(idToken);
-    });
-
-  const checkAuthentication = () => {
-    firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
-      if (usr) {
-        history.push(`/home/${idToken}`);
-      }
-    });
-  };
-
-  const getUserId = () =>
+  //自分のユニークなIDを取得する
+  useEffect(() => {
     ref.onSnapshot((usersDocs) => {
       usersDocs.forEach((usersFilds) => {
         setUserId(usersFilds.id);
       });
     });
+  }, []);
+  //すでにログインしているユーザーを識別する
+  const checkAuthentication = () => {
+    firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
+      if (usr) {
+        history.push(`/home`);
+      }
+    });
+  };
+  //アカウント識別のためIDを格納する
+  const updateUserID = (id: string | number) => {
+    if (id) {
+      const doUserString = id.toString();
+      ref.doc(doUserString).update({ userID: id });
+    }
+  };
 
-  return [{ idToken, checkAuthentication, getUserId, userId }] as const;
+  return [{ checkAuthentication, userId, ref, updateUserID }] as const;
 }

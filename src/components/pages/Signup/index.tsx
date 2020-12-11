@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { FormControl, FormLabel } from "@chakra-ui/core";
 import firebase from "../../../firebase";
@@ -13,9 +13,6 @@ const Index: React.FC = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [useAuthenticationContents] = useAuthentication();
-  useAuthenticationContents.getUserId();
-  const myUserId = useAuthenticationContents.userId;
-
   return (
     <React.Fragment>
       <Formik
@@ -31,20 +28,20 @@ const Index: React.FC = () => {
             .min(6, "パスワードは6文字必要です")
             .required("パスワードは必須になってます"),
         })}
-        onSubmit={(fields) => {
+        onSubmit={async (fields) => {
           const email = fields.email;
           const password = fields.password;
           setLoading(true);
-          firebase
+          return firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(() => {
+            .then(async () => {
               const myUserID = {
-                idToken: useAuthenticationContents.idToken,
+                userID: [],
                 name: "kaito",
               };
-              firebase.firestore().collection("User").add(myUserID);
-              history.push(`/home/${useAuthenticationContents.idToken}`);
+              await useAuthenticationContents.ref.add(myUserID);
+              history.push(`/home`);
             })
             .catch((err) => {
               alert("きちんと入力してください");

@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact={true} component={Home} path="/home/:userId" />
+          <Route exact={true} component={Home} path="/home" />
           <Route exact path="/" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/graph" component={Graph} />

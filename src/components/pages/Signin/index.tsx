@@ -36,7 +36,7 @@ const Index: React.FC = () => {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((res) => {
-              history.push(`/home/${getIdToken.idToken}`);
+              history.push(`/home`);
               console.log(res);
             })
             .catch((err) => {
@@ -46,7 +46,7 @@ const Index: React.FC = () => {
             });
         }}
       >
-        {({ errors, status, touched }) => (
+        {({ errors, touched }) => (
           <Form className={styles.formWrap}>
             <FormControl className={styles.form}>
               <FormLabel htmlFor="email">Email</FormLabel>
