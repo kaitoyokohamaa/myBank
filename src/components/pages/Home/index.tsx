@@ -4,17 +4,17 @@ import Form from "./form";
 import CountUp from "react-countup";
 import styles from "./home.module.css";
 import Header from "../../organisms/Header";
-import Tab from "./tabs";
+import { Tabel } from "./tabel";
 import { useFunctions } from "../../../functions/useFunctions";
 
 import firebase from "../../../firebase";
-export type moneyField = {
+export interface moneyField {
   money: number;
   description: string;
   type: string;
   createdAt: firebase.firestore.FieldValue;
   day: any;
-};
+}
 
 const Index: FC = () => {
   const now = new Date();
@@ -73,7 +73,7 @@ const Index: FC = () => {
           </div>
         </div>
         {/* 画面半分の収入/支出のタブを作成 */}
-        <Tab budget={functionsHome.budget} />
+        <Tabel budget={functionsHome.budget} />
       </div>
     </React.Fragment>
   );

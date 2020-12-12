@@ -17,18 +17,18 @@ export default function Index() {
         <div className={styles.linkWrap}>
           <li>
             <Link className={styles.link} to={`/home`}>
-              ホーム
+              HOME
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link className={styles.link} to="/graph">
               グラフ
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link className={styles.link} to="/" onClick={logOut}>
               {" "}
-              ログアウト
+              LOGOUT
             </Link>
           </li>
         </div>

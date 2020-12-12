@@ -1,5 +1,5 @@
 import React, { useState, FC, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
+
 import { Button } from "@chakra-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -72,15 +72,15 @@ const Form: FC = () => {
         <option value="exp">-</option>
         <option value="inc">+</option>
       </select>
-      <TextField
+      <input
         type="text"
         placeholder="Add description"
         value={text}
-        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setText(event.target.value);
         }}
       />
-      <TextField
+      <input
         type="number"
         placeholder="200"
         value={money}
