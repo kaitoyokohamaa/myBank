@@ -79,7 +79,7 @@ export const Form: FC = ({}) => {
         <div className={styles.modalFormArea}>
           <h1 className={styles.modalFormH1}>Let's Add Money</h1>
           <div>
-            <span className={styles.coment}>日付</span>
+            <span className={styles.coment}>Day</span>
             <DatePicker onChange={dateChange} className={styles.calendar} />
             {month}月{currentDay}日
           </div>
@@ -114,12 +114,8 @@ export const Form: FC = ({}) => {
             }}
           />
 
-          <button
-            className={styles.styledBtn}
-            onClick={submitHandler}
-            color="primary"
-          >
-            登録
+          <button className={styles.styledBtn} onClick={submitHandler}>
+            Save
           </button>
         </div>
       </Modal>
