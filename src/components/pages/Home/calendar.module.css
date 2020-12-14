@@ -1,34 +1,75 @@
 .calendar {
-    margin: 30px 0px;
-    width: 50%;
-    height: auto;
-    font: inherit;
-    color: currentColor;
-    width: 100%;
-    border-bottom: 1px solid black;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    height: 1.1876em;
-    margin: 0;
-    display: block;
-    padding: 6px 0 7px;
-    min-width: 0;
-    background: none;
-    box-sizing: content-box;
-    animation-name: mui-auto-fill-cancel;
-    letter-spacing: inherit;
-    animation-duration: 10ms;
-    -webkit-tap-highlight-color: transparent;
-    margin-bottom: 20px;
+  margin: 30px 0px;
+  width: 50%;
+  height: auto;
+  font: inherit;
+  color: currentColor;
+  width: 100%;
+  border-bottom: 1px solid black;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  height: 1.1876em;
+  margin: 0;
+  display: block;
+  padding: 6px 0 7px;
+  min-width: 0;
+  background: none;
+  box-sizing: content-box;
+  animation-name: mui-auto-fill-cancel;
+  letter-spacing: inherit;
+  animation-duration: 10ms;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 20px;
 }
 
 .coment {
-    color: rgb(31, 8, 0);
-    font-size: 17px;
-    margin-bottom: 0;
-    font-family: system-ui;
-    font-style: revert;
-    font-weight: 900;
-    padding-right: 16px;
+  color: rgb(31, 8, 0);
+  font-size: 17px;
+  margin-bottom: 0;
+  font-family: system-ui;
+  font-style: revert;
+  font-weight: 900;
+  padding-right: 16px;
+}
+
+.modalFormArea {
+  background-color: #faf6f0;
+  margin: 0 auto;
+  width: 50%;
+  padding: 90px;
+  margin-top: 200px;
+  border: 1px solid pink;
+}
+.modalFormH1 {
+  color: #000;
+  text-align: center;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.styledBtn {
+  background: linear-gradient(90deg, #ffffff, #df405a);
+  border: 1px;
+  width: 240px;
+  padding: 16px 12px;
+  box-shadow: 0 4px 16px rgba(32, 54, 120, 0.2);
+}
+.styledBtn:hover {
+  transition: 1s;
+  opacity: 0.6;
+}
+
+.styledInput {
+  border: none;
+  outline: none;
+  display: inline-block;
+  height: 34px;
+  vertical-align: middle;
+
+  right: 9px;
+  border-radius: 22px;
+
+  box-sizing: border-box;
+  padding: 0 18px;
 }

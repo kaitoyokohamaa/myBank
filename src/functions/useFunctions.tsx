@@ -42,9 +42,8 @@ export function useFunctions() {
         } else {
           const myUid = usr.uid;
           setCurrentUserId(myUid);
-          console.log(bankID);
+
           if (bankID) {
-            console.log(bankID);
             ref
               .doc(bankID)
               .collection("bank")

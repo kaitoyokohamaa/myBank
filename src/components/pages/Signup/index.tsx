@@ -9,11 +9,14 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Spinner from "../../atoms/Spinner";
 import { useAuthentication } from "../../../functions/useAuthentication";
-import { useFunctions } from "../../../functions/useFunctions";
+
 const Index: React.FC = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [useAuthenticationContents] = useAuthentication();
+  useEffect(() => {
+    useAuthenticationContents.checkAuthentication();
+  }, []);
 
   return (
     <React.Fragment>
