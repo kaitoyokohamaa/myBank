@@ -57,6 +57,7 @@ export const Form: FC = ({}) => {
         ref.doc(getBankID).collection("bank").add(sendMoney);
         setText("");
         setMoney(0);
+        setOpen(false);
       }
     } else {
       alert("本文が入力されてません");
