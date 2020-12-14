@@ -6,18 +6,28 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "./calendar.module.css";
 import firebase from "../../../firebase";
 import { moneyField } from "./index";
-
+import Modal from "@material-ui/core/Modal";
 import { useFunctions } from "../../../functions/useFunctions";
-const Form: FC = () => {
+export const Form: FC = ({}) => {
   const [text, setText] = useState<string>("");
-  const [type, setType] = useState<string>("inc");
+  const [type, setType] = useState<string>("exp");
   const [money, setMoney] = useState<number>(0);
   const [date, setDate] = useState(new Date());
   const [getBankID, setGetBankID] = useState<string>();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const [functionContents] = useFunctions();
   const currentUserId = functionContents.currentUserId;
   const ref = firebase.firestore().collection("User");
+
   useEffect(() => {
     console.log(currentUserId);
     ref.onSnapshot((usersDocs) => {
@@ -58,44 +68,62 @@ const Form: FC = () => {
   const currentDay = date.getDate();
   return (
     <div>
-      <div>
-        <span className={styles.coment}>日付</span>
-        <DatePicker onChange={dateChange} className={styles.calendar} />
-        {month}月{currentDay}日
-      </div>
-      <select
-        value={type}
-        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-          setType(event.target.value);
-        }}
+      <button className={styles.styledBtn} type="button" onClick={handleOpen}>
+        Add Money
+      </button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
       >
-        <option value="exp">-</option>
-        <option value="inc">+</option>
-      </select>
-      <input
-        type="text"
-        placeholder="Add description"
-        value={text}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setText(event.target.value);
-        }}
-      />
-      <input
-        type="number"
-        placeholder="200"
-        value={money}
-        onChange={(
-          event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-        ) => {
-          const moneyStore: number = Number(event.target.value);
-          setMoney(moneyStore);
-        }}
-      />
+        <div className={styles.modalFormArea}>
+          <h1 className={styles.modalFormH1}>Let's Add Money</h1>
+          <div>
+            <span className={styles.coment}>日付</span>
+            <DatePicker onChange={dateChange} className={styles.calendar} />
+            {month}月{currentDay}日
+          </div>
+          <select
+            value={type}
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+              setType(event.target.value);
+            }}
+          >
+            <option value="exp">-</option>
+            <option value="inc">+</option>
+          </select>
+          <input
+            className={styles.styledInput}
+            type="text"
+            placeholder="Add description"
+            value={text}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setText(event.target.value);
+            }}
+          />
+          <input
+            className={styles.styledInput}
+            type="number"
+            placeholder="200"
+            value={money}
+            onChange={(
+              event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+            ) => {
+              const moneyStore: number = Number(event.target.value);
+              setMoney(moneyStore);
+            }}
+          />
 
-      <Button onClick={submitHandler} color="primary">
-        登録
-      </Button>
+          <button
+            className={styles.styledBtn}
+            onClick={submitHandler}
+            color="primary"
+          >
+            登録
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
-export default Form;

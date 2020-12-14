@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 
-import Form from "./form";
+import { Form } from "./form";
 import CountUp from "react-countup";
 import styles from "./home.module.css";
 import Header from "../../organisms/Header";
@@ -16,9 +16,7 @@ export interface moneyField {
   day: any;
 }
 
-const Index: FC = () => {
-  const now = new Date();
-  const thisMonth = now.getMonth() + 1;
+export const Home: FC = () => {
   const [functionsHome] = useFunctions();
 
   return (
@@ -27,19 +25,6 @@ const Index: FC = () => {
 
       <div className={styles.home}>
         <div className={styles.homeHeader}>
-          <h2 className={styles.total}>
-            {thisMonth}月の残高は
-            {functionsHome.totalBudget && (
-              <CountUp
-                start={0}
-                end={functionsHome.totalBudget}
-                duration={2.5}
-                separator=","
-              />
-            )}
-            円です
-          </h2>
-
           <div className={styles.body}>
             <div className={styles.totalIncome}>
               <h2>Income</h2>+
@@ -78,4 +63,3 @@ const Index: FC = () => {
     </React.Fragment>
   );
 };
-export default Index;
