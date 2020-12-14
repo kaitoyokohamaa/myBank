@@ -15,20 +15,22 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
             <th>金額</th>
             <th>カテゴリ</th>
           </tr>
-          {budget?.map((t: moneyField) => {
-            const CurrentMonth = t.day.toDate().getMonth() + 1;
-            const CurrentDay = t.day.toDate().getDay() + 13;
-            return (
-              <tr className={styles.styledTable}>
-                <td>
-                  {CurrentMonth}月{CurrentDay}日
-                </td>
-                <td>{t.description}</td>
-                <td>{t.money}</td>
-                <td>極楽</td>
-              </tr>
-            );
-          })}
+          <tbody>
+            {budget?.map((t: moneyField) => {
+              const CurrentMonth = t.day.toDate().getMonth() + 1;
+              const CurrentDay = t.day.toDate().getDay() + 13;
+              return (
+                <tr key={t.description} className={styles.styledTable}>
+                  <td>
+                    {CurrentMonth}月{CurrentDay}日
+                  </td>
+                  <td>{t.description}</td>
+                  <td>{t.money}</td>
+                  <td>極楽</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </>
     </div>

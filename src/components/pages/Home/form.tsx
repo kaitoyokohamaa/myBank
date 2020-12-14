@@ -29,7 +29,6 @@ export const Form: FC = ({}) => {
   const ref = firebase.firestore().collection("User");
 
   useEffect(() => {
-    console.log(currentUserId);
     ref.onSnapshot((usersDocs) => {
       usersDocs.forEach((contens) => {
         if (contens.data().userID[0].includes(currentUserId)) {
