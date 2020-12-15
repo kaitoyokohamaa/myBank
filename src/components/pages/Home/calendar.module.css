@@ -53,6 +53,7 @@
   border: 1px;
   width: 240px;
   padding: 16px 12px;
+  border-radius: 34px;
   box-shadow: 0 4px 16px rgba(32, 54, 120, 0.2);
 }
 .styledBtn:hover {

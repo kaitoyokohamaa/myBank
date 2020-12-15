@@ -21,7 +21,7 @@
 .styledTable th,
 .styledTable td {
   padding: 12px 15px;
-  width: 200px;
+  width: 260px;
 }
 
 .styledTable tbody tr {
@@ -43,4 +43,18 @@
 
 .styledh1 {
   color: #000;
+}
+.styledButton {
+  margin: 4px;
+  padding: 6px 8px;
+  border: 1px solid #df405a;
+  background-color: #df405a;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.styledInput {
+  border: 2px solid #df405a;
+  outline: 0;
+  border-radius: 12px;
 }
