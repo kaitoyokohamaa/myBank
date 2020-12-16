@@ -9,7 +9,7 @@ export const EditableFields: FC<moneyField> = ({
   day,
   description,
   money,
-  createdAt,
+
   id,
 }) => {
   return (

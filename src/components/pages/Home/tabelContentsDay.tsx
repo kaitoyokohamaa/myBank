@@ -3,14 +3,19 @@ import EditIcon from "@material-ui/icons/Edit";
 import styles from "./tabel.module.css";
 import { useFunctions } from "../../../functions/useFunctions";
 import firebase from "../../../firebase";
+import DatePicker from "react-datepicker";
 export default function TabelContentsArea(props: { day: string; id: string }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
-  const [changedDay, setChangedDay] = useState<string>(props.day);
+  const [changedDay, setChangedDay] = useState<Date | string>(props.day);
   const [functions] = useFunctions();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
+  const dateChange = (date: Date) => {
+    const detailDate = date;
+    setChangedDay(detailDate);
+  };
   useEffect(() => {
     let useBankID: string;
     ref.onSnapshot((usersDocs) => {
@@ -36,7 +41,9 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
               .doc(userContents.id)
               .update({ day: changedDay });
           }
-          setIsEditing(true);
+          setTimeout(() => {
+            setIsEditing(true);
+          }, 1000);
         });
       });
   };
@@ -62,12 +69,7 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
     </>
   ) : (
     <th>
-      <input
-        autoFocus
-        onChange={(e) => setChangedDay(e.target.value)}
-        value={changedDay}
-        className={styles.styledInput}
-      />
+      <DatePicker onChange={dateChange} className={styles.calendar} />
       <button className={styles.styledButton} onClick={handleClick}>
         保存
       </button>

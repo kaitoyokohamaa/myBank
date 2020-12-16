@@ -2,7 +2,7 @@ import React, { useState, FC, useEffect } from "react";
 import { v1 as uuidv1 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styles from "./calendar.module.css";
+import styles from "./form.module.css";
 import firebase from "../../../firebase";
 import { moneyField } from "./index";
 import Modal from "@material-ui/core/Modal";

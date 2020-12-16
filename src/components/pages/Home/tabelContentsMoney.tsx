@@ -39,7 +39,9 @@ export default function TabelContentsArea(props: {
               .doc(userContents.id)
               .update({ money: changedMoney });
           }
-          setIsEditing(true);
+          setTimeout(() => {
+            setIsEditing(true);
+          }, 1000);
         });
       });
   };

@@ -41,7 +41,9 @@ export default function TabelContentsArea(props: {
               .doc(userContents.id)
               .update({ category: changedCategory });
           }
-          setIsEditing(true);
+          setTimeout(() => {
+            setIsEditing(true);
+          }, 1000);
         });
       });
   };
