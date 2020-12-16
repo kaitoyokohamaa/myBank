@@ -21,7 +21,8 @@
 .styledTable th,
 .styledTable td {
   padding: 12px 15px;
-  width: 200px;
+  width: 260px;
+  height: 30px;
 }
 
 .styledTable tbody tr {
@@ -33,7 +34,7 @@
 }
 
 .styledTable tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #512645;
 }
 
 .styledTable tbody tr .activeRow {
@@ -43,4 +44,18 @@
 
 .styledh1 {
   color: #000;
+}
+.styledButton {
+  margin: 4px;
+  padding: 6px 8px;
+  border: 1px solid #df405a;
+  background-color: #df405a;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.styledInput {
+  border: 2px solid #df405a;
+  outline: 0;
+  border-radius: 12px;
 }

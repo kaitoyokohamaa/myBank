@@ -1,6 +1,5 @@
 import React, { useState, FC, useEffect } from "react";
-
-import { Button } from "@chakra-ui/core";
+import { v1 as uuidv1 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./calendar.module.css";
@@ -52,11 +51,13 @@ export const Form: FC = ({}) => {
         type,
         createdAt: firebase.firestore.Timestamp.now(),
         day: date,
+        id: uuidv1(),
       };
       if (getBankID) {
         ref.doc(getBankID).collection("bank").add(sendMoney);
         setText("");
         setMoney(0);
+        setOpen(false);
       }
     } else {
       alert("本文が入力されてません");

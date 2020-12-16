@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC } from "react";
 
 import { Form } from "./form";
 import CountUp from "react-countup";
@@ -14,6 +14,7 @@ export interface moneyField {
   type: string;
   createdAt: firebase.firestore.FieldValue;
   day: any;
+  id: string;
 }
 
 export const Home: FC = () => {

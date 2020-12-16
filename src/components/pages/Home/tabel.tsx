@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-
+import { EditableFields } from "./editableFields";
 import { moneyField } from "./index";
 import styles from "./tabel.module.css";
 
@@ -9,24 +9,29 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
       <>
         <h1>Recent spending</h1>
         <table className={styles.styledTable}>
-          <tr className={styles.styledTr}>
-            <th>date</th>
-            <th>Contents</th>
-            <th>Amount of money</th>
-            <th>category</th>
-          </tr>
+          <tbody>
+            <tr className={styles.styledTr}>
+              <th>date</th>
+              <th>Contents</th>
+              <th>Amount of money</th>
+              <th>category</th>
+            </tr>
+          </tbody>
           <tbody>
             {budget?.map((t: moneyField) => {
               const CurrentMonth = t.day.toDate().getMonth() + 1;
               const CurrentDay = t.day.toDate().getDay() + 13;
+              const Curentdate: string = `${CurrentMonth}月${CurrentDay}日`;
               return (
                 <tr key={t.description} className={styles.styledTable}>
-                  <td>
-                    {CurrentMonth}月{CurrentDay}日
-                  </td>
-                  <td>{t.description}</td>
-                  <td>{t.money}</td>
-                  <td>極楽</td>
+                  <EditableFields
+                    day={Curentdate}
+                    id={t.id || "0"}
+                    description={t.description}
+                    money={t.money}
+                    createdAt={t.createdAt}
+                    type={t.type}
+                  />
                 </tr>
               );
             })}

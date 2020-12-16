@@ -47,6 +47,7 @@ export function useFunctions() {
             ref
               .doc(bankID)
               .collection("bank")
+              .orderBy("createdAt", "desc")
               .onSnapshot((querySnapshot: firebase.firestore.DocumentData) => {
                 let storeBudget: firebase.firestore.DocumentData[] = [];
                 let storeIncome: number[] = [];
