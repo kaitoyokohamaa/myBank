@@ -22,6 +22,7 @@
 .styledTable td {
   padding: 12px 15px;
   width: 260px;
+  height: 30px;
 }
 
 .styledTable tbody tr {

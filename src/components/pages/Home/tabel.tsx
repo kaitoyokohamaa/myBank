@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { EditableFields } from "./editableFields";
 import { moneyField } from "./index";
 import styles from "./tabel.module.css";
@@ -26,6 +26,7 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
                 <tr key={t.description} className={styles.styledTable}>
                   <EditableFields
                     day={Curentdate}
+                    id={t.id || "0"}
                     description={t.description}
                     money={t.money}
                     createdAt={t.createdAt}

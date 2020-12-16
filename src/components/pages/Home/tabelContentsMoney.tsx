@@ -5,11 +5,12 @@ import { useFunctions } from "../../../functions/useFunctions";
 import firebase from "../../../firebase";
 export default function TabelContentsArea(props: {
   money: number;
-  createdAt: firebase.firestore.FieldValue;
+  id: string;
 }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
+  const [changedMoney, setChangedMoney] = useState<number>(props.money);
   const [functions] = useFunctions();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
@@ -25,7 +26,23 @@ export default function TabelContentsArea(props: {
       });
     });
   }, [currentUserId]);
-  const handleClick = () => {};
+  const handleClick = () => {
+    ref
+      .doc(getBankID)
+      .collection("bank")
+      .onSnapshot((userDocs: firebase.firestore.DocumentData) => {
+        userDocs.forEach((userContents: firebase.firestore.DocumentData) => {
+          if (userContents.data().id === props.id) {
+            ref
+              .doc(getBankID)
+              .collection("bank")
+              .doc(userContents.id)
+              .update({ money: changedMoney });
+          }
+          setIsEditing(true);
+        });
+      });
+  };
 
   return isEditing ? (
     <>
@@ -38,7 +55,7 @@ export default function TabelContentsArea(props: {
         {isHover && (
           <EditIcon
             style={{
-              fontSize: "14px",
+              fontSize: "12px",
               paddingLeft: "10px",
             }}
             type="edit"
@@ -49,7 +66,13 @@ export default function TabelContentsArea(props: {
     </>
   ) : (
     <th>
-      <input className={styles.styledInput} />
+      <input
+        autoFocus
+        type="number"
+        onChange={(e) => setChangedMoney(Number(e.target.value))}
+        value={changedMoney}
+        className={styles.styledInput}
+      />
       <button className={styles.styledButton} onClick={handleClick}>
         保存
       </button>
