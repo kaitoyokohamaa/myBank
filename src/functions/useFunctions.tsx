@@ -87,7 +87,7 @@ export function useFunctions() {
           }
         }
       });
-  }, [setExpence, setIncome, bankID]);
+  }, [bankID]);
   // 収入と支出を足す
   useEffect(() => {
     if (income && expence) {

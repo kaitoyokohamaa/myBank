@@ -28,23 +28,27 @@ export default function TabelContentsArea(props: {
       });
     });
   }, [currentUserId]);
-  const handleClick = () => {
+  const handleClick = async () => {
     ref
       .doc(getBankID)
       .collection("bank")
-      .onSnapshot((userDocs: firebase.firestore.DocumentData) => {
-        userDocs.forEach((userContents: firebase.firestore.DocumentData) => {
-          if (userContents.data().id === props.id) {
-            ref
-              .doc(getBankID)
-              .collection("bank")
-              .doc(userContents.id)
-              .update({ description: changedDescription });
+      .onSnapshot(async (userDocs: firebase.firestore.DocumentData) => {
+        await userDocs.forEach(
+          (userContents: firebase.firestore.DocumentData) => {
+            if (userContents.data().id === props.id) {
+              setTimeout(async () => {
+                await ref
+                  .doc(getBankID)
+                  .collection("bank")
+                  .doc(userContents.id)
+                  .update({ description: changedDescription });
+              }, 1000);
+            }
+            setTimeout(() => {
+              setIsEditing(true);
+            }, 1000);
           }
-          setTimeout(() => {
-            setIsEditing(true);
-          }, 1000);
-        });
+        );
       });
   };
   return isEditing ? (

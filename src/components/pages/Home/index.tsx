@@ -15,6 +15,7 @@ export interface moneyField {
   createdAt: firebase.firestore.FieldValue;
   day: any;
   id: string;
+  category: string;
 }
 
 export const Home: FC = () => {

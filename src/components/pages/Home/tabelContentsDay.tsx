@@ -8,7 +8,7 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
-  const [changedDay, setChangedDay] = useState<Date | string>(props.day);
+  const [changedDay, setChangedDay] = useState<Date>();
   const [functions] = useFunctions();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
@@ -69,7 +69,7 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
     </>
   ) : (
     <th>
-      <DatePicker onChange={dateChange} className={styles.calendar} />
+      <DatePicker required onChange={dateChange} className={styles.calendar} />
       <button className={styles.styledButton} onClick={handleClick}>
         保存
       </button>

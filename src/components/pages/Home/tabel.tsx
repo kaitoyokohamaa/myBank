@@ -31,6 +31,7 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
                     money={t.money}
                     createdAt={t.createdAt}
                     type={t.type}
+                    category={t.category}
                   />
                 </tr>
               );

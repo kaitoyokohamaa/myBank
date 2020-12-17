@@ -52,6 +52,7 @@ export const Form: FC = ({}) => {
         createdAt: firebase.firestore.Timestamp.now(),
         day: date,
         id: uuidv1(),
+        category: "",
       };
       if (getBankID) {
         ref.doc(getBankID).collection("bank").add(sendMoney);
