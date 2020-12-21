@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import EditIcon from "@material-ui/icons/Edit";
 import styles from "./tabel.module.css";
-import { useFunctions } from "../../../functions/useFunctions";
+import { useGetUid } from "../../../functions/useGetUid";
 import firebase from "../../../firebase";
 export default function TabelContentsArea(props: {
   description: string;
@@ -10,47 +10,56 @@ export default function TabelContentsArea(props: {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
+  const [getUserFiledsID, setGetUserFiledsID] = useState<string>();
   const [changedDescription, setChangedDescription] = useState<string>(
     props.description
   );
-  const [functions] = useFunctions();
+  const [functions] = useGetUid();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
+  // ユーザー情報が自分かを確認する
   useEffect(() => {
-    let useBankID: string;
     ref.onSnapshot((usersDocs) => {
       usersDocs.forEach((contens) => {
         if (contens.data().userID[0].includes(currentUserId)) {
           const bankID = contens.id;
-          useBankID = contens.id;
+
           setGetBankID(bankID);
         }
       });
     });
   }, [currentUserId]);
-  const handleClick = async () => {
+  // 自分がアップデートしたい箇所IDを取得する
+  useEffect(() => {
+    if (getBankID) {
+      ref
+        .doc(getBankID)
+        .collection("bank")
+        .onSnapshot(async (userDocs: firebase.firestore.DocumentData) => {
+          await userDocs.forEach(
+            (userContents: firebase.firestore.DocumentData) => {
+              if (userContents.data().id === props.id) {
+                setGetUserFiledsID(userContents.id);
+              }
+            }
+          );
+        });
+    }
+  }, [getBankID]);
+
+  const handleClick = () => {
+    // アップデート開始
     ref
       .doc(getBankID)
       .collection("bank")
-      .onSnapshot(async (userDocs: firebase.firestore.DocumentData) => {
-        await userDocs.forEach(
-          (userContents: firebase.firestore.DocumentData) => {
-            if (userContents.data().id === props.id) {
-              setTimeout(async () => {
-                await ref
-                  .doc(getBankID)
-                  .collection("bank")
-                  .doc(userContents.id)
-                  .update({ description: changedDescription });
-              }, 1000);
-            }
-            setTimeout(() => {
-              setIsEditing(true);
-            }, 1000);
-          }
-        );
-      });
+      .doc(getUserFiledsID)
+      .update({ description: changedDescription });
+    // 保存完了
+    setTimeout(() => {
+      setIsEditing(true);
+    }, 1000);
   };
+
   return isEditing ? (
     <>
       <th
