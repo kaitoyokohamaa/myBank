@@ -11,7 +11,7 @@
 </p>　
 新
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/55383786/102040298-c70ece80-3e0f-11eb-885a-7611a4537ba8.png" width=70%>  
+  <img src="https://user-images.githubusercontent.com/55383786/102849647-ec788980-445a-11eb-8937-75bcccf841a8.png" width=70%>  
 </p>　
 
 少しリニューアルしました。
