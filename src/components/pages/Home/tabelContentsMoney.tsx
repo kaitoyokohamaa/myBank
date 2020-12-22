@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import EditIcon from "@material-ui/icons/Edit";
+import { EditOutlined } from "@ant-design/icons";
 import styles from "./tabel.module.css";
-import { useFunctions } from "../../../functions/useFunctions";
+import { useGetUid } from "../../../functions/useGetUid";
 import firebase from "../../../firebase";
 export default function TabelContentsArea(props: {
   money: number;
@@ -11,7 +11,8 @@ export default function TabelContentsArea(props: {
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
   const [changedMoney, setChangedMoney] = useState<number>(props.money);
-  const [functions] = useFunctions();
+  const [getUserFiledsID, setGetUserFiledsID] = useState<string>();
+  const [functions] = useGetUid();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
   useEffect(() => {
@@ -26,22 +27,35 @@ export default function TabelContentsArea(props: {
       });
     });
   }, [currentUserId]);
+
+  // 自分がアップデートしたい箇所IDを取得する
+  useEffect(() => {
+    if (getBankID) {
+      ref
+        .doc(getBankID)
+        .collection("bank")
+        .onSnapshot(async (userDocs: firebase.firestore.DocumentData) => {
+          await userDocs.forEach(
+            (userContents: firebase.firestore.DocumentData) => {
+              if (userContents.data().id === props.id) {
+                setGetUserFiledsID(userContents.id);
+              }
+            }
+          );
+        });
+    }
+  }, [getBankID]);
+
   const handleClick = () => {
     ref
       .doc(getBankID)
       .collection("bank")
-      .onSnapshot((userDocs: firebase.firestore.DocumentData) => {
-        userDocs.forEach((userContents: firebase.firestore.DocumentData) => {
-          if (userContents.data().id === props.id) {
-            ref
-              .doc(getBankID)
-              .collection("bank")
-              .doc(userContents.id)
-              .update({ money: changedMoney });
-          }
-          setIsEditing(true);
-        });
-      });
+      .doc(getUserFiledsID)
+      .update({ money: changedMoney });
+
+    setTimeout(() => {
+      setIsEditing(true);
+    }, 1000);
   };
 
   return isEditing ? (
@@ -52,16 +66,7 @@ export default function TabelContentsArea(props: {
       >
         {props.money}
 
-        {isHover && (
-          <EditIcon
-            style={{
-              fontSize: "12px",
-              paddingLeft: "10px",
-            }}
-            type="edit"
-            onClick={() => setIsEditing(false)}
-          />
-        )}
+        {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>
     </>
   ) : (

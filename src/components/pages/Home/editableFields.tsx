@@ -9,7 +9,7 @@ export const EditableFields: FC<moneyField> = ({
   day,
   description,
   money,
-  createdAt,
+  category,
   id,
 }) => {
   return (
@@ -17,7 +17,10 @@ export const EditableFields: FC<moneyField> = ({
       <TabelContentsDay day={day} id={id} />
       <TabelContentsDescription description={description} id={id} />
       <TabelContentsMoney money={money} id={id} />
-      <TabelContentsCategory category={"極楽"} id={id} />
+      <TabelContentsCategory
+        category={category ? category : "未記入"}
+        id={id}
+      />
     </>
   );
 };

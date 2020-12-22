@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
-import EditIcon from "@material-ui/icons/Edit";
+import { EditOutlined } from "@ant-design/icons";
 import styles from "./tabel.module.css";
-import { useFunctions } from "../../../functions/useFunctions";
+import { useGetUid } from "../../../functions/useGetUid";
 import firebase from "../../../firebase";
+import DatePicker from "react-datepicker";
 export default function TabelContentsArea(props: { day: string; id: string }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
-  const [changedDay, setChangedDay] = useState<string>(props.day);
-  const [functions] = useFunctions();
+  const [changedDay, setChangedDay] = useState<Date>();
+  const [getUserFiledsID, setGetUserFiledsID] = useState<string>();
+  const [functions] = useGetUid();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
+
+  const dateChange = (date: Date) => {
+    const detailDate = date;
+    setChangedDay(detailDate);
+  };
+
   useEffect(() => {
     let useBankID: string;
     ref.onSnapshot((usersDocs) => {
@@ -23,22 +31,35 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
       });
     });
   }, [currentUserId]);
+
+  useEffect(() => {
+    if (getBankID) {
+      ref
+        .doc(getBankID)
+        .collection("bank")
+        .onSnapshot(async (userDocs: firebase.firestore.DocumentData) => {
+          await userDocs.forEach(
+            (userContents: firebase.firestore.DocumentData) => {
+              if (userContents.data().id === props.id) {
+                setGetUserFiledsID(userContents.id);
+              }
+            }
+          );
+        });
+    }
+  }, [getBankID]);
+
   const handleClick = () => {
     ref
       .doc(getBankID)
       .collection("bank")
-      .onSnapshot((userDocs: firebase.firestore.DocumentData) => {
-        userDocs.forEach((userContents: firebase.firestore.DocumentData) => {
-          if (userContents.data().id === props.id) {
-            ref
-              .doc(getBankID)
-              .collection("bank")
-              .doc(userContents.id)
-              .update({ day: changedDay });
-          }
-          setIsEditing(true);
-        });
-      });
+      .doc(getUserFiledsID)
+      .update({ day: changedDay });
+
+    // 保存完了
+    setTimeout(() => {
+      setIsEditing(true);
+    }, 1000);
   };
   return isEditing ? (
     <>
@@ -47,27 +68,12 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
         onMouseLeave={() => setIsHover(false)}
       >
         {props.day}
-
-        {isHover && (
-          <EditIcon
-            style={{
-              fontSize: "12px",
-              paddingLeft: "10px",
-            }}
-            type="edit"
-            onClick={() => setIsEditing(false)}
-          />
-        )}
+        {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>
     </>
   ) : (
     <th>
-      <input
-        autoFocus
-        onChange={(e) => setChangedDay(e.target.value)}
-        value={changedDay}
-        className={styles.styledInput}
-      />
+      <DatePicker required onChange={dateChange} className={styles.calendar} />
       <button className={styles.styledButton} onClick={handleClick}>
         保存
       </button>

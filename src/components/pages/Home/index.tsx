@@ -15,6 +15,7 @@ export interface moneyField {
   createdAt: firebase.firestore.FieldValue;
   day: any;
   id: string;
+  category: string;
 }
 
 export const Home: FC = () => {
@@ -58,7 +59,7 @@ export const Home: FC = () => {
             <Form />
           </div>
         </div>
-        {/* 画面半分の収入/支出のタブを作成 */}
+        {/* 画面半分の収入/支出のテーブルを作成 */}
         <Tabel budget={functionsHome.budget} />
       </div>
     </React.Fragment>
