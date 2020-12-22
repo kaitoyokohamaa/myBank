@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EditIcon from "@material-ui/icons/Edit";
+import { EditOutlined } from "@ant-design/icons";
 import styles from "./tabel.module.css";
 import { useGetUid } from "../../../functions/useGetUid";
 import firebase from "../../../firebase";
@@ -68,17 +68,7 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
         onMouseLeave={() => setIsHover(false)}
       >
         {props.day}
-
-        {isHover && (
-          <EditIcon
-            style={{
-              fontSize: "12px",
-              paddingLeft: "10px",
-            }}
-            type="edit"
-            onClick={() => setIsEditing(false)}
-          />
-        )}
+        {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>
     </>
   ) : (

@@ -4,6 +4,7 @@ import { ThemeProvider, theme } from "@chakra-ui/core";
 import { Home } from "./components/pages/Home";
 import SignUp from "./components/pages/Signup";
 import SignIn from "./components/pages/Signin";
+import "antd/dist/antd.css";
 // import Graph from "./components/pages/Graph";
 const App: React.FC = () => {
   return (

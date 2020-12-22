@@ -5,7 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import styles from "./form.module.css";
 import firebase from "../../../firebase";
 import { moneyField } from "./index";
-import Modal from "@material-ui/core/Modal";
+
+import { Modal, Button } from "antd";
 import { useFunctions } from "../../../functions/useFunctions";
 export const Form: FC = ({}) => {
   const [text, setText] = useState<string>("");
@@ -69,12 +70,12 @@ export const Form: FC = ({}) => {
   const currentDay = date.getDate();
   return (
     <div>
-      <button className={styles.styledBtn} type="button" onClick={handleOpen}>
+      <Button className={styles.styledBtn} onClick={handleOpen}>
         Add Money
-      </button>
+      </Button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        visible={open}
+        onCancel={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >

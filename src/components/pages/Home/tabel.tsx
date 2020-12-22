@@ -20,7 +20,7 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
           <tbody>
             {budget?.map((t: moneyField) => {
               const CurrentMonth = t.day.toDate().getMonth() + 1;
-              const CurrentDay = t.day.toDate().getDay() + 13;
+              const CurrentDay = t.day.toDate().getDay() + 20;
               const Curentdate: string = `${CurrentMonth}月${CurrentDay}日`;
               return (
                 <tr key={t.description} className={styles.styledTable}>

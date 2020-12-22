@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EditIcon from "@material-ui/icons/Edit";
+import { EditOutlined } from "@ant-design/icons";
 import styles from "./tabel.module.css";
 import firebase from "../../../firebase";
 import { useGetUid } from "../../../functions/useGetUid";
@@ -66,21 +66,13 @@ export default function TabelContentsArea(props: {
       >
         {props.category}
 
-        {isHover && (
-          <EditIcon
-            style={{
-              fontSize: "12px",
-              paddingLeft: "10px",
-            }}
-            type="edit"
-            onClick={() => setIsEditing(false)}
-          />
-        )}
+        {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>
     </>
   ) : (
     <th>
       <input
+        required
         autoFocus
         onChange={(e) => setChangedCategory(e.target.value)}
         value={changedCategory}
