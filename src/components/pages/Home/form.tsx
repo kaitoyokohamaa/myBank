@@ -86,37 +86,44 @@ export const Form: FC = ({}) => {
             <DatePicker onChange={dateChange} className={styles.calendar} />
             {month}月{currentDay}日
           </div>
-          <select
-            value={type}
-            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-              setType(event.target.value);
-            }}
-          >
-            <option value="exp">-</option>
-            <option value="inc">+</option>
-          </select>
-          <input
-            className={styles.styledInput}
-            type="text"
-            placeholder="Add description"
-            value={text}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              setText(event.target.value);
-            }}
-          />
-          <input
-            className={styles.styledInput}
-            type="number"
-            placeholder="200"
-            value={money}
-            onChange={(
-              event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-            ) => {
-              const moneyStore: number = Number(event.target.value);
-              setMoney(moneyStore);
-            }}
-          />
-
+          <div className={styles.flex}>
+            <div>
+              <select
+                value={type}
+                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
+                  setType(event.target.value);
+                }}
+              >
+                <option value="exp">-</option>
+                <option value="inc">+</option>
+              </select>
+            </div>
+            <div>
+              <input
+                className={styles.styledInput}
+                type="text"
+                placeholder="Add description"
+                value={text}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setText(event.target.value);
+                }}
+              />
+              <input
+                className={styles.styledInput}
+                type="number"
+                placeholder="200"
+                value={money}
+                onChange={(
+                  event: React.ChangeEvent<
+                    HTMLTextAreaElement | HTMLInputElement
+                  >
+                ) => {
+                  const moneyStore: number = Number(event.target.value);
+                  setMoney(moneyStore);
+                }}
+              />
+            </div>
+          </div>
           <button className={styles.styledBtn} onClick={submitHandler}>
             Save
           </button>
