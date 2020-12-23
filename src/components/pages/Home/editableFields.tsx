@@ -5,6 +5,7 @@ import TabelContentsDay from "./tabelContentsDay";
 import TabelContentsDescription from "./tabelContentsDescription";
 import TabelContentsMoney from "./tabelContentsMoney";
 import TabelContentsCategory from "./tabelContentsCategory";
+import TabelContentsDelte from "./tabelContentsDelete";
 export const EditableFields: FC<moneyField> = ({
   day,
   description,
@@ -21,6 +22,7 @@ export const EditableFields: FC<moneyField> = ({
         category={category ? category : "未記入"}
         id={id}
       />
+      <TabelContentsDelte id={id} />
     </>
   );
 };
