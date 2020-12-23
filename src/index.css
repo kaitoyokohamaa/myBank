@@ -1,3 +1,14 @@
 body {
   font-family: "Comic Sans MS", cursive;
 }
+
+.ant-modal-wrap {
+  position: fixed;
+  top: 78px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  outline: 0;
+  -webkit-overflow-scrolling: touch;
+}

@@ -70,9 +70,7 @@ export const Form: FC = ({}) => {
   const currentDay = date.getDate();
   return (
     <div>
-      <Button className={styles.styledBtn} onClick={handleOpen}>
-        Add Money
-      </Button>
+      <Button onClick={handleOpen}>Add Money</Button>
       <Modal
         visible={open}
         onCancel={handleClose}
@@ -95,7 +93,6 @@ export const Form: FC = ({}) => {
                 }}
               >
                 <option value="exp">-</option>
-                <option value="inc">+</option>
               </select>
             </div>
             <div>
@@ -124,9 +121,11 @@ export const Form: FC = ({}) => {
               />
             </div>
           </div>
-          <button className={styles.styledBtn} onClick={submitHandler}>
-            Save
-          </button>
+          <div className={styles.center}>
+            <button className={styles.styledBtn} onClick={submitHandler}>
+              Save
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
