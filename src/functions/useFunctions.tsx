@@ -49,7 +49,7 @@ export function useFunctions() {
           querySnapshot.forEach((docs: firebase.firestore.DocumentData) => {
             const showBudget = docs.data();
             storeBudget.push(showBudget);
-            console.log(storeBudget);
+
             //収入の中身を足す
             if (
               showBudget.type === "inc" &&
@@ -80,8 +80,6 @@ export function useFunctions() {
         });
     }
   }, [bankID]);
-  console.log(bankID);
-  // フィールドの
 
   // 収入と支出を足す
   useEffect(() => {
@@ -92,6 +90,7 @@ export function useFunctions() {
 
   return [
     {
+      bankID,
       totalBudget,
       income,
       expence,

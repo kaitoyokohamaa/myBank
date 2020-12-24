@@ -7,14 +7,13 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
   return (
     <div>
       <>
-        <h1>Recent spending</h1>
         <table className={styles.styledTable}>
           <tbody>
             <tr className={styles.styledTr}>
               <th>date</th>
               <th>Contents</th>
               <th>Amount of money</th>
-              <th>category</th>
+              <th>memo</th>
               <th>delte</th>
             </tr>
           </tbody>

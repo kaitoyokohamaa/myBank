@@ -6,7 +6,7 @@ import styles from "./home.module.css";
 import Header from "../../organisms/Header";
 import { Tabel } from "./tabel";
 import { useFunctions } from "../../../functions/useFunctions";
-
+import Graph from "../Graph";
 import firebase from "../../../firebase";
 export interface moneyField {
   money: number;
@@ -24,39 +24,31 @@ export const Home: FC = () => {
   return (
     <React.Fragment>
       <Header />
-
       <div className={styles.home}>
         <div className={styles.homeHeader}>
           <div className={styles.body}>
-            <div className={styles.totalIncome}>
-              <h2>Income</h2>+
-              <span className={styles.income}>
-                {functionsHome.income && (
-                  <CountUp
-                    start={0}
-                    end={functionsHome.income}
-                    duration={2.5}
-                    separator=","
-                  />
-                )}
-              </span>
-            </div>
             <div className={styles.Expenses}>
-              <h2>Expenses</h2>-
-              <span className={styles.expence}>
-                {functionsHome.expence && (
-                  <CountUp
-                    start={0}
-                    end={functionsHome.expence}
-                    duration={2.5}
-                    separator=","
-                  />
-                )}
-              </span>
+              <h1>Expenses</h1>
+              <p>
+                My expence is ¥
+                <span className={styles.expence}>
+                  {functionsHome.expence && (
+                    <CountUp
+                      start={0}
+                      end={functionsHome.expence}
+                      duration={2.5}
+                      separator=","
+                    />
+                  )}
+                </span>
+              </p>
+              <div className={styles.formArea}>
+                <Form />
+              </div>
             </div>
           </div>
           <div>
-            <Form />
+            <Graph />
           </div>
         </div>
         {/* 画面半分の収入/支出のテーブルを作成 */}

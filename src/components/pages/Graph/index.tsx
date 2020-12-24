@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  ComposedChart,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
+  CartesianGrid,
   Tooltip,
   Legend,
-  CartesianGrid,
-  Bar,
 } from "recharts";
-import Header from "../../organisms/Header";
+import styles from "./graph.module.css";
 import { useGraphFunctions } from "../../../functions/useGraphFunctions";
 export default function Graph() {
   const [getExpenceMonth] = useGraphFunctions();
@@ -28,9 +28,9 @@ export default function Graph() {
     { month: "12月", 支出: getExpenceMonth.december },
   ];
   return (
-    <div>
-      <Header />
-      <ComposedChart
+    <div className={styles.graph}>
+      <h1>Daily Graph</h1>
+      <BarChart
         width={800}
         height={280}
         data={dataGraph}
@@ -48,7 +48,7 @@ export default function Graph() {
           fillOpacity={1}
           fill="pink"
         />
-      </ComposedChart>
+      </BarChart>
     </div>
   );
 }
