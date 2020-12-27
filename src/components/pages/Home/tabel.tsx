@@ -7,11 +7,7 @@ import styles from "./tabel.module.css";
 export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
   const numEachPage = 4;
   const [minValue, setMinValue] = useState<number>(0);
-  const [maxValue, setMaxValue] = useState<number>(1);
-  useEffect(() => {
-    setMinValue((1 - 1) * numEachPage);
-    setMaxValue(1 * numEachPage);
-  }, []);
+  const [maxValue, setMaxValue] = useState<number>(numEachPage);
 
   const handleChange = (value: number) => {
     setMinValue((value - 1) * numEachPage);
