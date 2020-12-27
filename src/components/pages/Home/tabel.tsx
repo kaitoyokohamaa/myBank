@@ -1,9 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { EditableFields } from "./editableFields";
 import { moneyField } from "./index";
+import Pegination from "../../molecules/pagination";
 import styles from "./tabel.module.css";
 
 export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
+  const [minValue, setMinValue] = useState<number>(0);
+  const [maxValue, setMaxValue] = useState<number>(1);
+  const numEachPage = 4;
+
+  const handleChange = (value: number) => {
+    setMinValue((value - 1) * numEachPage);
+    setMaxValue(value * numEachPage);
+  };
+  console.log(budget);
   return (
     <div>
       <>
@@ -18,26 +28,29 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
             </tr>
           </tbody>
           <tbody>
-            {budget?.map((t: moneyField) => {
-              const CurrentMonth = t.day.toDate().getMonth() + 1;
-              const CurrentDay = t.day.toDate().getDate();
-              const Curentdate: string = `${CurrentMonth}月${CurrentDay}日`;
-              return (
-                <tr key={t.description} className={styles.styledTable}>
-                  <EditableFields
-                    day={Curentdate}
-                    id={t.id || "0"}
-                    description={t.description}
-                    money={t.money}
-                    createdAt={t.createdAt}
-                    type={t.type}
-                    category={t.category}
-                  />
-                </tr>
-              );
-            })}
+            {budget &&
+              budget.length > 0 &&
+              budget.slice(minValue, maxValue).map((t: moneyField) => {
+                const CurrentMonth = t.day.toDate().getMonth() + 1;
+                const CurrentDay = t.day.toDate().getDate();
+                const Curentdate: string = `${CurrentMonth}月${CurrentDay}日`;
+                return (
+                  <tr key={t.description} className={styles.styledTable}>
+                    <EditableFields
+                      day={Curentdate}
+                      id={t.id || "0"}
+                      description={t.description}
+                      money={t.money}
+                      createdAt={t.createdAt}
+                      type={t.type}
+                      category={t.category}
+                    />
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
+        <Pegination onChange={handleChange} numEachPage={numEachPage} />
       </>
     </div>
   );
