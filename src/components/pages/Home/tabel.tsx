@@ -13,6 +13,8 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
     setMinValue((value - 1) * numEachPage);
     setMaxValue(value * numEachPage);
   };
+  // 重複しないようにするため
+  const filterdBudgets = Array.from(new Set(budget));
 
   return (
     <div>
