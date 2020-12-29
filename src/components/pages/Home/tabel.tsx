@@ -8,6 +8,12 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
   const numEachPage = 4;
   const [minValue, setMinValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(numEachPage);
+  const [maxNum, setMaxNum] = useState<number>(0);
+  useEffect(() => {
+    if (budget) {
+      setMaxNum(budget.length);
+    }
+  }, [budget]);
 
   const handleChange = (value: number) => {
     setMinValue((value - 1) * numEachPage);
@@ -50,7 +56,11 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
               })}
           </tbody>
         </table>
-        <Pegination onChange={handleChange} numEachPage={numEachPage} />
+        <Pegination
+          onChange={handleChange}
+          numEachPage={numEachPage}
+          maxNum={maxNum}
+        />
       </>
     </div>
   );
