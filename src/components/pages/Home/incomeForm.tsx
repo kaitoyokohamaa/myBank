@@ -8,7 +8,7 @@ import { moneyField } from "./index";
 
 import { Modal, Button } from "antd";
 import { useFunctions } from "../../../functions/useFunctions";
-export const Form: FC = ({}) => {
+export const IncomeForm: FC = ({}) => {
   const [text, setText] = useState<string>("");
   const [type, setType] = useState<string>("exp");
   const [money, setMoney] = useState<number>(0);
@@ -70,7 +70,7 @@ export const Form: FC = ({}) => {
   const currentDay = date.getDate();
   return (
     <div>
-      <Button onClick={handleOpen}>支出追加</Button>
+      <Button onClick={handleOpen}>収入追加</Button>
       <Modal
         visible={open}
         onCancel={handleClose}
@@ -94,7 +94,7 @@ export const Form: FC = ({}) => {
                   setType(event.target.value);
                 }}
               >
-                <option value="exp">-</option>
+                <option value="inc">+</option>
               </select>
             </div>
             <div>

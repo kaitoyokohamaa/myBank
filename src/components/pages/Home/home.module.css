@@ -14,7 +14,8 @@
 }
 
 .formArea {
-  margin-top: 40px;
+  display: flex;
+  margin: 10px;
 }
 .modalFormArea {
   background-color: #fff;
@@ -34,6 +35,7 @@
 .Expenses {
   padding: 0px 30px 0px 30px;
   width: 300px;
+  margin-top: -48px;
 }
 
 .expence {

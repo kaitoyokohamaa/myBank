@@ -29,7 +29,6 @@ export default function Graph() {
   ];
   return (
     <div className={styles.graph}>
-      <h1>Daily Graph</h1>
       <BarChart
         width={800}
         height={280}

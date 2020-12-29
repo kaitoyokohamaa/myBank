@@ -22,11 +22,11 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
         <table className={styles.styledTable}>
           <tbody>
             <tr className={styles.styledTr}>
-              <th>date</th>
-              <th>Contents</th>
-              <th>Amount of money</th>
-              <th>memo</th>
-              <th>delte</th>
+              <th>日付</th>
+              <th>内容</th>
+              <th>金額</th>
+              <th>_φ(･_･</th>
+              <th>削除</th>
             </tr>
           </tbody>
           <tbody>
