@@ -5,7 +5,7 @@ import { Home } from "./components/pages/Home";
 import SignUp from "./components/pages/Signup";
 import SignIn from "./components/pages/Signin";
 import "antd/dist/antd.css";
-import Graph from "./components/pages/Graph";
+import Income from "./components/pages/Income";
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -14,7 +14,7 @@ const App: React.FC = () => {
           <Route exact={true} component={Home} path="/home" />
           <Route exact path="/" component={SignUp} />
           <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/graph" component={Graph} />
+          <Route exact path="/income" component={Income} />
         </Switch>
       </ThemeProvider>
     </BrowserRouter>
