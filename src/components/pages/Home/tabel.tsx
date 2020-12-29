@@ -33,6 +33,7 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
                 const CurrentMonth = t.day.toDate().getMonth() + 1;
                 const CurrentDay = t.day.toDate().getDate();
                 const Curentdate: string = `${CurrentMonth}月${CurrentDay}日`;
+
                 return (
                   <tr key={t.id} className={styles.styledTable}>
                     <EditableFields

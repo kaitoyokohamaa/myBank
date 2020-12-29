@@ -10,7 +10,7 @@ import { Modal, Button } from "antd";
 import { useFunctions } from "../../../functions/useFunctions";
 export const IncomeForm: FC = ({}) => {
   const [text, setText] = useState<string>("");
-  const [type, setType] = useState<string>("exp");
+  const [type, setType] = useState<string>("inc");
   const [money, setMoney] = useState<number>(0);
   const [date, setDate] = useState(new Date());
   const [getBankID, setGetBankID] = useState<string>();

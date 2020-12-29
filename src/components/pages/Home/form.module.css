@@ -9,12 +9,12 @@
 }
 
 .modalFormArea {
-  background-color: #faf6f0;
+  background-color: #9fcdff;
   margin: 0 auto;
 
   padding: 90px;
 
-  border: 1px solid pink;
+  border: 1px solid #9fcdff;
 }
 .modalFormH1 {
   color: #000;
@@ -23,17 +23,6 @@
   margin-top: 20px;
 }
 
-.styledBtn {
-  background: linear-gradient(90deg, #ffffff, #df405a);
-  border: 1px;
-  width: 134px;
-  padding: 8px 12px;
-  border-radius: 34px;
-  margin: 0 auto;
-  box-shadow: 0 4px 16px rgba(32, 54, 120, 0.2);
-  margin-top: 20px;
-  color: #191919;
-}
 .styledBtn:hover {
   transition: 1s;
   opacity: 0.6;
