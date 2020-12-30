@@ -12,12 +12,13 @@ export const EditableFields: FC<moneyField> = ({
   money,
   category,
   id,
+  type,
 }) => {
   return (
     <>
       <TabelContentsDay day={day} id={id} />
       <TabelContentsDescription description={description} id={id} />
-      <TabelContentsMoney money={money} id={id} />
+      <TabelContentsMoney money={money} id={id} type={type} />
       <TabelContentsCategory
         category={category ? category : "未記入"}
         id={id}
