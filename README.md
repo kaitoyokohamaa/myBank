@@ -7,8 +7,11 @@
 ## :art: IMG
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/55383786/103164172-1ced6880-484b-11eb-927a-fd1a925c400a.png" width=70%>  
+  <img src="https://user-images.githubusercontent.com/55383786/103396697-f9425f00-4b77-11eb-8c13-b7943b5ccacc.png" width=70%>  
 </p>　
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55383786/103396715-0d865c00-4b78-11eb-9b26-47f0bba55036.png" width=70%>  
+</p>　
 
-
+<p>楽しく貯蓄ができるように戦い機能を追加しました。収益をついするごとに相手にダメージを与えることができます。デザインはドラクエを参考にしました。</p>
