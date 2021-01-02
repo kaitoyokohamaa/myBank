@@ -74,6 +74,7 @@
 .commend {
   text-decoration: none;
   list-style: none;
+  cursor: pointer;
 }
 .hp {
   border-top: 10px solid #fff;
@@ -83,7 +84,52 @@
 
 .enemyImg {
   width: 300px;
+  height: 300px;
 }
 .commendLi {
   margin-top: 10px;
+}
+@keyframes damage {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.5;
+    -webkit-transform: translate(2px);
+  }
+  20% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.5;
+    -webkit-transform: translate(-2px);
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+    -webkit-transform: translate(2px);
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.5;
+    -webkit-transform: translate(-2px);
+  }
+  80% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.5;
+    -webkit-transform: translate(2px);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.enemyAtaack {
+  animation: damage 2s ease 0s 1 alternate none running;
 }

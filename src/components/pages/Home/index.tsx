@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 
 import { Form } from "./form";
-import { IncomeForm } from "./incomeForm";
-import CountUp from "react-countup";
+
 import styles from "./home.module.css";
 import Header from "../../organisms/Header";
 import { Tabel } from "./tabel";
@@ -34,7 +33,6 @@ export const Home: FC = () => {
         {/* 画面半分の収入/支出のテーブルを作成 */}
         <div className={styles.formArea}>
           <Form />
-          <IncomeForm />
         </div>
         <Tabel budget={functionsHome.budget} />
       </div>

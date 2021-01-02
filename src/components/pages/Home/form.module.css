@@ -7,7 +7,12 @@
   font-weight: 900;
   padding-right: 16px;
 }
-
+.day {
+  color: #fff;
+}
+.title {
+  color: #fff;
+}
 .modalFormArea {
   background-color: #9fcdff;
   margin: 0 auto;
@@ -15,6 +20,10 @@
   padding: 90px;
 
   border: 1px solid #9fcdff;
+}
+.modalIncomeFormArea {
+  background-color: #000;
+  padding: 90px;
 }
 .modalFormH1 {
   color: #000;

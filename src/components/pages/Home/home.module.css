@@ -72,3 +72,17 @@
 .tab[aria-selected="true"] {
   background-color: #dedede;
 }
+
+body {
+  background: #050505;
+}
+select {
+  position: relative;
+  -webkit-appearance: none;
+  margin: 0;
+  background: none;
+  border: none;
+  -webkit-box-sizing: border-box;
+  font-size: 24px;
+  color: #fff;
+}
