@@ -6,6 +6,7 @@ import firebase from "../../../firebase";
 export default function TabelContentsArea(props: {
   money: number;
   id: string;
+  type: string;
 }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
@@ -64,7 +65,11 @@ export default function TabelContentsArea(props: {
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        {props.money}
+        {props.type === "exp" ? (
+          <span className={styles.exp}>-{props.money}</span>
+        ) : (
+          <span className={styles.inc}>{props.money}</span>
+        )}
 
         {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>

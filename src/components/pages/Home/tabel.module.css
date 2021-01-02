@@ -4,16 +4,16 @@
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 400px;
-  border: 1px #ddd solid;
+  border: 1px #9fcdff solid;
   text-align: left;
 }
 
 .styledTr {
-  background-color: #faf6f0;
+  background-color: #9fcdff;
 }
 
 .styledTable thead tr {
-  background-color: #009879;
+  background-color: #9fcdff;
   color: #ffffff;
   text-align: left;
 }
@@ -34,7 +34,7 @@
 }
 
 .styledTable tbody tr:last-of-type {
-  border-bottom: 2px solid #512645;
+  border-bottom: 2px solid #9fcdff;
 }
 
 .styledTable tbody tr .activeRow {
@@ -48,14 +48,21 @@
 .styledButton {
   margin: 4px;
   padding: 6px 8px;
-  border: 1px solid #df405a;
-  background-color: #df405a;
+  border: 1px solid #9fcdff;
+  background-color: #476fff;
   color: #fff;
   border-radius: 8px;
 }
 
 .styledInput {
-  border: 2px solid #df405a;
+  border: 2px solid #9fcdff;
   outline: 0;
   border-radius: 12px;
+}
+
+.inc {
+  color: #4572a7;
+}
+.exp {
+  color: #aa4643;
 }

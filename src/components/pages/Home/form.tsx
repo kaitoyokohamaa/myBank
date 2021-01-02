@@ -70,15 +70,17 @@ export const Form: FC = ({}) => {
   const currentDay = date.getDate();
   return (
     <div>
-      <Button onClick={handleOpen}>Add Money</Button>
+      <Button onClick={handleOpen}>支出追加</Button>
       <Modal
         visible={open}
         onCancel={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        footer={[
+          <Button key="submit" type="default" onClick={submitHandler}>
+            投稿する
+          </Button>,
+        ]}
       >
         <div className={styles.modalFormArea}>
-          <h1 className={styles.modalFormH1}>Let's Add Money</h1>
           <div>
             <span className={styles.coment}>Day</span>
             <DatePicker onChange={dateChange} className={styles.calendar} />
@@ -120,11 +122,6 @@ export const Form: FC = ({}) => {
                 }}
               />
             </div>
-          </div>
-          <div className={styles.center}>
-            <button className={styles.styledBtn} onClick={submitHandler}>
-              Save
-            </button>
           </div>
         </div>
       </Modal>

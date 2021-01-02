@@ -1,0 +1,26 @@
+[
+  {
+    "name": "冴えないサラリーマン",
+    "img": "enemy1.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "バニーガールちゃん",
+    "img": "enemy2.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "伝説の男",
+    "img": "enemy3.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "冴えないサラリーマン",
+    "img": "enemy4.png",
+    "age": 13,
+    "num": 2000
+  }
+]

@@ -29,10 +29,9 @@ export default function Graph() {
   ];
   return (
     <div className={styles.graph}>
-      <h1>Daily Graph</h1>
       <BarChart
-        width={800}
-        height={280}
+        width={1200}
+        height={300}
         data={dataGraph}
         margin={{ top: 20, right: 60, bottom: 0, left: 0 }}
       >
