@@ -65,32 +65,28 @@ export default function Index() {
   }, [currentUserId]);
   // ダメージの計算を行う
   useEffect(() => {
-    wait(500).then(() => {
+    (async function () {
+      await wait(100);
       if (attack && incantation !== "") {
         setComment(incantation);
         setIncantation("");
       } else if (attack && incantation === "") {
-        setComment("喰らえ!21歳拳パンチ");
+        setComment("かいかいの攻撃！！喰らえ！21歳拳パンチ");
       }
-    });
-    wait(1000)
-      .then(() => {
-        if (attack && incantation !== "") {
-          const attakNum = hp - 10;
-          setHp(attakNum);
-          setComment(`10のダメージ`);
-        } else if (attack && incantation === "") {
-          const attakNum = hp - 5;
-          setHp(attakNum);
-          setComment(`5のダメージ`);
-        }
-      })
-      .then(() => {
-        wait(1000).then(() => {
-          setAttack(false);
-          setComment("どうする？");
-        });
-      });
+      await wait(500);
+      if (attack && incantation !== "") {
+        const attakNum = hp - 10;
+        setHp(attakNum);
+        setComment(`10のダメージ`);
+      } else if (attack && incantation === "") {
+        const attakNum = hp - 5;
+        setHp(attakNum);
+        setComment(`5のダメージ`);
+      }
+      await wait(1500);
+      setAttack(false);
+      setComment("どうする？");
+    })();
   }, [attack]);
   // 収益を追加する
   const submitHandler = debounce(() => {
