@@ -9,6 +9,7 @@ import firebase from "../../../firebase";
 import data from "./data.json";
 import { moneyField } from "../Home/index";
 import { useFunctions } from "../../../functions/useFunctions";
+import debounce from "lodash/debounce";
 const cx = require("classnames");
 
 export default function Index() {
@@ -31,12 +32,15 @@ export default function Index() {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(hp);
+
   const [functionContents] = useFunctions();
   const currentUserId = functionContents.currentUserId;
   const totalBudget = functionContents.totalBudget;
   const ref = firebase.firestore().collection("User");
-
+  // settimeoutをpromiseチェーンを使って管理
+  const wait = (timeout: number) =>
+    new Promise((resolve, reject) => setTimeout(resolve, timeout));
+  // 敵の切り替え
   useEffect(() => {
     if (hp === 0 && data[index].name === "冴えないサラリーマン") {
       setIndex(index + 1);
@@ -48,6 +52,7 @@ export default function Index() {
       setComment("バニーガールちゃんを倒した");
     }
   }, [hp]);
+  // 自分のIDを識別する
   useEffect(() => {
     ref.onSnapshot((usersDocs) => {
       usersDocs.forEach((contens) => {
@@ -58,28 +63,37 @@ export default function Index() {
       });
     });
   }, [currentUserId]);
-
+  // ダメージの計算を行う
   useEffect(() => {
-    if (attack && incantation !== "") {
-      setComment(incantation);
-      setIncantation("");
-    }
-
-    setTimeout(() => {
-      if (incantation !== "") {
-        const attakNum = hp - 10;
-        setHp(attakNum);
-        setComment(`10のダメージ`);
+    wait(500).then(() => {
+      if (attack && incantation !== "") {
+        setComment(incantation);
+        setIncantation("");
+      } else if (attack && incantation === "") {
+        setComment("喰らえ!21歳拳パンチ");
       }
-    }, 1000);
-
-    setTimeout(() => {
-      setAttack(false);
-      setComment("どうする？");
-    }, 2000);
+    });
+    wait(1000)
+      .then(() => {
+        if (attack && incantation !== "") {
+          const attakNum = hp - 10;
+          setHp(attakNum);
+          setComment(`10のダメージ`);
+        } else if (attack && incantation === "") {
+          const attakNum = hp - 5;
+          setHp(attakNum);
+          setComment(`5のダメージ`);
+        }
+      })
+      .then(() => {
+        wait(1000).then(() => {
+          setAttack(false);
+          setComment("どうする？");
+        });
+      });
   }, [attack]);
-
-  const submitHandler = () => {
+  // 収益を追加する
+  const submitHandler = debounce(() => {
     if (text.trim() !== "") {
       const sendMoney: moneyField = {
         money,
@@ -100,16 +114,11 @@ export default function Index() {
     } else {
       alert("本文が入力されてません");
     }
-  };
-  const fightHandler = () => {
-    setComment("喰らえ!21歳拳パンチ");
+  }, 500);
+  // 戦いのコマンドを押したら
+  const fightHandler = debounce(() => {
     setAttack(true);
-    const attakNum = hp - 5;
-    setHp(attakNum);
-    setTimeout(() => {
-      setComment(`5のダメージ`);
-    }, 1000);
-  };
+  }, 1000);
 
   return (
     <div className={styles.Wrapper}>
