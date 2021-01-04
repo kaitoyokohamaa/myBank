@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
 import Header from "../../organisms/Header";
-import Logo from "../../../Img/logo.png";
 import styles from "./index.module.css";
 import { Progress } from "antd";
 import { v1 as uuidv1 } from "uuid";
@@ -10,21 +9,23 @@ import data from "./data.json";
 import { moneyField } from "../Home/index";
 import { useFunctions } from "../../../functions/useFunctions";
 import debounce from "lodash/debounce";
+import { useLocalStorage } from "./useLocalStorage";
 const cx = require("classnames");
 
 export default function Index() {
   const [text, setText] = useState<string>("");
+
   const [type, setType] = useState<string>("inc");
   const [money, setMoney] = useState<number>(0);
   const [date, setDate] = useState(new Date());
   const [getBankID, setGetBankID] = useState<string>();
   const [open, setOpen] = useState(false);
   const [attack, setAttack] = useState<boolean>(false);
-  const [hp, setHp] = useState<number>(100);
+  const [hp, setHp] = useLocalStorage("enemyHp", 100);
   const [incantation, setIncantation] = useState<string>("");
   const [lv, setLv] = useState<number>(1);
-  const [index, setIndex] = useState<number>(0);
-  const [comment, setComment] = useState<string>(`${data[index].name}が現れた`);
+  const [index, setIndex] = useLocalStorage("enemy", 0);
+  const [comment, setComment] = useState<string>(`${data[index].name}と戦闘中`);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -65,7 +66,7 @@ export default function Index() {
   }, [currentUserId]);
   // ダメージの計算を行う
   useEffect(() => {
-    (async function () {
+    (async () => {
       await wait(100);
       if (attack && incantation !== "") {
         setComment(incantation);
@@ -110,7 +111,7 @@ export default function Index() {
     } else {
       alert("本文が入力されてません");
     }
-  }, 500);
+  }, 1000);
   // 戦いのコマンドを押したら
   const fightHandler = debounce(() => {
     setAttack(true);
