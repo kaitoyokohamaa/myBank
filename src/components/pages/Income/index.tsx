@@ -21,9 +21,10 @@ export default function Index() {
   const [getBankID, setGetBankID] = useState<string>();
   const [open, setOpen] = useState(false);
   const [attack, setAttack] = useState<boolean>(false);
+  const [blow, setBlow] = useState<boolean>(false);
   const [hp, setHp] = useLocalStorage("enemyHp", 100);
   const [incantation, setIncantation] = useState<string>("");
-  const [lv, setLv] = useState<number>(1);
+  const [lv, setLv] = useLocalStorage("myLv", 1);
   const [index, setIndex] = useLocalStorage("enemy", 0);
   const [comment, setComment] = useState<string>(`${data[index].name}と戦闘中`);
   const handleOpen = () => {
@@ -40,17 +41,54 @@ export default function Index() {
   const ref = firebase.firestore().collection("User");
   // settimeoutをpromiseチェーンを使って管理
   const wait = (timeout: number) =>
-    new Promise((resolve, reject) => setTimeout(resolve, timeout));
+    new Promise((resolve) => setTimeout(resolve, timeout));
   // 敵の切り替え
   useEffect(() => {
     if (hp === 0 && data[index].name === "冴えないサラリーマン") {
       setIndex(index + 1);
+      setLv(lv + 1);
       setHp(100);
       setComment("冴えないサラリーマンを倒した");
     } else if (hp === 0 && data[index].name === "バニーガールちゃん") {
       setIndex(index + 1);
+      setLv(lv + 1);
       setHp(100);
       setComment("バニーガールちゃんを倒した");
+    } else if (hp === 0 && data[index].name === "伝説の男") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("伝説の男を倒した");
+    } else if (hp === 0 && data[index].name === "女神オブ自由") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("女神オブ自由を倒した");
+    } else if (hp === 0 && data[index].name === "god") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("godを倒した");
+    } else if (hp === 0 && data[index].name === "魔女") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("魔女を倒した");
+    } else if (hp === 0 && data[index].name === "神") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("神を倒した");
+    } else if (hp === 0 && data[index].name === "女子高生") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("女子高生を倒した");
+    } else if (hp === 0 && data[index].name === "ドラゴン") {
+      setIndex(index + 1);
+      setLv(lv + 1);
+      setHp(100);
+      setComment("ドラゴンを倒した");
     }
   }, [hp]);
   // 自分のIDを識別する
@@ -73,8 +111,11 @@ export default function Index() {
         setIncantation("");
       } else if (attack && incantation === "") {
         setComment("かいかいの攻撃！！喰らえ！21歳拳パンチ");
+      } else if (blow) {
+        setComment("一撃必殺！！");
       }
-      await wait(500);
+
+      await wait(1000);
       if (attack && incantation !== "") {
         const attakNum = hp - 10;
         setHp(attakNum);
@@ -83,12 +124,16 @@ export default function Index() {
         const attakNum = hp - 5;
         setHp(attakNum);
         setComment(`5のダメージ`);
+      } else if (blow) {
+        setHp(0);
+        setComment(`${data[index].name}は倒れた`);
       }
-      await wait(1500);
+      await wait(2000);
       setAttack(false);
+      setBlow(false);
       setComment("どうする？");
     })();
-  }, [attack]);
+  }, [attack, blow]);
   // 収益を追加する
   const submitHandler = debounce(() => {
     if (text.trim() !== "") {
@@ -115,6 +160,10 @@ export default function Index() {
   // 戦いのコマンドを押したら
   const fightHandler = debounce(() => {
     setAttack(true);
+  }, 1000);
+
+  const fightBlowHandler = debounce(() => {
+    setBlow(true);
   }, 1000);
 
   return (
@@ -145,6 +194,7 @@ export default function Index() {
             <Progress
               style={{
                 width: "50%",
+                margin: "10px",
               }}
               strokeColor={{
                 "0%": "red",
@@ -164,7 +214,7 @@ export default function Index() {
                   onCancel={handleClose}
                   footer={[
                     <Button
-                      key="submit"
+                      key="expro"
                       type="default"
                       onClick={() => {
                         setIncantation("エクスプロォォージョンッ！！");
@@ -174,7 +224,7 @@ export default function Index() {
                       エクスプロォォージョンッ！！
                     </Button>,
                     <Button
-                      key="submit"
+                      key="finalflash"
                       type="default"
                       onClick={() => {
                         setIncantation("ファイナルフラッシュ！！");
@@ -184,7 +234,7 @@ export default function Index() {
                       ファイナルフラッシュ！！
                     </Button>,
                     <Button
-                      key="submit"
+                      key="stream"
                       type="default"
                       onClick={() => {
                         setIncantation("滅びのバーストストリーム");
@@ -194,7 +244,7 @@ export default function Index() {
                       滅びのバーストストリーム！！
                     </Button>,
                     <Button
-                      key="submit"
+                      key="secretAttack"
                       type="default"
                       onClick={() => {
                         setIncantation("秘技マジ卍");
@@ -242,7 +292,7 @@ export default function Index() {
                 <li className={styles.commendLi} onClick={fightHandler}>
                   戦う
                 </li>
-                <li className={styles.commendLi} onClick={fightHandler}>
+                <li className={styles.commendLi} onClick={fightBlowHandler}>
                   一撃
                 </li>
                 <li
