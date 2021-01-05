@@ -18,8 +18,32 @@
     "num": 2000
   },
   {
-    "name": "冴えないサラリーマン",
+    "name": "女神オブ自由",
     "img": "enemy4.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "魔女",
+    "img": "enemy5.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "神",
+    "img": "enemy6.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "女子高生",
+    "img": "enemy7.png",
+    "age": 13,
+    "num": 2000
+  },
+  {
+    "name": "ドラゴン",
+    "img": "enemy8.png",
     "age": 13,
     "num": 2000
   }

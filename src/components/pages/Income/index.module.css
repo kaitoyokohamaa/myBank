@@ -1,6 +1,7 @@
 .flex {
   display: flex;
   justify-content: center;
+  margin-top: -40px;
 }
 
 .incomeArea {
@@ -9,7 +10,7 @@
   font-family: PixelMplus10 Bold;
 }
 .status {
-  border: #fff 3px solid;
+  border: #fff 2px solid;
   background: #050505;
 }
 .statusTtl,
@@ -35,18 +36,18 @@
 }
 .saveMoney {
   background-color: black;
-  border: 4px solid #fff;
+  border: 2px solid #fff;
   border-radius: 1px;
   width: 150px;
-  margin: 10px;
+  margin: 50px 5px 10px 10px;
   margin-left: 40px;
 }
 .message {
   background-color: black;
-  border: 4px solid #fff;
+  border: 2px solid #fff;
   border-radius: 1px;
-  width: 600px;
-  margin: 10px;
+  width: 700px;
+  margin: 50px 10px 10px 0px;
   padding: 20px;
 }
 .Wrapper {
