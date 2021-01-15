@@ -82,21 +82,10 @@ export const Form: FC = ({}) => {
       >
         <div className={styles.modalFormArea}>
           <div>
-            <span className={styles.coment}>Day</span>
             <DatePicker onChange={dateChange} className={styles.calendar} />
             {month}月{currentDay}日
           </div>
           <div className={styles.flex}>
-            <div>
-              <select
-                value={type}
-                onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
-                  setType(event.target.value);
-                }}
-              >
-                <option value="exp">-</option>
-              </select>
-            </div>
             <div>
               <input
                 className={styles.styledInput}

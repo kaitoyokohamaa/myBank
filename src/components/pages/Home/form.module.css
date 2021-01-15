@@ -45,17 +45,12 @@
   display: flex;
 }
 .styledInput {
-  border: none;
-  outline: none;
-  display: inline-block;
-  height: 34px;
-  vertical-align: middle;
-  margin: 2px;
-  right: 9px;
-  border-radius: 4px;
-
+  width: 50%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 2px solid #ddd;
   box-sizing: border-box;
-  padding: 0 18px;
 }
 
 .styledInput :last-child {

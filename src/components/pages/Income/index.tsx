@@ -256,8 +256,9 @@ export default function Index() {
                   ]}
                 >
                   <div className={styles.modalIncomeFormArea}>
-                    <div className={styles.flex}>
+                    <div>
                       <div>
+                        <h1 className={styles.title}>収入を記録</h1>
                         <input
                           className={styles.styledInput}
                           type="text"
