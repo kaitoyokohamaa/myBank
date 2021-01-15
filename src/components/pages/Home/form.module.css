@@ -16,9 +16,7 @@
 .modalFormArea {
   background-color: #9fcdff;
   margin: 0 auto;
-
   padding: 90px;
-
   border: 1px solid #9fcdff;
 }
 .modalIncomeFormArea {
@@ -51,6 +49,7 @@
   border-radius: 3px;
   border: 2px solid #ddd;
   box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .styledInput :last-child {
