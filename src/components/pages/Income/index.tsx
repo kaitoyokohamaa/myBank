@@ -105,7 +105,7 @@ export default function Index() {
   // ダメージの計算を行う
   useEffect(() => {
     (async () => {
-      await wait(100);
+      await wait(200);
       if (attack && incantation !== "") {
         setComment(incantation);
         setIncantation("");
@@ -115,7 +115,7 @@ export default function Index() {
         setComment("一撃必殺！！");
       }
 
-      await wait(1000);
+      await wait(600);
       if (attack && incantation !== "") {
         const attakNum = hp - 10;
         setHp(attakNum);
@@ -128,7 +128,8 @@ export default function Index() {
         setHp(0);
         setComment(`${data[index].name}は倒れた`);
       }
-      await wait(2000);
+
+      await wait(700);
       setAttack(false);
       setBlow(false);
       setComment("どうする？");
@@ -256,8 +257,9 @@ export default function Index() {
                   ]}
                 >
                   <div className={styles.modalIncomeFormArea}>
-                    <div className={styles.flex}>
+                    <div>
                       <div>
+                        <h1 className={styles.title}>収入を記録</h1>
                         <input
                           className={styles.styledInput}
                           type="text"

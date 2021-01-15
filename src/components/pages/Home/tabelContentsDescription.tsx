@@ -54,6 +54,7 @@ export default function TabelContentsArea(props: {
       .collection("bank")
       .doc(getUserFiledsID)
       .update({ description: changedDescription });
+    setIsHover(false);
     // 保存完了
     setTimeout(() => {
       setIsEditing(true);

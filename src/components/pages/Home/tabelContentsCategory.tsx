@@ -52,7 +52,7 @@ export default function TabelContentsArea(props: {
       .collection("bank")
       .doc(getUserFiledsID)
       .update({ category: changedCategory });
-
+    setIsHover(false);
     setTimeout(() => {
       setIsEditing(true);
     }, 1000);
