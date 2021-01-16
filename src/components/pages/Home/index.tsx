@@ -39,3 +39,5 @@ export const Home: FC = () => {
     </React.Fragment>
   );
 };
+
+export { Home as default } from "./index";

@@ -1,23 +1,29 @@
-import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import { ThemeProvider, theme } from "@chakra-ui/core";
-import { Home } from "./components/pages/Home";
-import SignUp from "./components/pages/Signup";
-import SignIn from "./components/pages/Signin";
+
 import "antd/dist/antd.css";
-import Income from "./components/pages/Income";
+
+const Home = lazy(() => import("./components/pages/Home"));
+const SignUp = lazy(() => import("./components/pages/Signup"));
+const SignIn = lazy(() => import("./components/pages/Signin"));
+const Income = lazy(() => import("./components/pages/Income"));
+
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <Switch>
-          <Route exact={true} component={Home} path="/home" />
-          <Route exact path="/" component={SignUp} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/income" component={Income} />
-        </Switch>
-      </ThemeProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Switch>
+            <Route exact={true} component={Home} path="/home" />
+            <Route exact path="/" component={SignUp} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/income" component={Income} />
+          </Switch>
+        </Suspense>
+      </Router>
+    </ThemeProvider>
   );
 };
 
