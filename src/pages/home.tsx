@@ -1,11 +1,11 @@
 import React, { FC, Fragment } from "react";
 
-import { Form } from "../components/organisms/Home/form";
+import { Form } from "components/Home/form";
 
-import Header from "components/organisms/Header";
-import { Tabel } from "../components/organisms/Home/tabel";
-import { useFunctions } from "functions/useFunctions";
-import Graph from "../components/Graph";
+import Header from "components/Header";
+import { Tabel } from "components/Home/tabel";
+import { useFunctions } from "hooks/useFunctions";
+import Graph from "components/Graph";
 import firebase from "config/firebase";
 export interface moneyField {
   money: number;

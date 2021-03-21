@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Typography } from "antd";
 import firebase from "firebase/app";
-import { useAuthentication } from "functions/useAuthentication";
+import { useAuthentication } from "hooks/useAuthentication";
 import { Button } from "antd";
 const Index: React.FC = () => {
   const { Title } = Typography;

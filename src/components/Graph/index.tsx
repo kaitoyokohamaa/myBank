@@ -28,7 +28,7 @@ export default function Graph() {
     { month: "12月", 支出: getExpenceMonth.december },
   ];
   return (
-    <div className={styles.graph}>
+    <div>
       <BarChart
         width={1200}
         height={300}

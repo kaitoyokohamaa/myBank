@@ -17,6 +17,6 @@
     "jsx": "preserve",
     "baseUrl": "src"
   },
-  "include": ["src/**/*.tsx", "src", "craco.config.js", "pages"],
+  "include": ["src/**/*.tsx", "src", "pages"],
   "exclude": ["node_modules"]
 }

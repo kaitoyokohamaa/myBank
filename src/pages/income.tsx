@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
-import Header from "components/organisms/Header";
-import styles from "./index.module.css";
+import Header from "components/Header";
+
 import { Progress } from "antd";
 import { v1 as uuidv1 } from "uuid";
-import firebase from "../config/firebase";
-import data from "../components/organisms/Income/data.json";
-import { moneyField } from "../components/organisms/Home/index";
-import { useFunctions } from "../functions/useFunctions";
+import firebase from "config/firebase";
+import data from "components/Income/data.json";
+import { moneyField } from "components/Home/index";
+import { useFunctions } from "hooks/useFunctions";
 import debounce from "lodash/debounce";
-import { useLocalStorage } from "../components/organisms/Income/useLocalStorage";
-const cx = require("classnames");
+import { useLocalStorage } from "components/Income/useLocalStorage";
 
 export default function Index() {
   const [text, setText] = useState<string>("");
@@ -168,30 +167,25 @@ export default function Index() {
   }, 1000);
 
   return (
-    <div className={styles.Wrapper}>
+    <div>
       <Header />
-      <div className={styles.flex}>
-        <div className={styles.incomeArea}>
-          <div className={styles.status}>
-            <ul className={styles.statusTtl}>
-              <li className={styles.commendLi}>名前</li>
-              <li className={styles.commendLi}>レベル</li>
-              <li className={styles.commendLi}>体力(残高)</li>
+      <div>
+        <div>
+          <div>
+            <ul>
+              <li>名前</li>
+              <li>レベル</li>
+              <li>体力(残高)</li>
             </ul>
-            <ul className={styles.statusPlayer}>
-              <li className={styles.commendLi}>かいかい</li>
-              <li className={styles.commendLi}>{lv}</li>
-              <li className={styles.commendLi}>
-                {totalBudget ? totalBudget : 1}
-              </li>
+            <ul>
+              <li>かいかい</li>
+              <li>{lv}</li>
+              <li>{totalBudget ? totalBudget : 1}</li>
             </ul>
           </div>
-          <div className={styles.enemy}>
-            <h4 className={styles.name}>{data[index].name}</h4>
-            <img
-              className={cx(styles.enemyImg, attack && styles.enemyAtaack)}
-              src={`/Img/${data[index].img}`}
-            />
+          <div>
+            <h4>{data[index].name}</h4>
+            <img src={`/Img/${data[index].img}`} />
             <Progress
               style={{
                 width: "50%",
@@ -205,10 +199,10 @@ export default function Index() {
               percent={hp}
             />
           </div>
-          <div className={styles.flex}>
-            <div className={styles.saveMoney}>
-              <p className={styles.commendTtl}>かいかい</p>
-              <ul className={styles.commend}>
+          <div>
+            <div>
+              <p>かいかい</p>
+              <ul>
                 <li onClick={handleOpen}>▶︎呪文</li>
                 <Modal
                   visible={open}
@@ -226,12 +220,11 @@ export default function Index() {
                     </Button>,
                   ]}
                 >
-                  <div className={styles.modalIncomeFormArea}>
+                  <div>
                     <div>
                       <div>
-                        <h1 className={styles.title}>収入を記録</h1>
+                        <h1>収入を記録</h1>
                         <input
-                          className={styles.styledInput}
                           type="text"
                           placeholder="Add description"
                           value={text}
@@ -242,7 +235,6 @@ export default function Index() {
                           }}
                         />
                         <input
-                          className={styles.styledInput}
                           type="number"
                           placeholder="200"
                           value={money}
@@ -261,21 +253,12 @@ export default function Index() {
                     </div>
                   </div>
                 </Modal>
-                <li className={styles.commendLi} onClick={fightHandler}>
-                  戦う
-                </li>
-                <li className={styles.commendLi} onClick={fightBlowHandler}>
-                  一撃
-                </li>
-                <li
-                  className={styles.commendLi}
-                  onClick={() => setComment("逃げちゃダメだ")}
-                >
-                  逃げる
-                </li>
+                <li onClick={fightHandler}>戦う</li>
+                <li onClick={fightBlowHandler}>一撃</li>
+                <li onClick={() => setComment("逃げちゃダメだ")}>逃げる</li>
               </ul>
             </div>
-            <div className={styles.message}>
+            <div>
               <p>{comment}</p>
             </div>
           </div>
