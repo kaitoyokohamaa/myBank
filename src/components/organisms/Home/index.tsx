@@ -2,12 +2,11 @@ import React, { FC } from "react";
 
 import { Form } from "./form";
 
-import styles from "./home.module.css";
-import Header from "../../organisms/Header";
+import Header from "../Header";
 import { Tabel } from "./tabel";
-import { useFunctions } from "../../functions/useFunctions";
+import { useFunctions } from "../../../functions/useFunctions";
 import Graph from "../Graph";
-import firebase from "../../config/firebase";
+import firebase from "../../../config/firebase";
 export interface moneyField {
   money: number;
   description: string;
@@ -24,14 +23,14 @@ export const Homes: FC = () => {
   return (
     <React.Fragment>
       <Header />
-      <div className={styles.home}>
-        <div className={styles.homeHeader}>
+      <div>
+        <div>
           <div>
             <Graph />
           </div>
         </div>
         {/* 画面半分の収入/支出のテーブルを作成 */}
-        <div className={styles.formArea}>
+        <div>
           <Form />
         </div>
         <Tabel budget={functionsHome.budget} />

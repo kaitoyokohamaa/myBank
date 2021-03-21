@@ -2,7 +2,6 @@ import React, { FC, useState, useEffect } from "react";
 import { EditableFields } from "./editableFields";
 import { moneyField } from "./index";
 import Pegination from "components/molecules/pagination";
-import styles from "./tabel.module.css";
 
 export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
   const numEachPage = 4;
@@ -23,9 +22,9 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
   return (
     <div>
       <>
-        <table className={styles.styledTable}>
+        <table>
           <tbody>
-            <tr className={styles.styledTr}>
+            <tr>
               <th>日付</th>
               <th>内容</th>
               <th>金額</th>
@@ -41,7 +40,7 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
                 const Curentdate: string = `${CurrentMonth}月${CurrentDay}日`;
 
                 return (
-                  <tr key={t.id} className={styles.styledTable}>
+                  <tr key={t.id}>
                     <EditableFields
                       day={Curentdate}
                       id={t.id || "0"}

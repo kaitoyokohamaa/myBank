@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
-import styles from "./tabel.module.css";
-import { useGetUid } from "../../functions/useGetUid";
-import firebase from "../../config/firebase";
+
+import { useGetUid } from "../../../functions/useGetUid";
+import firebase from "../../../config/firebase";
 import DatePicker from "react-datepicker";
 export default function TabelContentsArea(props: { day: string; id: string }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
@@ -73,10 +73,8 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
     </>
   ) : (
     <th>
-      <DatePicker required onChange={dateChange} className={styles.calendar} />
-      <button className={styles.styledButton} onClick={handleClick}>
-        保存
-      </button>
+      <DatePicker required onChange={dateChange} />
+      <button onClick={handleClick}>保存</button>
     </th>
   );
 }

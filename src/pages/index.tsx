@@ -1,12 +1,12 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Typography } from "antd";
 import firebase from "firebase/app";
 import { useAuthentication } from "functions/useAuthentication";
 import { Button } from "antd";
 const Index: React.FC = () => {
   const { Title } = Typography;
-  const history = useHistory();
+  const router = useRouter();
   const [useAuthenticationContents] = useAuthentication();
   const submitHanfler = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -21,7 +21,8 @@ const Index: React.FC = () => {
         useAuthenticationContents.ref.add(usersInfo);
       })
       .then(() => {
-        history.push(`/home`);
+        // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 pregetch
+        router.push(`/home`);
       })
       .catch((error) => {
         console.log(error);

@@ -1,7 +1,7 @@
 import React from "react";
+import Link from "next/link";
 import Logo from "../../atoms/Logo";
-import styles from "./header.module.css";
-import { NavLink } from "react-router-dom";
+
 import * as firebase from "firebase/app";
 
 export default function Index() {
@@ -12,56 +12,22 @@ export default function Index() {
 
   return (
     <div>
-      <header className={styles.header}>
-        <NavLink
-          className={styles.link}
-          activeStyle={{
-            color: "#007bff",
-            fontWeight: "bold",
-          }}
-          to={`/home`}
-        >
+      <header>
+        <Link href={`/home`}>
           <Logo />
-        </NavLink>
+        </Link>
 
-        <div className={styles.linkWrap}>
+        <div>
           <li>
-            <NavLink
-              className={styles.link}
-              activeStyle={{
-                color: "#007bff",
-                fontWeight: "bold",
-              }}
-              to={`/home`}
-            >
-              ホーム
-            </NavLink>
+            <Link href={`/home`}>ホーム</Link>
           </li>
           <li>
-            <NavLink
-              className={styles.link}
-              activeStyle={{
-                color: "#007bff",
-                fontWeight: "bold",
-              }}
-              to="/income"
-            >
-              予算
-            </NavLink>
+            <Link href={`Income`}>予算</Link>
           </li>
           <li>
-            <NavLink
-              className={styles.link}
-              activeStyle={{
-                color: "#007bff",
-                fontWeight: "bold",
-              }}
-              to="/"
-              onClick={logOut}
-            >
-              {" "}
-              ログアウト
-            </NavLink>
+            <Link href={`Income`}>
+              <span onClick={logOut}>ログアウト</span>
+            </Link>
           </li>
         </div>
       </header>

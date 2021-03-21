@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
-import styles from "./tabel.module.css";
-import { useGetUid } from "../../functions/useGetUid";
-import firebase from "../../config/firebase";
+
+import firebase from "../../../config/firebase";
+import { useGetUid } from "../../../functions/useGetUid";
 export default function TabelContentsArea(props: {
-  description: string;
+  category: string;
   id: string;
 }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
   const [getUserFiledsID, setGetUserFiledsID] = useState<string>();
-  const [changedDescription, setChangedDescription] = useState<string>(
-    props.description
+  const [changedCategory, setChangedCategory] = useState<string>(
+    props.category
   );
   const [functions] = useGetUid();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
-  // ユーザー情報が自分かを確認する
   useEffect(() => {
     ref.onSnapshot((usersDocs) => {
       usersDocs.forEach((contens) => {
         if (contens.data().userID[0].includes(currentUserId)) {
           const bankID = contens.id;
-
           setGetBankID(bankID);
         }
       });
     });
   }, [currentUserId]);
+
   // 自分がアップデートしたい箇所IDを取得する
   useEffect(() => {
     if (getBankID) {
@@ -48,14 +47,12 @@ export default function TabelContentsArea(props: {
   }, [getBankID]);
 
   const handleClick = () => {
-    // アップデート開始
     ref
       .doc(getBankID)
       .collection("bank")
       .doc(getUserFiledsID)
-      .update({ description: changedDescription });
+      .update({ category: changedCategory });
     setIsHover(false);
-    // 保存完了
     setTimeout(() => {
       setIsEditing(true);
     }, 1000);
@@ -67,7 +64,7 @@ export default function TabelContentsArea(props: {
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        {props.description}
+        {props.category}
 
         {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>
@@ -75,14 +72,12 @@ export default function TabelContentsArea(props: {
   ) : (
     <th>
       <input
+        required
         autoFocus
-        onChange={(e) => setChangedDescription(e.target.value)}
-        value={changedDescription}
-        className={styles.styledInput}
+        onChange={(e) => setChangedCategory(e.target.value)}
+        value={changedCategory}
       />
-      <button className={styles.styledButton} onClick={handleClick}>
-        保存
-      </button>
+      <button onClick={handleClick}>保存</button>
     </th>
   );
 }

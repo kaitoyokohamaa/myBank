@@ -1,15 +1,13 @@
 import type { AppProps /*, AppContext */ } from "next/app";
 import React, { Fragment } from "react";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { CSSReset } from "@chakra-ui/core";
 import "../styles/globals.css";
 import "antd/dist/antd.css";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Fragment>
-      <ThemeProvider>
-        <CSSReset />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <CSSReset />
+      <Component {...pageProps} />
     </Fragment>
   );
 }

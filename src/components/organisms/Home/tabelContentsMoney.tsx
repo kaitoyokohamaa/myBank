@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
-import styles from "./tabel.module.css";
-import firebase from "../../config/firebase";
-import { useGetUid } from "../../functions/useGetUid";
+import { useGetUid } from "../../../functions/useGetUid";
+import firebase from "../../../config/firebase";
 export default function TabelContentsArea(props: {
-  category: string;
+  money: number;
   id: string;
+  type: string;
 }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [getBankID, setGetBankID] = useState<string>();
+  const [changedMoney, setChangedMoney] = useState<number>(props.money);
   const [getUserFiledsID, setGetUserFiledsID] = useState<string>();
-  const [changedCategory, setChangedCategory] = useState<string>(
-    props.category
-  );
   const [functions] = useGetUid();
   const currentUserId = functions.currentUserId;
   const ref = firebase.firestore().collection("User");
   useEffect(() => {
+    let useBankID: string;
     ref.onSnapshot((usersDocs) => {
       usersDocs.forEach((contens) => {
         if (contens.data().userID[0].includes(currentUserId)) {
           const bankID = contens.id;
+          useBankID = contens.id;
           setGetBankID(bankID);
         }
       });
@@ -51,7 +51,7 @@ export default function TabelContentsArea(props: {
       .doc(getBankID)
       .collection("bank")
       .doc(getUserFiledsID)
-      .update({ category: changedCategory });
+      .update({ money: changedMoney });
     setIsHover(false);
     setTimeout(() => {
       setIsEditing(true);
@@ -64,7 +64,11 @@ export default function TabelContentsArea(props: {
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
-        {props.category}
+        {props.type === "exp" ? (
+          <span>-{props.money}</span>
+        ) : (
+          <SVGPatternElement>{props.money}</SVGPatternElement>
+        )}
 
         {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
       </th>
@@ -72,15 +76,12 @@ export default function TabelContentsArea(props: {
   ) : (
     <th>
       <input
-        required
         autoFocus
-        onChange={(e) => setChangedCategory(e.target.value)}
-        value={changedCategory}
-        className={styles.styledInput}
+        type="number"
+        onChange={(e) => setChangedMoney(Number(e.target.value))}
+        value={changedMoney}
       />
-      <button className={styles.styledButton} onClick={handleClick}>
-        保存
-      </button>
+      <button onClick={handleClick}>保存</button>
     </th>
   );
 }

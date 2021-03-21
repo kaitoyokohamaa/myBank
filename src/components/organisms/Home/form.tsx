@@ -3,11 +3,11 @@ import { v1 as uuidv1 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./form.module.css";
-import firebase from "../../config/firebase";
+import firebase from "../../../config/firebase";
 import { moneyField } from "./index";
 
 import { Modal, Button } from "antd";
-import { useFunctions } from "../../functions/useFunctions";
+import { useFunctions } from "../../../functions/useFunctions";
 export const Form: FC = ({}) => {
   const [text, setText] = useState<string>("");
   const [type, setType] = useState<string>("exp");

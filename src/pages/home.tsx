@@ -1,11 +1,11 @@
 import React, { FC, Fragment } from "react";
 
-import { Form } from "../pages/Home/form";
+import { Form } from "../components/organisms/Home/form";
 
 import Header from "components/organisms/Header";
-import { Tabel } from "../pages/Home/tabel";
+import { Tabel } from "../components/organisms/Home/tabel";
 import { useFunctions } from "functions/useFunctions";
-import Graph from "../pages/Graph/";
+import Graph from "../components/organisms/Graph";
 import firebase from "config/firebase";
 export interface moneyField {
   money: number;
@@ -17,7 +17,7 @@ export interface moneyField {
   category: string;
 }
 
-export const Home: FC = () => {
+const Home: FC = () => {
   const [functionsHome] = useFunctions();
 
   return (
@@ -38,3 +38,5 @@ export const Home: FC = () => {
     </Fragment>
   );
 };
+
+export default Home;

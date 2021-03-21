@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
-import Header from "../../organisms/Header";
+import Header from "components/organisms/Header";
 import styles from "./index.module.css";
 import { Progress } from "antd";
 import { v1 as uuidv1 } from "uuid";
-import firebase from "../../config/firebase";
-import data from "./data.json";
-import { moneyField } from "../Home/index";
-import { useFunctions } from "../../functions/useFunctions";
+import firebase from "../config/firebase";
+import data from "../components/organisms/Income/data.json";
+import { moneyField } from "../components/organisms/Home/index";
+import { useFunctions } from "../functions/useFunctions";
 import debounce from "lodash/debounce";
-import { useLocalStorage } from "./useLocalStorage";
+import { useLocalStorage } from "../components/organisms/Income/useLocalStorage";
 const cx = require("classnames");
 
 export default function Index() {
