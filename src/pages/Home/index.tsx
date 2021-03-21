@@ -18,7 +18,7 @@ export interface moneyField {
   category: string;
 }
 
-export const Home: FC = () => {
+export const Homes: FC = () => {
   const [functionsHome] = useFunctions();
 
   return (

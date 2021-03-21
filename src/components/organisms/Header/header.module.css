@@ -11,10 +11,6 @@
   margin-bottom: 100px;
 }
 
-body {
-  margin: 0;
-}
-
 .linkWrap {
   display: flex;
   list-style: none;

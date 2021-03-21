@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { EditableFields } from "./editableFields";
 import { moneyField } from "./index";
-import Pegination from "../../molecules/pagination";
+import Pegination from "components/molecules/pagination";
 import styles from "./tabel.module.css";
 
 export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {

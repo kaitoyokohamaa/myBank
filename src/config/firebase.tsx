@@ -14,7 +14,7 @@ const initalFirebase = {
 if (!firebase.apps.length) {
   firebase.initializeApp(initalFirebase);
 } else {
-  firebase.app(); // if already initialized, use that one
+  firebase.firestore(); // if already initialized, use that one
 }
 
 export const db = firebase.firestore();
