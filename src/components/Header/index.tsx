@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Logo from "../../atoms/Logo";
+import Logo from "../../Logo";
 
 import * as firebase from "firebase/app";
 

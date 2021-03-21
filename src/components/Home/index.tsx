@@ -5,7 +5,7 @@ import { Form } from "./form";
 import Header from "../Header";
 import { Tabel } from "./tabel";
 import { useFunctions } from "../../../functions/useFunctions";
-import Graph from "../Graph";
+import Graph from "../../Graph";
 import firebase from "../../../config/firebase";
 export interface moneyField {
   money: number;
