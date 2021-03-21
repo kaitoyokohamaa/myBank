@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "../firebase";
+import firebase from "../config/firebase";
 import { useHistory } from "react-router-dom";
 
 export function useAuthentication() {

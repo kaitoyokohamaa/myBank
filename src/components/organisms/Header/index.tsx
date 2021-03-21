@@ -56,7 +56,7 @@ export default function Index() {
                 color: "#007bff",
                 fontWeight: "bold",
               }}
-              to="/signin"
+              to="/"
               onClick={logOut}
             >
               {" "}

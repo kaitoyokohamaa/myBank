@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../firebase";
+import firebase from "../config/firebase";
 
 export function useGetUid() {
   const [currentUserId, setCurrentUserId] = useState<number | string>();

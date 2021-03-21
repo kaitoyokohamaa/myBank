@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../firebase";
+import firebase from "../config/firebase";
 import { useFunctions } from "./useFunctions";
 import { moneyField } from "../components/pages/Home";
 export function useGraphFunctions() {
