@@ -22,10 +22,10 @@ export default function Index() {
             <Link href={`/home`}>ホーム</Link>
           </li>
           <li>
-            <Link href={`Income`}>予算</Link>
+            <Link href={`income`}>予算</Link>
           </li>
           <li>
-            <Link href={`Income`}>
+            <Link href={`/`}>
               <span onClick={logOut}>ログアウト</span>
             </Link>
           </li>

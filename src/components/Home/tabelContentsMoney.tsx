@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
-import { useGetUid } from "../../../functions/useGetUid";
-import firebase from "../../../config/firebase";
+import { useGetUid } from "hooks/useGetUid";
+import firebase from "config/firebase";
 export default function TabelContentsArea(props: {
   money: number;
   id: string;

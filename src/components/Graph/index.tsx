@@ -8,8 +8,8 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import styles from "./graph.module.css";
-import { useGraphFunctions } from "../../functions/useGraphFunctions";
+
+import { useGraphFunctions } from "hooks/useGraphFunctions";
 export default function Graph() {
   const [getExpenceMonth] = useGraphFunctions();
 

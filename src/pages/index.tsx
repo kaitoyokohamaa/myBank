@@ -29,21 +29,26 @@ const Index: React.FC = () => {
       });
   };
   return (
-    <React.Fragment>
+    <div className="bg-blue-5 text-white h-screen">
       <div className="grid grid-cols-8 gap-8">
-        <div className="mt-80 m-auto col-span-3">
-          <Title level={2}>ログインして家計簿を記録しよう！</Title>
+        <div className="mt-80 m-auto col-span-4">
+          <Title>
+            <span className="text-white">ログインして家計簿を記録しよう！</span>
+          </Title>
           <div className="pt-10 m-auto">
-            <Button type="primary" onClick={submitHanfler}>
+            <button
+              className="border-white transition delay-200 py-2 rounded-xl px-10 border-2 hover:bg-white hover:text-blue-5"
+              onClick={submitHanfler}
+            >
               googleログイン
-            </Button>
+            </button>
           </div>
         </div>
-        <div className="col-span-5 mt-28">
-          <img src="Img/undraw_mobile_login_ikmv.png" />
+        <div className="col-span-4">
+          <img className=" h-screen" src="Img/undraw_mobile_login_ikmv.png" />
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

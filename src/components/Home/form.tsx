@@ -2,7 +2,7 @@ import React, { useState, FC, useEffect } from "react";
 import { v1 as uuidv1 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styles from "./form.module.css";
+
 import firebase from "config/firebase";
 import { moneyField } from "./index";
 
@@ -80,15 +80,14 @@ export const Form: FC = ({}) => {
           </Button>,
         ]}
       >
-        <div className={styles.modalFormArea}>
+        <div>
           <div>
-            <DatePicker onChange={dateChange} className={styles.calendar} />
+            <DatePicker onChange={dateChange} />
             {month}月{currentDay}日
           </div>
-          <div className={styles.flex}>
+          <div>
             <div>
               <input
-                className={styles.styledInput}
                 type="text"
                 placeholder="Add description"
                 value={text}
@@ -97,7 +96,6 @@ export const Form: FC = ({}) => {
                 }}
               />
               <input
-                className={styles.styledInput}
                 type="number"
                 placeholder="200"
                 value={money}
