@@ -19,7 +19,7 @@ const Index: React.FC = () => {
       .then((result) => {
         const usersInfo = {
           userID: [result.user?.uid],
-          name: result.additionalUserInfo?.profile?.name,
+          name: result.additionalUserInfo?.profile?.["name"],
         };
 
         useAuthenticationContents.ref.add(usersInfo);

@@ -68,7 +68,7 @@ export default function TabelContentsArea(props: {
         {props.type === "exp" ? (
           <span>-{props.money}</span>
         ) : (
-          <SVGPatternElement>{props.money}</SVGPatternElement>
+          <>{props.money}</>
         )}
 
         {isHover && <EditOutlined onClick={() => setIsEditing(false)} />}
