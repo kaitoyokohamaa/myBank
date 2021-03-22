@@ -31,7 +31,7 @@ const Home: FC = () => {
             <span className="text-center">HOME</span>
           </Title>
           <Graph />
-          <div className="ml-10 mt-20">
+          <div className="ml-10 mt-10">
             <Form />
             <Tabel budget={functionsHome.budget} />
           </div>
