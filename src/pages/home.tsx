@@ -1,12 +1,12 @@
 import React, { FC, Fragment } from "react";
-
 import { Form } from "components/Home/form";
-
-import Header from "components/Header";
+import { Sideber } from "components/sidebar";
 import { Tabel } from "components/Home/tabel";
 import { useFunctions } from "hooks/useFunctions";
 import Graph from "components/Graph";
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import { Typography } from "antd";
+import "firebase/firestore";
 export interface moneyField {
   money: number;
   description: string;
@@ -19,21 +19,23 @@ export interface moneyField {
 
 const Home: FC = () => {
   const [functionsHome] = useFunctions();
-
+  const { Title } = Typography;
   return (
     <Fragment>
-      <Header />
-      <div>
-        <div>
-          <div>
-            <Graph />
+      <div className="grid grid-cols-10 gap-2 h-screen">
+        <div className="col-span-2">
+          <Sideber />
+        </div>
+        <div className="col-span-8 ml-20 mt-32">
+          <Title>
+            <span className="text-center">HOME</span>
+          </Title>
+          <Graph />
+          <div className="ml-10 mt-20">
+            <Form />
+            <Tabel budget={functionsHome.budget} />
           </div>
         </div>
-        {/* 画面半分の収入/支出のテーブルを作成 */}
-        <div>
-          <Form />
-        </div>
-        <Tabel budget={functionsHome.budget} />
       </div>
     </Fragment>
   );

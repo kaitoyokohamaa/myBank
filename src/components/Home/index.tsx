@@ -6,7 +6,8 @@ import Header from "components/Header";
 import { Tabel } from "./tabel";
 import { useFunctions } from "hooks/useFunctions";
 import Graph from "components/Graph";
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 export interface moneyField {
   money: number;
   description: string;

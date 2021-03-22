@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useGetUid } from "hooks/useGetUid";
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 const { confirm } = Modal;
 export default function TabelContentsArea(props: { id: string }) {

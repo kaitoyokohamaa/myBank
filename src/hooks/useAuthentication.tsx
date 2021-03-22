@@ -1,10 +1,11 @@
 import React from "react";
-import firebase from "../config/firebase";
-import { useHistory } from "react-router-dom";
+import { useRouter } from "next/router";
+import firebase from "config/firebase";
 
 export function useAuthentication() {
-  const history = useHistory();
+  const router = useRouter();
 
+  console.log(firebase);
   const db = firebase.firestore();
   const ref = db.collection("User");
 
@@ -12,7 +13,7 @@ export function useAuthentication() {
   const checkAuthentication = () => {
     firebase.auth().onAuthStateChanged(async (usr: firebase.User | null) => {
       if (usr) {
-        history.push(`/home`);
+        router.push(`/home`);
       }
     });
   };

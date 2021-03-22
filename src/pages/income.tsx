@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
-import Header from "components/Header";
+import { Sideber } from "components/sidebar";
 
 import { Progress } from "antd";
 import { v1 as uuidv1 } from "uuid";
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import data from "components/Income/data.json";
 import { moneyField } from "components/Home/index";
 import { useFunctions } from "hooks/useFunctions";
@@ -168,7 +169,7 @@ export default function Index() {
 
   return (
     <div>
-      <Header />
+      <Sideber />
       <div>
         <div>
           <div>

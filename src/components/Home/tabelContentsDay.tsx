@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
 
 import { useGetUid } from "hooks/useGetUid";
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import DatePicker from "react-datepicker";
 export default function TabelContentsArea(props: { day: string; id: string }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);

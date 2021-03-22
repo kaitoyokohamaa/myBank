@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { Typography } from "antd";
 import firebase from "firebase/app";
 import { useAuthentication } from "hooks/useAuthentication";
-import { Button } from "antd";
+
 const Index: React.FC = () => {
   const { Title } = Typography;
   const router = useRouter();
   const [useAuthenticationContents] = useAuthentication();
+  useEffect(() => {
+    useAuthenticationContents.checkAuthentication();
+  }, []);
   const submitHanfler = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase
@@ -16,8 +19,9 @@ const Index: React.FC = () => {
       .then((result) => {
         const usersInfo = {
           userID: [result.user?.uid],
-          name: result.additionalUserInfo?.username,
+          name: result.additionalUserInfo?.profile?.name,
         };
+
         useAuthenticationContents.ref.add(usersInfo);
       })
       .then(() => {

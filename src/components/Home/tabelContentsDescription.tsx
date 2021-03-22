@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { EditOutlined } from "@ant-design/icons";
 
 import { useGetUid } from "hooks/useGetUid";
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 export default function TabelContentsArea(props: {
   description: string;
   id: string;

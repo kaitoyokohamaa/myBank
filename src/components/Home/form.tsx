@@ -2,8 +2,8 @@ import React, { useState, FC, useEffect } from "react";
 import { v1 as uuidv1 } from "uuid";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
-import firebase from "config/firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import { moneyField } from "./index";
 
 import { Modal, Button } from "antd";
