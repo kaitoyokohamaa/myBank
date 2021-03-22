@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { Form } from "./form";
 
-import { Sideber } from "components/Header";
+import { Sideber } from "components/sidebar";
 import { Tabel } from "./tabel";
 import { useFunctions } from "hooks/useFunctions";
 import Graph from "components/Graph";
