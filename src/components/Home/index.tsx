@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 import { Form } from "./form";
 
-import Header from "components/Header";
+import { Sideber } from "components/Header";
 import { Tabel } from "./tabel";
 import { useFunctions } from "hooks/useFunctions";
 import Graph from "components/Graph";
@@ -23,7 +23,7 @@ export const Homes: FC = () => {
 
   return (
     <React.Fragment>
-      <Header />
+      <Sideber />
       <div>
         <div>
           <div>
