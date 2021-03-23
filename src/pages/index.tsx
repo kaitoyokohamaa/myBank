@@ -46,6 +46,10 @@ const Index: React.FC = () => {
             >
               googleログイン
             </button>
+
+            <button className="border-white transition delay-200 py-2 rounded-xl px-10 border-2 hover:bg-white hover:text-blue-5 ml-4">
+              ゲストでログイン
+            </button>
           </div>
         </div>
         <div className="col-span-4">
