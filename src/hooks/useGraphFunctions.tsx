@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../config/firebase";
+import firebase from "lib/firebase";
 import { useFunctions } from "./useFunctions";
-import { moneyField } from "components/Home";
+import { moneyField } from "components/home";
 export function useGraphFunctions() {
   const [useGraph] = useFunctions();
   const [expence, setExpence] = useState<moneyField[]>();
