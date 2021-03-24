@@ -74,7 +74,7 @@ export default function Guest() {
             </form>
           </div>
           <div className="col-span-4">
-            <img className=" h-screen" src="Img/undraw_mobile_login_ikmv.png" />
+            <img className=" h-screen" src="img/undraw_mobile_login_ikmv.png" />
           </div>
         </div>
       </div>
