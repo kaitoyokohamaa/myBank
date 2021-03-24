@@ -5,7 +5,7 @@ import { Form } from "./form";
 import { Sideber } from "components/sidebar";
 import { Tabel } from "./tabel";
 import { useFunctions } from "hooks/useFunctions";
-import Graph from "components/Graph";
+import Graph from "components/graph";
 import firebase from "firebase/app";
 import "firebase/firestore";
 export interface moneyField {

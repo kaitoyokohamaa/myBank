@@ -1,12 +1,13 @@
 import React, { FC, Fragment } from "react";
-import { Form } from "components/Home/form";
+import { Form } from "components/home/form";
 import { Sideber } from "components/sidebar";
-import { Tabel } from "components/Home/tabel";
+import { Tabel } from "components/home/tabel";
 import { useFunctions } from "hooks/useFunctions";
-import Graph from "components/Graph";
+import Graph from "components/graph";
 import firebase from "firebase/app";
 import { Typography } from "antd";
 import "firebase/firestore";
+import { Heads } from "components/head";
 export interface moneyField {
   money: number;
   description: string;

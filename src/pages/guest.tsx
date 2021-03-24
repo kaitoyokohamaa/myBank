@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "config/firebase";
+import firebase from "lib/firebase";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Typography } from "antd";
@@ -39,7 +39,7 @@ export default function Guest() {
             <div className="block">
               <label>email</label>
               <input
-                className=" w-full pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                className="w-full pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                 name="email"
                 type="email"
                 value="testuser@test.com"
