@@ -23,6 +23,7 @@ const Home: FC = () => {
   const { Title } = Typography;
   return (
     <Fragment>
+      <Heads />
       <div className="grid grid-cols-10 gap-2 h-screen">
         <div className="col-span-2">
           <Sideber />
