@@ -75,14 +75,15 @@ export default function TabelContentsArea(props: {
       </th>
     </>
   ) : (
-    <th className="w-40  p-4 ">
+    <th className="w-full p-4 flex">
       <input
+        className="w-20 mr-1 rounded-lg border-2 border-blue-5 outline-none focus:border-blue-5"
         autoFocus
         onChange={(e) => setChangedDescription(e.target.value)}
         value={changedDescription}
       />
       <button
-        className="border-blue-5 bg-blue-5  rounded-lg px-4 py-0.5"
+        className="border-blue-5 bg-blue-5  rounded-lg px-2 "
         onClick={handleClick}
       >
         <span className="text-purple-50">保存</span>

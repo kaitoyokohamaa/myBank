@@ -65,7 +65,7 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
   return isEditing ? (
     <>
       <th
-        className="w-32 p-4"
+        className="w-40  p-4 "
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -74,9 +74,18 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
       </th>
     </>
   ) : (
-    <th className="w-30  p-4">
-      <DatePicker required onChange={dateChange} />
-      <button onClick={handleClick}>保存</button>
+    <th className="w-full p-4 flex">
+      <DatePicker
+        className="w-20 mr-1 rounded-lg border-2 border-blue-5 outline-none focus:border-blue-5"
+        required
+        onChange={dateChange}
+      />
+      <button
+        className="border-blue-5 bg-blue-5  rounded-lg px-2 "
+        onClick={handleClick}
+      >
+        <span className="text-purple-50">保存</span>
+      </button>
     </th>
   );
 }

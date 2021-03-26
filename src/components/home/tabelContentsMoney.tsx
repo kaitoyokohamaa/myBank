@@ -62,6 +62,7 @@ export default function TabelContentsArea(props: {
   return isEditing ? (
     <>
       <th
+        className="w-40  p-4 "
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -77,12 +78,18 @@ export default function TabelContentsArea(props: {
   ) : (
     <th>
       <input
+        className="w-20 mr-1 rounded-lg border-2 border-blue-5 outline-none focus:border-blue-5"
         autoFocus
         type="number"
         onChange={(e) => setChangedMoney(Number(e.target.value))}
         value={changedMoney}
       />
-      <button onClick={handleClick}>保存</button>
+      <button
+        className="border-blue-5 bg-blue-5  rounded-lg px-2 "
+        onClick={handleClick}
+      >
+        <span className="text-purple-50">保存</span>
+      </button>
     </th>
   );
 }
