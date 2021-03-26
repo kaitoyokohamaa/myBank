@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Pagination } from "antd";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export default function Index(props: Props) {
   return (
-    <div>
+    <div className="m-10">
       <Pagination
         defaultCurrent={1}
         total={props.maxNum}

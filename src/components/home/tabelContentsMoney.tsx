@@ -3,6 +3,8 @@ import { EditOutlined } from "@ant-design/icons";
 import { useGetUid } from "hooks/useGetUid";
 import firebase from "firebase/app";
 import "firebase/firestore";
+import { TextInput } from "components/input";
+import { TableButton } from "components/Button";
 export default function TabelContentsArea(props: {
   money: number;
   id: string;
@@ -62,6 +64,7 @@ export default function TabelContentsArea(props: {
   return isEditing ? (
     <>
       <th
+        className="w-40  p-4 "
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -76,13 +79,14 @@ export default function TabelContentsArea(props: {
     </>
   ) : (
     <th>
-      <input
-        autoFocus
-        type="number"
+      <TextInput
         onChange={(e) => setChangedMoney(Number(e.target.value))}
         value={changedMoney}
       />
-      <button onClick={handleClick}>保存</button>
+      <TableButton
+        onClick={handleClick}
+     />
+       
     </th>
   );
 }

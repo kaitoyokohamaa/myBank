@@ -3,7 +3,9 @@ import { EditOutlined } from "@ant-design/icons";
 
 import { useGetUid } from "hooks/useGetUid";
 import firebase from "firebase/app";
+import { TextInput } from "components/input";
 import "firebase/firestore";
+import { TableButton } from "components/Button";
 export default function TabelContentsArea(props: {
   description: string;
   id: string;
@@ -65,6 +67,7 @@ export default function TabelContentsArea(props: {
   return isEditing ? (
     <>
       <th
+        className="w-40  p-4 "
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
       >
@@ -74,13 +77,12 @@ export default function TabelContentsArea(props: {
       </th>
     </>
   ) : (
-    <th>
-      <input
-        autoFocus
+    <th className="w-full p-4 flex">
+      <TextInput
         onChange={(e) => setChangedDescription(e.target.value)}
         value={changedDescription}
       />
-      <button onClick={handleClick}>保存</button>
+      <TableButton onClick={handleClick} />
     </th>
   );
 }
