@@ -5,6 +5,7 @@ import { useGetUid } from "hooks/useGetUid";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import DatePicker from "react-datepicker";
+import { TableButton } from "components/Button";
 export default function TabelContentsArea(props: { day: string; id: string }) {
   const [isEditing, setIsEditing] = useState<boolean>(true);
   const [isHover, setIsHover] = useState<boolean>(false);
@@ -80,12 +81,7 @@ export default function TabelContentsArea(props: { day: string; id: string }) {
         required
         onChange={dateChange}
       />
-      <button
-        className="border-blue-5 bg-blue-5  rounded-lg px-2 "
-        onClick={handleClick}
-      >
-        <span className="text-purple-50">保存</span>
-      </button>
+      <TableButton onClick={handleClick} />
     </th>
   );
 }
