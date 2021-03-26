@@ -1,6 +1,6 @@
 .ant-modal-wrap {
   position: fixed;
-  top: 78px;
+  top: 158px !important;
   right: 0;
   bottom: 0;
   left: 0;
@@ -20,4 +20,18 @@
   text-align: left;
   vertical-align: middle;
   word-break: normal;
+}
+.ant-btn {
+  border: 1px solid #00afcc !important;
+  border-radius: 10px !important;
+  background-color: #00afcc !important;
+  color: #fff !important;
+  padding: 10px 40px !important;
+  height: 50px !important;
+  margin: 10px;
+  transition-delay: 1s;
+}
+.ant-btn :hover {
+  opacity: 0.8;
+  background-color: #57b0c0 !important;
 }

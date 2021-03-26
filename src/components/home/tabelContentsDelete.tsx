@@ -46,7 +46,7 @@ export default function TabelContentsArea(props: { id: string }) {
 
   const handleClick = () => {
     confirm({
-      title: "Do You Want to delete...?",
+      title: "削除しますか？",
 
       onOk() {
         ref.doc(getBankID).collection("bank").doc(getUserFiledsID).delete();

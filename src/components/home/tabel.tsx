@@ -22,17 +22,17 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
   return (
     <div>
       <>
-        <table className="border-collapse  table-auto w-10/12">
+        <table className="border-collapse rounded-t-sm  table-auto w-10/12">
           <tbody>
-            <tr className="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0">
-              <th className=" px-4 py-4">日付</th>
-              <th className=" px-4 py-4">内容</th>
+            <tr className="w-full font-light text-white rounded-t-sm  bg-blue-5 whitespace-no-wrap border border-b-0">
+              <th className="px-4 py-4">日付</th>
+              <th className="px-4 py-4">内容</th>
               <th className="px-4 py-4">金額</th>
-              <th className=" px-4 py-4">_φ(･_･</th>
+              <th className="px-4 py-4">_φ(･_･</th>
               <th className="px-4 py-4">削除</th>
             </tr>
           </tbody>
-          <tbody className="border-collapse border border-green-800">
+          <tbody className="border-collapse border border-blue-5">
             {budget &&
               budget.slice(minValue, maxValue).map((t: moneyField) => {
                 const CurrentMonth = t.day.toDate().getMonth() + 1;
@@ -41,7 +41,7 @@ export const Tabel: FC<firebase.firestore.DocumentData> = ({ budget }) => {
 
                 return (
                   <tr
-                    className="w-full font-light text-gray-700 bg-gray-100 whitespace-no-wrap border border-b-0"
+                    className="w-full font-light text-gray-700 bg-white-100 whitespace-no-wrap border border-b-0"
                     key={t.id}
                   >
                     <EditableFields
