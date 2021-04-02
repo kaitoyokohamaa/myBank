@@ -32,7 +32,7 @@ export default function Guest() {
   const url = `https://og-image.vercel.app/${title}.png`;
   return (
     <Fragment>
-      <Meta title={title} image={url} />
+      <Meta title={title} image={encodeURI(url)} />
       <div className="bg-blue-5  h-screen">
         <div className="grid grid-cols-8 gap-8">
           <div className="mt-70 m-auto col-span-4">

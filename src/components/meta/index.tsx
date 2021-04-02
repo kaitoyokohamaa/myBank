@@ -5,6 +5,7 @@ type Props = {
   image?: string;
 };
 export const Meta: VFC<Props> = ({ title, image }) => {
+  console.log(image);
   return (
     <head>
       <title>{title}</title>
