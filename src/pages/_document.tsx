@@ -14,7 +14,6 @@ export default class MyDocument extends Document<Props> {
             property="og:description"
             content="こちらは家計簿アプリです。グラフで自分が使ったお金を見える化します。"
           />
-          <meta property="og:image" content="/img/pig.jpeg" />
           <meta property="og:site_name" content="kaibank" />
           <meta property="og:type" content="website" />
           {/* twitterで拡散 */}
