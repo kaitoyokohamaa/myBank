@@ -3,8 +3,8 @@ import firebase from "lib/firebase";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Typography } from "antd";
-
 import { Meta } from "components/meta";
+
 type Inputs = {
   email: string;
   password: string;
@@ -28,8 +28,10 @@ export default function Guest() {
         console.log(err);
       });
   };
+
   const title = "ゲストログイン";
   const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
+
   return (
     <Fragment>
       <Meta title={title} image={encodeURI(url)} />

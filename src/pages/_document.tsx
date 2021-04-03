@@ -8,7 +8,7 @@ export default class MyDocument extends Document<Props> {
       <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
-          <meta property="og:title" content="家計簿アプリです。" />
+
           <meta
             name="Description"
             property="og:description"
