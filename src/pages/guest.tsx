@@ -28,7 +28,7 @@ export default function Guest() {
         console.log(err);
       });
   };
-  const title = "guest login";
+  const title = "ゲストログイン";
   const url = `https://og-image.vercel.app/${title}.png`;
   return (
     <Fragment>
