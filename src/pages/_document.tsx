@@ -17,7 +17,7 @@ export default class MyDocument extends Document<Props> {
           <meta property="og:site_name" content="kaibank" />
           <meta property="og:type" content="website" />
           {/* twitterで拡散 */}
-          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@mj3PBy4ayqxfy14" />
           {/* fabicon */}
           <link rel="shortcut icon" href="/img/pig.jpeg" />

@@ -10,9 +10,6 @@ export const Meta: VFC<Props> = ({ title, image, desctiotion }) => {
   return (
     <head>
       <meta http-equiv="x-ua-compatible" content="ie=edge" />
-
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@mj3PBy4ayqxfy14" />
       <meta property="og:site_name" content="家計簿アプリ" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title ? title : "家計簿アプリ"} />
