@@ -29,7 +29,7 @@ export default function Guest() {
       });
   };
   const title = "ゲストログイン";
-  const url = `https://og-image.vercel.app/${title}.png`;
+  const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   return (
     <Fragment>
       <Meta title={title} image={encodeURI(url)} />
