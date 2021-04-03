@@ -8,6 +8,7 @@ import firebase from "firebase/app";
 import { Typography } from "antd";
 import "firebase/firestore";
 import { Heads } from "components/head";
+import { Meta } from "components/meta";
 export interface moneyField {
   money: number;
   description: string;
@@ -21,9 +22,11 @@ export interface moneyField {
 const Home: FC = () => {
   const [functionsHome] = useFunctions();
   const { Title } = Typography;
+  const title = "ホーム";
+  const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   return (
     <Fragment>
-      <Heads />
+      <Meta title={title} image={encodeURI(url)} />
       <div className="grid grid-cols-10 gap-2 h-screen">
         <div className="col-span-2">
           <Sideber />
