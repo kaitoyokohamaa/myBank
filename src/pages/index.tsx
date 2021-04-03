@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Typography } from "antd";
 import firebase from "firebase/app";
 import { useAuthentication } from "hooks/useAuthentication";
-import { Heads } from "components/head";
+import { Meta } from "components/meta";
 const Index: React.FC = () => {
   const { Title } = Typography;
 

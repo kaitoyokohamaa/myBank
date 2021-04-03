@@ -7,7 +7,7 @@ import Graph from "components/graph";
 import firebase from "firebase/app";
 import { Typography } from "antd";
 import "firebase/firestore";
-import { Heads } from "components/head";
+
 import { Meta } from "components/meta";
 export interface moneyField {
   money: number;
