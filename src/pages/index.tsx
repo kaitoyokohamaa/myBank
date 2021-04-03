@@ -4,9 +4,12 @@ import Link from "next/link";
 import { Typography } from "antd";
 import firebase from "firebase/app";
 import { useAuthentication } from "hooks/useAuthentication";
-import { Heads } from "components/head";
+import { Meta } from "components/meta";
 const Index: React.FC = () => {
   const { Title } = Typography;
+
+  const title = "ログイン";
+  const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   const router = useRouter();
   const [useAuthenticationContents] = useAuthentication();
   useEffect(() => {
@@ -36,7 +39,7 @@ const Index: React.FC = () => {
 
   return (
     <Fragment>
-      <Heads />
+      <Meta title={title} image={encodeURI(url)} />
 
       <div className="bg-blue-5 text-white h-screen">
         <div className="grid grid-cols-8 gap-8">

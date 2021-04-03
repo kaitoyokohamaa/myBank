@@ -3,7 +3,8 @@ import firebase from "lib/firebase";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Typography } from "antd";
-import { Heads } from "components/head";
+import { Meta } from "components/meta";
+
 type Inputs = {
   email: string;
   password: string;
@@ -28,14 +29,17 @@ export default function Guest() {
       });
   };
 
+  const title = "ゲストログイン";
+  const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
+
   return (
     <Fragment>
-      <Heads />
+      <Meta title={title} image={encodeURI(url)} />
       <div className="bg-blue-5  h-screen">
         <div className="grid grid-cols-8 gap-8">
           <div className="mt-70 m-auto col-span-4">
             <Title>
-              <span className="text-white">ゲストログイン</span>
+              <span className="text-white">{title}</span>
             </Title>
             <p>このまま送信してください</p>
             <form onSubmit={handleSubmit(onSubmit)}>
