@@ -12,7 +12,7 @@ export default class MyDocument extends Document<Props> {
           <meta
             name="Description"
             property="og:description"
-            content="こちらは家計簿アプリです。グラフで自分が使ったお金を見える化します。"
+            content="グラフで自分が使ったお金を見える化します。"
           />
           <meta property="og:site_name" content="kaibank" />
           <meta property="og:type" content="website" />
