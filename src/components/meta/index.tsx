@@ -6,7 +6,6 @@ type Props = {
   desctiotion?: string;
 };
 export const Meta: VFC<Props> = ({ title, image, desctiotion }) => {
-  console.log(image);
   return (
     <head>
       <meta http-equiv="x-ua-compatible" content="ie=edge" />

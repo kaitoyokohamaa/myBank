@@ -9,7 +9,8 @@ const Index: React.FC = () => {
   const { Title } = Typography;
 
   const title = "ログイン";
-  const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
+  const id = "12231222";
+  const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.${id}`;
   const router = useRouter();
   const [useAuthenticationContents] = useAuthentication();
   useEffect(() => {
