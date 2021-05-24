@@ -30,9 +30,9 @@ export const Form: FC = ({}) => {
 
   useEffect(() => {
     ref.onSnapshot((usersDocs) => {
-      usersDocs.forEach((contens) => {
-        if (contens.data().userID[0].includes(currentUserId)) {
-          const bankID = contens.id;
+      usersDocs.forEach((contents) => {
+        if (contents.data().userID[0].includes(currentUserId)) {
+          const bankID = contents.id;
           setGetBankID(bankID);
         }
       });

@@ -12,12 +12,14 @@ const Index: React.FC = () => {
   const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   const router = useRouter();
   const [useAuthenticationContents] = useAuthentication();
+
   useEffect(() => {
     useAuthenticationContents.checkAuthentication();
   }, []);
-  const submitHanfler = () => {
+
+  const submitHanfler = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
+    await firebase
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
@@ -25,11 +27,22 @@ const Index: React.FC = () => {
           userID: [result.user?.uid],
           name: result.additionalUserInfo?.profile?.["name"],
         };
-
-        useAuthenticationContents.ref.add(usersInfo);
+        firebase
+          .firestore()
+          .collection("User")
+          .onSnapshot((contents) => {
+            if (!contents.size) {
+              useAuthenticationContents.ref.add(usersInfo);
+            }
+            contents.forEach((userDocs) => {
+              if (!userDocs.data().userID[0].includes(result.user?.uid)) {
+                useAuthenticationContents.ref.add(usersInfo);
+              }
+            });
+          });
       })
       .then(() => {
-        // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 pregetch
+        // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 prefetch
         router.push(`/home`);
       })
       .catch((error) => {

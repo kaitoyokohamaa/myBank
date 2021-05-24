@@ -6,7 +6,6 @@ type Props = {
   desctiotion?: string;
 };
 export const Meta: VFC<Props> = ({ title, image, desctiotion }) => {
-  console.log(image);
   return (
     <head>
       <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -27,11 +26,11 @@ export const Meta: VFC<Props> = ({ title, image, desctiotion }) => {
           desctiotion ? desctiotion : "自分が使った支出をグラフで見える化します"
         }
       />
-      <meta name="twitter:image" content={image ? image : "/img/pig.jpeg"} />
+      <meta name="twitter:image" content={image ? image : "/img/favicon.png"} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="og:url" content="https://ogp-kaitoyokohamaa.vercel.app" />
       <link rel="canonical" href="https://ogp-kaitoyokohamaa.vercel.app" />
-      <meta property="og:image" content={image ? image : "/img/pig.jpeg"} />
+      <meta property="og:image" content={image ? image : "/img/favicon.png"} />
       <title>{title}</title>
     </head>
   );
