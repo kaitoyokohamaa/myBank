@@ -20,8 +20,8 @@ export default class MyDocument extends Document<Props> {
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:site" content="@mj3PBy4ayqxfy14" />
           {/* fabicon */}
-          <link rel="shortcut icon" href="/img/pig.jpeg" />
-          <link rel="apple-touch-icon" href="/img/pig.jpeg" />
+          <link rel="shortcut icon" href="/img/favicon.png" />
+          <link rel="apple-touch-icon" href="/img/favicon.png" />
         </Head>
         <body>
           <Main />

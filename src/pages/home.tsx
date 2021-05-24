@@ -23,6 +23,7 @@ const Home: FC = () => {
   const [functionsHome] = useFunctions();
   const { Title } = Typography;
   const title = "ホーム";
+
   const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   return (
     <Fragment>
