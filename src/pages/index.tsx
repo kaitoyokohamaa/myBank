@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Typography } from "antd";
@@ -7,7 +7,7 @@ import { useAuthentication } from "hooks/useAuthentication";
 import { Meta } from "components/meta";
 const Index: React.FC = () => {
   const { Title } = Typography;
-
+  let isTrue: boolean;
   const title = "ログイン";
   const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   const router = useRouter();
@@ -30,26 +30,32 @@ const Index: React.FC = () => {
         firebase
           .firestore()
           .collection("User")
+          .where("userID", "array-contains", result.user?.uid)
+          .onSnapshot(() => {
+            router.push(`/home`);
+          });
+        return usersInfo;
+      })
+      .then((usersInfo) => {
+        firebase
+          .firestore()
+          .collection("User")
           .onSnapshot((contents) => {
             if (!contents.size) {
               useAuthenticationContents.ref.add(usersInfo);
+              router.push(`/home`);
             }
-            contents.forEach((userDocs) => {
-              if (!userDocs.data().userID[0].includes(result.user?.uid)) {
-                useAuthenticationContents.ref.add(usersInfo);
-              }
+            contents.forEach(() => {
+              useAuthenticationContents.ref.add(usersInfo);
+              router.push(`/home`);
             });
+            // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 prefetch
           });
-      })
-      .then(() => {
-        // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 prefetch
-        router.push(`/home`);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   return (
     <Fragment>
       <Meta title={title} image={encodeURI(url)} />
