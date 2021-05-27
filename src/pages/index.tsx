@@ -30,26 +30,16 @@ const Index: React.FC = () => {
         firebase
           .firestore()
           .collection("User")
-          .where("userID", "array-contains", result.user?.uid)
-          .onSnapshot(() => {
-            router.push(`/home`);
-          });
-        return usersInfo;
-      })
-      .then((usersInfo) => {
-        firebase
-          .firestore()
-          .collection("User")
-          .onSnapshot((contents) => {
-            if (!contents.size) {
-              useAuthenticationContents.ref.add(usersInfo);
+          .doc(result.user?.uid)
+          .get()
+          .then((doc) => {
+            if (!doc.exists) {
+              useAuthenticationContents.ref
+                .doc(result.user?.uid)
+                .set(usersInfo);
+            } else {
               router.push(`/home`);
             }
-            contents.forEach(() => {
-              useAuthenticationContents.ref.add(usersInfo);
-              router.push(`/home`);
-            });
-            // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 prefetch
           });
       })
       .catch((error) => {
