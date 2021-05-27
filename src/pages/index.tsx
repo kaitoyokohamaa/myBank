@@ -7,7 +7,7 @@ import { useAuthentication } from "hooks/useAuthentication";
 import { Meta } from "components/meta";
 const Index: React.FC = () => {
   const { Title } = Typography;
-  let isTrue: boolean;
+
   const title = "ログイン";
   const url = `https://ogp-kaitoyokohamaa.vercel.app/${title}.png`;
   const router = useRouter();
