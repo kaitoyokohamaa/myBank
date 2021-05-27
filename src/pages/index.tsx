@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { Typography } from "antd";
@@ -30,26 +30,22 @@ const Index: React.FC = () => {
         firebase
           .firestore()
           .collection("User")
-          .onSnapshot((contents) => {
-            if (!contents.size) {
-              useAuthenticationContents.ref.add(usersInfo);
+          .doc(result.user?.uid)
+          .get()
+          .then((doc) => {
+            if (!doc.exists) {
+              useAuthenticationContents.ref
+                .doc(result.user?.uid)
+                .set(usersInfo);
+            } else {
+              router.push(`/home`);
             }
-            contents.forEach((userDocs) => {
-              if (!userDocs.data().userID[0].includes(result.user?.uid)) {
-                useAuthenticationContents.ref.add(usersInfo);
-              }
-            });
           });
-      })
-      .then(() => {
-        // to do https://zenn.dev/d_suke/articles/0fc7670b2da750f6dd87 prefetch
-        router.push(`/home`);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   return (
     <Fragment>
       <Meta title={title} image={encodeURI(url)} />
